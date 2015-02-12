@@ -4,11 +4,8 @@ class EnvbookingsController < ApplicationController
   # GET /envbookings
   # GET /envbookings.json
   def index
-    
+
     @envbookings = Envbooking.all
-    @envbookings.sort_by{|env| env[:start_date]}
-    @rowheight = 41
-    @divheight = (@envbookings.count+2)*@rowheight
 
   end
 
@@ -33,7 +30,7 @@ class EnvbookingsController < ApplicationController
 
     respond_to do |format|
       if @envbooking.save
-        format.html { redirect_to @envbooking, notice: 'Envbooking was successfully created.' }
+        format.html { redirect_to '/', notice: 'Envbooking was successfully created.' }
         format.json { render :show, status: :created, location: @envbooking }
       else
         format.html { render :new }

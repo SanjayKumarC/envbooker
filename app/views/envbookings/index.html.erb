@@ -1,55 +1,5 @@
 <%- model_class = Envbooking -%>
 
-<% content_for :script_entry_point do %>
-
-  google.load('visualization', '1', {packages:['timeline'], callback: init});
-  
-  function init () {
-    $(document).on('page:load', drawChart);
-    drawChart();
-  } 
-
-  function drawChart() {
-    var container = document.getElementById('timeline');
-    var chart = new google.visualization.Timeline(container);
-    var dataTable = new google.visualization.DataTable();
- 
-
-    dataTable.addColumn({ type: 'string', id: 'Environment Name' });
-    dataTable.addColumn({ type: 'string', id: 'Project'});
-    dataTable.addColumn({ type: 'date', id: 'Start' });
-    dataTable.addColumn({ type: 'date', id: 'End' });
-    dataTable.addRows([
-      <% @envbookings.each do |envbooking| %>
-        <% if envbooking.id==@envbookings.last.id %>
-          [
-            '<%= Env.find_by_id(envbooking.env_id).name %>',
-            '<%= Project.find_by_id(envbooking.project_id).name %>',
-            new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
-            new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
-          ]
-        <% else %> 
-          [
-            '<%= Env.find_by_id(envbooking.env_id).name %>',
-            '<%= Project.find_by_id(envbooking.project_id).name %>',
-            new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
-            new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
-          ],
-        <% end %>
-      <% end %>
-    ]);
-    var options = {
-      backgroundColor: '#ffd'
-    };
-
-    chart.draw(dataTable, options);
-  }
-<% end %>
-
-<% content_for :new_div_entry_point do %>
-  <div id="timeline" style="width:1200px; height:<%= @divheight %>px;"></div>
-<% end %>
-
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
