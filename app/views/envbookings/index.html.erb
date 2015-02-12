@@ -50,7 +50,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:env_id) %></th>
       <th><%= model_class.human_attribute_name(:project_id) %></th>
       <th><%= model_class.human_attribute_name(:start_date) %></th>
@@ -61,7 +60,6 @@
   <tbody>
     <% @envbookings.each do |envbooking| %>
       <tr>
-        <td><%= link_to envbooking.id, envbooking_path(envbooking) %></td>
         <td><%= Env.find_by_id(envbooking.env_id).name %></td>
         <td><%= Project.find_by_id(envbooking.project_id).name %></td>
         <td><%= envbooking.start_date %></td>

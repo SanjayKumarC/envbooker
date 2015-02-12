@@ -5,20 +5,16 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:envlevel_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @envs.each do |env| %>
       <tr>
-        <td><%= link_to env.id, env_path(env) %></td>
         <td><%= env.name %></td>
-        <td><%= env.envlevel_id %></td>
-        <td><%=l env.created_at %></td>
+        <td><%= Envlevel.find_by_id(env.envlevel_id).name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_env_path(env), :class => 'btn btn-default btn-xs' %>

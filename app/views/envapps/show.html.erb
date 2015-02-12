@@ -1,14 +1,21 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Envapp -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Env:</strong>
-  <%= @envapp.env %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:env_id) %>:</strong></dt>
+  <dd><%= @envapp.env_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:app_id) %>:</strong></dt>
+  <dd><%= @envapp.app_id %></dd>
+</dl>
 
-<p>
-  <strong>App:</strong>
-  <%= @envapp.app %>
-</p>
-
-<%= link_to 'Edit', edit_envapp_path(@envapp) %> |
-<%= link_to 'Back', envapps_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              envapps_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_envapp_path(@envapp), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              envapp_path(@envapp),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
