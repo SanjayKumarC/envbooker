@@ -27,7 +27,8 @@ gem "twitter-bootstrap-rails"
 gem "less-rails"
 gem "therubyracer"
 
-gem 'jquery-turbolinks'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
