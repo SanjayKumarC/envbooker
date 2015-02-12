@@ -1,0 +1,2 @@
+module EnvappsHelper
+end

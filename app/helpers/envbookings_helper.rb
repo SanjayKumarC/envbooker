@@ -1,0 +1,2 @@
+module EnvbookingsHelper
+end

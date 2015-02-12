@@ -1,0 +1,85 @@
+<%- model_class = Envbooking -%>
+
+<% content_for :script_entry_point do %>
+
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var container = document.getElementById('timeline');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+ 
+
+    dataTable.addColumn({ type: 'string', id: 'Environment Name' });
+    dataTable.addColumn({ type: 'string', id: 'Project'});
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    dataTable.addRows([
+      <% @envbookings.each do |envbooking| %>
+        <% if envbooking.id==@envbookings.last.id %>
+          [
+            '<%= Env.find_by_id(envbooking.env_id).name %>',
+            '<%= Project.find_by_id(envbooking.project_id).name %>',
+            new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
+            new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
+          ]
+        <% else %> 
+          [
+            '<%= Env.find_by_id(envbooking.env_id).name %>',
+            '<%= Project.find_by_id(envbooking.project_id).name %>',
+            new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
+            new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
+          ],
+        <% end %>
+      <% end %>
+    ]);
+    var options = {
+      backgroundColor: '#ffd'
+    };
+
+    chart.draw(dataTable, options);
+  }
+<% end %>
+
+<% content_for :new_div_entry_point do %>
+  <div id="timeline" style="width:1200px; height:<%= @divheight %>px;"></div>
+<% end %>
+
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:env_id) %></th>
+      <th><%= model_class.human_attribute_name(:project_id) %></th>
+      <th><%= model_class.human_attribute_name(:start_date) %></th>
+      <th><%= model_class.human_attribute_name(:end_date) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @envbookings.each do |envbooking| %>
+      <tr>
+        <td><%= link_to envbooking.id, envbooking_path(envbooking) %></td>
+        <td><%= Env.find_by_id(envbooking.env_id).name %></td>
+        <td><%= Project.find_by_id(envbooking.project_id).name %></td>
+        <td><%= envbooking.start_date %></td>
+        <td><%= envbooking.end_date %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_envbooking_path(envbooking), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      envbooking_path(envbooking),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_envbooking_path,
+            :class => 'btn btn-primary' %>

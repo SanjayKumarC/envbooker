@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Env:</strong>
+  <%= @envapp.env %>
+</p>
+
+<p>
+  <strong>App:</strong>
+  <%= @envapp.app %>
+</p>
+
+<%= link_to 'Edit', edit_envapp_path(@envapp) %> |
+<%= link_to 'Back', envapps_path %>
