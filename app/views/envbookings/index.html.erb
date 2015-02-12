@@ -2,7 +2,13 @@
 
 <% content_for :script_entry_point do %>
 
-  google.setOnLoadCallback(drawChart);
+  google.load('visualization', '1', {packages:['timeline'], callback: init});
+  
+  function init () {
+    $(document).on('page:load', drawChart);
+    drawChart();
+  } 
+
   function drawChart() {
     var container = document.getElementById('timeline');
     var chart = new google.visualization.Timeline(container);

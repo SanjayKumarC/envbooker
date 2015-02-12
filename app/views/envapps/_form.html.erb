@@ -18,14 +18,14 @@
   <div class="control-group">
     <%= f.label :env_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :env_id, :class => 'form-control' %>
+      <%= f.select :env_id, options_for_select(Env.all.map{|e|[e.name, e.id]}), :class => 'form-control' %>
     </div>
     <%= error_span(@envapp[:env_id]) %>
   </div>
   <div class="control-group">
     <%= f.label :app_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :app_id, :class => 'form-control' %>
+      <%= f.select :app_id, options_for_select(App.all.map{|e|[e.name, e.id]}), :class => 'form-control' %>
     </div>
     <%= error_span(@envapp[:app_id]) %>
   </div>
