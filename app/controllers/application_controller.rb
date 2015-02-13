@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
 
   #authenticate for all but the index
   before_action :authenticate_user!
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 end

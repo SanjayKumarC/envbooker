@@ -10,12 +10,18 @@
   <dd><%= @envapp.app_id %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              envapps_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_envapp_path(@envapp), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+
+<%= link_to t('.back', :default => t("helpers.links.back")),envapps_path, :class => 'btn btn-default'  %>
+
+<% if can? :update, @envapp %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),edit_envapp_path(@envapp), :class => 'btn btn-default' %>
+<% end %>
+
+<% if can? :delete, @envapp  %>
+
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               envapp_path(@envapp),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+<% end %>

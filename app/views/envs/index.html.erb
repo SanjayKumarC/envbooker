@@ -7,7 +7,9 @@
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:envlevel_id) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% if can? :update, @envs and can? :delete, @envs %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -16,13 +18,16 @@
         <td><%= env.name %></td>
         <td><%= Envlevel.find_by_id(env.envlevel_id).name %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_env_path(env), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <% if can? :update, env %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_env_path(env), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+          <% if can? :delete, env %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       env_path(env),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
+            <% end %> 
         </td>
       </tr>
     <% end %>

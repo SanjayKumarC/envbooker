@@ -4,6 +4,6 @@ class Envapp < ActiveRecord::Base
 
   validates :env, presence: true
   validates :app, presence: true
-  validates_uniqueness_of :env
-  validates_uniqueness_of :app
+
+  validates_uniqueness_of :env, :scope => [:app]
 end

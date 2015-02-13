@@ -10,7 +10,9 @@
       <th><%= model_class.human_attribute_name(:project_id) %></th>
       <th><%= model_class.human_attribute_name(:start_date) %></th>
       <th><%= model_class.human_attribute_name(:end_date) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% if can? :update, @envbookings and can? :delete, @envbookings %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -21,13 +23,16 @@
         <td><%= envbooking.start_date %></td>
         <td><%= envbooking.end_date %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_envbooking_path(envbooking), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <% if can? :update, envbooking %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_envbooking_path(envbooking), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+          <% if can? :delete, envbooking %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       envbooking_path(envbooking),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
+            <% end %>
         </td>
       </tr>
     <% end %>

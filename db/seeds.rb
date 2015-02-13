@@ -103,6 +103,9 @@ Env.all.each do |e|
 	end
 end
 
+User.delete_all
+User.create! :email => 'admin@admin.com', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
+
 
 
 
