@@ -32,6 +32,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'bootstrap_form'
 gem 'devise'
 gem 'cancancan'
+gem 'activerecord-session_store'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
