@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'index/index'
+
   resources :envapps
 
   resources :apps
