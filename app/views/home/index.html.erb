@@ -39,9 +39,19 @@
       <% end %>
     ]);
     var options = {
-      backgroundColor: '#ffd'
     };
 
+    function selectHandler() {
+      var selectedItem = chart.getSelection()[0];
+      if (selectedItem) {
+        <%# ruby scripting foo here that finds the Envbooking record using the 
+          env,project,start date, end date....should probably add an index to the table for this...
+        %>
+
+      }
+    }
+
+    google.visualization.events.addListener(chart, 'select', selectHandler);
     chart.draw(dataTable, options);
   }
 <% end %>

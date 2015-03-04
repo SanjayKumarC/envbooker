@@ -1,6 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   name: MyString1
-  envlevel_id: 
+  envlevel_id: 1
+
+two:
+  id: 2
+  name: env2
+  envlevel_id: 2
 

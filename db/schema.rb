@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213162109) do
+ActiveRecord::Schema.define(version: 20150304125257) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
@@ -32,12 +32,13 @@ ActiveRecord::Schema.define(version: 20150213162109) do
   create_table "envbookings", force: :cascade do |t|
     t.integer  "env_id"
     t.integer  "project_id"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date     "start_date"
+    t.date     "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "envbookings", ["env_id", "project_id", "start_date", "end_date"], name: "index_envbookings_env_project_start_date_end_date", unique: true
   add_index "envbookings", ["env_id"], name: "index_envbookings_on_env_id"
   add_index "envbookings", ["project_id"], name: "index_envbookings_on_project_id"
 

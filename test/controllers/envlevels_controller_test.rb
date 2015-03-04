@@ -1,8 +1,17 @@
 require 'test_helper'
 
 class EnvlevelsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers   
+                     
+  Warden.test_mode!                                    
+
+  def teardown                                         
+    Warden.test_reset!                                 
+  end 
+
   setup do
-    @envlevel = envlevels(:one)
+    @envlevel = envlevels(:one, :two)
   end
 
   test "should get index" do

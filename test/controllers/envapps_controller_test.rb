@@ -1,6 +1,15 @@
 require 'test_helper'
 
 class EnvappsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers   
+                     
+  Warden.test_mode!                                    
+
+  def teardown                                         
+    Warden.test_reset!                                 
+  end 
+
   setup do
     @envapp = envapps(:one)
   end

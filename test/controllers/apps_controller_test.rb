@@ -1,8 +1,17 @@
 require 'test_helper'
 
 class AppsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers   
+                     
+  Warden.test_mode!                                    
+
+  def teardown                                         
+    Warden.test_reset!                                 
+  end 
+
   setup do
-    @app = apps(:one)
+    @app = apps(:one, :two)
   end
 
   test "should get index" do
