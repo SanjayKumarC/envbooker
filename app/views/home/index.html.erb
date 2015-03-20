@@ -41,17 +41,21 @@
     var options = {
     };
 
-    function selectHandler() {
-      var selectedItem = chart.getSelection()[0];
-      if (selectedItem) {
-        <%# ruby scripting foo here that finds the Envbooking record using the 
-          env,project,start date, end date....should probably add an index to the table for this...
-        %>
-
+    <%#
+      function selectHandler() {
+        var selectedItem = chart.getSelection()[0];
+        if (selectedItem) {
+          var env = dataTable.getValue(selectedItem.row, 0);
+          var project = dataTable.getValue(selectedItem.row, 1);
+          var start_date = dataTable.getValue(selectedItem.row, 2);
+          var end_date = dataTable.getValue(selectedItem.row, 3);
+          var url = '/?env=' + env + '&project=' + project +'&start_date=' + start_date + '&end_date=' + end_date
+          window.open(url);
+        }
       }
-    }
+    %>
 
-    google.visualization.events.addListener(chart, 'select', selectHandler);
+    google.visualization.events.addListener(chart, 'select');
     chart.draw(dataTable, options);
   }
 <% end %>

@@ -15,4 +15,7 @@ class HomeController < ApplicationController
 
     @systems.sort!.uniq!
 	end
+  def find
+  end
+  
 end
