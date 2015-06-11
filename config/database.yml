@@ -21,8 +21,9 @@ test: &test
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
-
-cucumber:
-  <<: *test
+  adapter: mysql2
+  encoding: utf-8
+  database: production
+  pool: 5
+  username: deploy
+  password: <%= ENV['MY_APP_DATABASE_PASSWORD'] %>
