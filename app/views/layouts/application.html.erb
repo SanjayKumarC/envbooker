@@ -59,7 +59,7 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to "Home", '/', 'data-no-turbolink' => true %> 
-            <% if user_signed_in? %>
+            <% if current_user.try(:admin?) %>
               <li><%= link_to "Apps", "/apps"  %></li>
               <li><%= link_to "Environments", "/envs"  %></li>
               <li><%= link_to "Levels", "/envlevels"  %></li>

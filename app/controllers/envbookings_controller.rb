@@ -1,5 +1,13 @@
 class EnvbookingsController < ApplicationController
   before_action :set_envbooking, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
+
+  def check_admin
+    unless current_user.admin?
+      flash[:error] = "Admins only"
+      redirect_to root_url
+    end
+  end
 
   # GET /envbookings
   # GET /envbookings.json
@@ -27,6 +35,10 @@ class EnvbookingsController < ApplicationController
   # POST /envbookings.json
   def create
     @envbooking = Envbooking.new(envbooking_params)
+    if @envbooking.user_id == nil
+      @envbooking.user_id = current_user.id
+    end
+
 
     respond_to do |format|
       if @envbooking.save

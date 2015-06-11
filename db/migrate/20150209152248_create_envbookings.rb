@@ -3,6 +3,7 @@ class CreateEnvbookings < ActiveRecord::Migration
     create_table :envbookings do |t|
       t.references :env, index: true
       t.references :project, index: true
+      t.references :user
       t.datetime :start_date
       t.datetime :end_date
 

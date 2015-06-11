@@ -1,6 +1,15 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+  before_action :check_admin
+
+  def check_admin
+    unless current_user.admin?
+      flash[:error] = "Admins only"
+      redirect_to root_url
+    end
+  end
+
 
   # GET /apps
   # GET /apps.json

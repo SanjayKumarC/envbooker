@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.delete_all
+User.create! :email => 'admin@admin.com', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
+User.create! :email => 'test@admin.com', :admin => false, :password => 'admin455', :password_confirmation => 'admin455'
+User.create! :email => 'test2@admin.com', :admin => false, :password => 'admin455', :password_confirmation => 'admin455'
 
 Envlevel.delete_all
 Envlevel.create!(:name => "DEV")
@@ -19,8 +23,11 @@ Env.create!(:name => "DEV2", :envlevel => Envlevel.find_by_name("DEV"))
 Env.create!(:name => "DEV3", :envlevel => Envlevel.find_by_name("DEV"))
 Env.create!(:name => "DEV4", :envlevel => Envlevel.find_by_name("DEV"))
 Env.create!(:name => "MOD",  :envlevel => Envlevel.find_by_name("UAT"))
-Env.create!(:name => "PROD", :envlevel => Envlevel.find_by_name("PROD"))
-Env.create!(:name => "BCP",  :envlevel => Envlevel.find_by_name("PROD"))
+Env.create!(:name => "UAT", :envlevel => Envlevel.find_by_name("UAT"))
+Env.create!(:name => "TST01",  :envlevel => Envlevel.find_by_name("SIT"))
+Env.create!(:name => "E2E",  :envlevel => Envlevel.find_by_name("SIT"))
+Env.create!(:name => "Baseline",  :envlevel => Envlevel.find_by_name("SIT"))
+
 
 Project.delete_all
 Project.create!(:name => "Dummy Project 1")
@@ -31,12 +38,14 @@ Envbooking.delete_all
 Envbooking.create!([
 	:env => Env.find_by_name('DEV1'), 
 	:project => Project.find_by_name("Dummy Project 1"), 
+	:user => User.find_by_email('admin@admin.com'),
 	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y")
 	])
 Envbooking.create!([
 	:env => Env.find_by_name('DEV1'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('admin@admin.com'),
 	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y")
 	])
@@ -44,6 +53,7 @@ Envbooking.create!([
 Envbooking.create!([
 	:env => Env.find_by_name('DEV1'), 
 	:project => Project.find_by_name("Dummy Project 3"), 
+	:user => User.find_by_email('admin@admin.com'),
 	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y")
 	])
@@ -51,6 +61,7 @@ Envbooking.create!([
 Envbooking.create!([
 	:env => Env.find_by_name('DEV2'), 
 	:project => Project.find_by_name("Dummy Project 1"), 
+	:user => User.find_by_email('test@admin.com'),
 	:start_date => Date.strptime("09/03/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/06/2015", "%d/%m/%Y")
 	])
@@ -58,6 +69,7 @@ Envbooking.create!([
 Envbooking.create!([
 	:env => Env.find_by_name('DEV2'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('test@admin.com'),
 	:start_date => Date.strptime("09/4/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y")
 	])
@@ -65,6 +77,7 @@ Envbooking.create!([
 Envbooking.create!([
 	:env => Env.find_by_name('DEV3'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('test2@admin.com'),
 	:start_date => Date.strptime("09/04/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y")
 	])
@@ -72,6 +85,7 @@ Envbooking.create!([
 Envbooking.create!([
 	:env => Env.find_by_name('DEV3'), 
 	:project => Project.find_by_name("Dummy Project 3"), 
+	:user => User.find_by_email('test@admin.com'),
 	:start_date => Date.strptime("09/06/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/08/2015", "%d/%m/%Y")
 	])
@@ -79,6 +93,7 @@ Envbooking.create!([
 Envbooking.create!([
 	:env => Env.find_by_name('DEV4'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('test2@admin.com'),
 	:start_date => Date.strptime("09/05/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/09/2015", "%d/%m/%Y")
 	])
@@ -102,10 +117,6 @@ Env.all.each do |e|
 			])
 	end
 end
-
-User.delete_all
-User.create! :email => 'admin@admin.com', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
-
 
 
 

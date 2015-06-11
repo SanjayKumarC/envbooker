@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150304125257) do
   create_table "envbookings", force: :cascade do |t|
     t.integer  "env_id"
     t.integer  "project_id"
+    t.integer  "user_id"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at", null: false
@@ -62,26 +63,6 @@ ActiveRecord::Schema.define(version: 20150304125257) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "roles", force: :cascade do |t|
-    t.string   "name",                              null: false
-    t.string   "authorizable_type"
-    t.integer  "authorizable_id"
-    t.boolean  "system",            default: false, null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-  end
-
-  add_index "roles", ["authorizable_type", "authorizable_id"], name: "index_roles_on_authorizable_type_and_authorizable_id"
-  add_index "roles", ["name"], name: "index_roles_on_name"
-
-  create_table "roles_users", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "role_id", null: false
-  end
-
-  add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id"
-  add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false

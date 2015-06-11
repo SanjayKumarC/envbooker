@@ -1,5 +1,14 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
+
+  def check_admin
+    unless current_user.admin?
+      flash[:error] = "Admins only"
+      redirect_to root_url
+    end
+  end
+  
 
   # GET /projects
   # GET /projects.json

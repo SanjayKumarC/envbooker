@@ -1,6 +1,6 @@
 <%= form_for @envbooking, :html => { :class => "form-horizontal envbooking" } do |f| %>
 
-    <% if @envbooking.errors.any? %>
+  <% if @envbooking.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
         <h3 class="panel-title"><%= pluralize(@envbooking.errors.count, "error") %> prohibited this envbooking from being saved:</h3>
@@ -28,6 +28,14 @@
       <%= f.select :project_id, options_for_select(Project.all.map{|p|[p.name, p.id]}), :class => 'form-control' %>
     </div>
     <%= error_span(@envbooking[:project_id]) %>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :user_id, options_for_select(User.all.map{|e|[e.email, e.id]}), :class => 'form-control', :prompt => true %>
+    </div>
+    <%= error_span(@envbooking[:user_id]) %>
   </div>
   <!-- Start date -->
 
