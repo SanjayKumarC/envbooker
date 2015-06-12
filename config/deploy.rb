@@ -21,4 +21,3 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
 end
 
-load 'lib/capistrano/tasks/seed'
