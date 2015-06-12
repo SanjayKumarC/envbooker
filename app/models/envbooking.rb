@@ -1,7 +1,7 @@
 class Envbooking < ActiveRecord::Base
-  belongs_to :env
-  belongs_to :project
-  belongs_to :user
+  belongs_to :env, :dependent => :delete
+  belongs_to :project, :dependent => :delete
+  belongs_to :user, :dependent => :delete
 
   validates :start_date, presence: true
   validates :end_date, presence: true
