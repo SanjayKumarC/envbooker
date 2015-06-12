@@ -20,3 +20,5 @@ namespace :deploy do
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 end
+
+load 'lib/capistrano/seed'
