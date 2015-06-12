@@ -17,7 +17,6 @@
 
     dataTable.addColumn({ type: 'string', id: 'Environment Name' });
     dataTable.addColumn({ type: 'string', id: 'Project'});
-    dataTable.addColumn({ type: 'string', role: 'tooltip'});
     dataTable.addColumn({ type: 'date', id: 'Start' });
     dataTable.addColumn({ type: 'date', id: 'End' });
     dataTable.addRows([
@@ -26,7 +25,6 @@
           [
             '<%= Env.find_by_id(envbooking.env_id).name %>',
             '<%= Project.find_by_id(envbooking.project_id).name %>',
-            '<%= User.find_by_id(envbooking.user_id).email %>',
             new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
             new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
           ]
@@ -34,7 +32,6 @@
           [
             '<%= Env.find_by_id(envbooking.env_id).name %>',
             '<%= Project.find_by_id(envbooking.project_id).name %>',
-            '<%= User.find_by_id(envbooking.user_id).email %>',
             new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
             new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
           ],
