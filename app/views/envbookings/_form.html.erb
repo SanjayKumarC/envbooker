@@ -14,45 +14,56 @@
       </div>
     </div>
   <% end %>
-
+  
+  <!-- Environmnt -->
   <div class="control-group">
     <%= f.label :env_id, :class => 'control-label' %>
-    <div class="controls">
+    <div class="controls same-width-item">
       <%= f.select :env_id, options_for_select(Env.all.map{|e|[e.name, e.id]}), :class => 'form-control' %>
     </div>
     <%= error_span(@envbooking[:env_id]) %>
   </div>
+
+  <!-- Project -->
   <div class="control-group">
     <%= f.label :project_id, :class => 'control-label' %>
-    <div class="controls">
+    <div class="controls same-width-item">
       <%= f.select :project_id, options_for_select(Project.all.map{|p|[p.name, p.id]}), :class => 'form-control' %>
     </div>
     <%= error_span(@envbooking[:project_id]) %>
   </div>
 
+  <!-- User -->
   <div class="control-group">
     <%= f.label :user_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :user_id, options_for_select(User.all.map{|e|[e.email, e.id]}), :class => 'form-control', :prompt => true %>
+    <div class="controls same-width-item">
+      <%= f.select :user_id, options_for_select(User.all.map{|u|[u.email, u.id]}), :class => 'form-control', :prompt => true %>
     </div>
     <%= error_span(@envbooking[:user_id]) %>
   </div>
-  <!-- Start date -->
+  
+  <!-- App -->
+  <div class="control-group">
+    <%= f.label :app_id, :class => 'control-label' %>
+    <div class="controls same-width-item">
+      <%= f.select :app_id, options_for_select(App.all.map{|a|[a.name, a.id]}), :class => 'form-control', :prompt => true %>
+    </div>
+    <%= error_span(@envbooking[:app_id]) %>
+  </div>
 
+  <!-- Start Date -->
   <div class="control-group">
     <%= f.label :start_date, :class => 'control-label' %>
-    <div class="controls">
+    <div class="controls same-width-item">
       <%= f.date_select :start_date, :class => 'form-control' %>
-
     </div>
     <%= error_span(@envbooking[:start_date]) %>
   </div>
 
-  <!-- End date -->
-
+  <!-- End Date -->
   <div class="control-group">
     <%= f.label :end_date, :class => 'control-label' %>
-    <div class="controls">
+    <div class="controls same-width-item">
       <%= f.date_select :end_date, :class => 'form-control' %>
     </div>
     <%= error_span(@envbooking[:end_date]) %>

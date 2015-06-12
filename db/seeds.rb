@@ -34,70 +34,6 @@ Project.create!(:name => "Dummy Project 1")
 Project.create!(:name => "Dummy Project 2")
 Project.create!(:name => "Dummy Project 3")
 
-Envbooking.delete_all
-Envbooking.create!([
-	:env => Env.find_by_name('DEV1'), 
-	:project => Project.find_by_name("Dummy Project 1"), 
-	:user => User.find_by_email('admin@admin.com'),
-	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y")
-	])
-Envbooking.create!([
-	:env => Env.find_by_name('DEV1'), 
-	:project => Project.find_by_name("Dummy Project 2"), 
-	:user => User.find_by_email('admin@admin.com'),
-	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y")
-	])
-
-Envbooking.create!([
-	:env => Env.find_by_name('DEV1'), 
-	:project => Project.find_by_name("Dummy Project 3"), 
-	:user => User.find_by_email('admin@admin.com'),
-	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y")
-	])
-
-Envbooking.create!([
-	:env => Env.find_by_name('DEV2'), 
-	:project => Project.find_by_name("Dummy Project 1"), 
-	:user => User.find_by_email('test@admin.com'),
-	:start_date => Date.strptime("09/03/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/06/2015", "%d/%m/%Y")
-	])
-
-Envbooking.create!([
-	:env => Env.find_by_name('DEV2'), 
-	:project => Project.find_by_name("Dummy Project 2"), 
-	:user => User.find_by_email('test@admin.com'),
-	:start_date => Date.strptime("09/4/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y")
-	])
-
-Envbooking.create!([
-	:env => Env.find_by_name('DEV3'), 
-	:project => Project.find_by_name("Dummy Project 2"), 
-	:user => User.find_by_email('test2@admin.com'),
-	:start_date => Date.strptime("09/04/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y")
-	])
-
-Envbooking.create!([
-	:env => Env.find_by_name('DEV3'), 
-	:project => Project.find_by_name("Dummy Project 3"), 
-	:user => User.find_by_email('test@admin.com'),
-	:start_date => Date.strptime("09/06/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/08/2015", "%d/%m/%Y")
-	])
-
-Envbooking.create!([
-	:env => Env.find_by_name('DEV4'), 
-	:project => Project.find_by_name("Dummy Project 2"), 
-	:user => User.find_by_email('test2@admin.com'),
-	:start_date => Date.strptime("09/05/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/09/2015", "%d/%m/%Y")
-	])
-
 App.delete_all
 App.create!([:name=> "Charles River"])
 App.create!([:name=> "CADIS"])
@@ -106,6 +42,78 @@ App.create!([:name=> "eFront"])
 App.create!([:name=> "CeDaR"])
 App.create!([:name=> "Phoenix"])
 App.create!([:name=> "Portree"])
+
+Envbooking.delete_all
+Envbooking.create!([
+	:env => Env.find_by_name('DEV1'), 
+	:project => Project.find_by_name("Dummy Project 1"), 
+	:user => User.find_by_email('admin@admin.com'),
+	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
+Envbooking.create!([
+	:env => Env.find_by_name('DEV1'), 
+	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('admin@admin.com'),
+	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
+
+Envbooking.create!([
+	:env => Env.find_by_name('DEV1'), 
+	:project => Project.find_by_name("Dummy Project 3"), 
+	:user => User.find_by_email('admin@admin.com'),
+	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
+
+Envbooking.create!([
+	:env => Env.find_by_name('DEV2'), 
+	:project => Project.find_by_name("Dummy Project 1"), 
+	:user => User.find_by_email('test@admin.com'),
+	:start_date => Date.strptime("09/03/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/06/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
+
+Envbooking.create!([
+	:env => Env.find_by_name('DEV2'), 
+	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('test@admin.com'),
+	:start_date => Date.strptime("09/4/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
+
+Envbooking.create!([
+	:env => Env.find_by_name('DEV3'), 
+	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('test2@admin.com'),
+	:start_date => Date.strptime("09/04/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
+
+Envbooking.create!([
+	:env => Env.find_by_name('DEV3'), 
+	:project => Project.find_by_name("Dummy Project 3"), 
+	:user => User.find_by_email('test@admin.com'),
+	:start_date => Date.strptime("09/06/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/08/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
+
+Envbooking.create!([
+	:env => Env.find_by_name('DEV4'), 
+	:project => Project.find_by_name("Dummy Project 2"), 
+	:user => User.find_by_email('test2@admin.com'),
+	:start_date => Date.strptime("09/05/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/09/2015", "%d/%m/%Y"), 
+	:app => App.find_by_name("CADIS")
+	])
 
 
 Envapp.delete_all

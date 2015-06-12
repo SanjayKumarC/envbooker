@@ -31,6 +31,15 @@ class EnvbookingsController < ApplicationController
   def edit
   end
 
+  def validate_date
+    if self[:end_date] < self[:start_date]
+      errors[:end_date] << "Error message should be greater than the start date."
+      return false
+    else
+      return true
+    end
+  end
+
   # POST /envbookings
   # POST /envbookings.json
   def create
@@ -83,6 +92,6 @@ class EnvbookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def envbooking_params
-      params.require(:envbooking).permit(:env_id, :project_id, :start_date, :end_date)
+      params.require(:envbooking).permit(:env_id, :project_id, :start_date, :end_date, :app_id, :user_id)
     end
 end
