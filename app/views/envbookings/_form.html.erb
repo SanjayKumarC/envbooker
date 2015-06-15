@@ -1,4 +1,4 @@
-<%= form_for @envbooking, :html => { :class => "form-horizontal envbooking" } do |f| %>
+<%= form_for @envbooking, :html => { :class => "form col-md-6 col-md-offset-2 well envbooking", :role => "form" } do |f| %>
 
   <% if @envbooking.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -16,62 +16,48 @@
   <% end %>
   
   <!-- Environmnt -->
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :env_id, :class => 'control-label' %>
-    <div class="controls same-width-item">
-      <%= f.select :env_id, options_for_select(Env.all.map{|e|[e.name, e.id]}), :class => 'form-control' %>
-    </div>
+    <%= f.select(:env_id, @env_map, {include_blank: true}, { :class => 'form-control' }) %>
     <%= error_span(@envbooking[:env_id]) %>
   </div>
 
   <!-- Project -->
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :project_id, :class => 'control-label' %>
-    <div class="controls same-width-item">
-      <%= f.select :project_id, options_for_select(Project.all.map{|p|[p.name, p.id]}), :class => 'form-control' %>
-    </div>
+    <%= f.select(:project_id, @proj_map, {include_blank: true}, { :class => 'form-control' }) %>
     <%= error_span(@envbooking[:project_id]) %>
   </div>
 
   <!-- User -->
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :user_id, :class => 'control-label' %>
-    <div class="controls same-width-item">
-      <%= f.select :user_id, options_for_select(User.all.map{|u|[u.email, u.id]}), :class => 'form-control', :prompt => true %>
-    </div>
+    <%= f.select(:user_id, @user_map, {include_blank: true}, { :class => 'form-control' }) %>
     <%= error_span(@envbooking[:user_id]) %>
   </div>
   
   <!-- App -->
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :app_id, :class => 'control-label' %>
-    <div class="controls same-width-item">
-      <%= f.select :app_id, options_for_select(App.all.map{|a|[a.name, a.id]}), :class => 'form-control', :prompt => true %>
-    </div>
+    <%= f.select(:app_id, @app_map, {include_blank: true}, { :class => 'form-control' }) %>
     <%= error_span(@envbooking[:app_id]) %>
   </div>
 
   <!-- Start Date -->
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :start_date, :class => 'control-label' %>
-    <div class="controls same-width-item">
-      <%= f.date_select :start_date, :class => 'form-control' %>
-    </div>
+    <%= f.date_select :start_date, :class => 'form-control' %>
     <%= error_span(@envbooking[:start_date]) %>
   </div>
 
   <!-- End Date -->
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :end_date, :class => 'control-label' %>
-    <div class="controls same-width-item">
-      <%= f.date_select :end_date, :class => 'form-control' %>
-    </div>
+    <%= f.date_select :end_date, :class => 'form-control' %>
     <%= error_span(@envbooking[:end_date]) %>
   </div>
 
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            envbookings_path, :class => 'btn btn-default' %>
+  <%= f.submit "Create Booking", :class => 'btn btn-primary pull-right' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")), envbookings_path, :class => 'btn btn-default pull-right' %>
 
 <% end %>
