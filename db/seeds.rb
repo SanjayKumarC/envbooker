@@ -56,8 +56,8 @@ Envbooking.create!([
 	:env => Env.find_by_name('DEV1'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
 	:user => User.find_by_email('admin@admin.com'),
-	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y"), 
+	:start_date => Date.strptime("09/03/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/06/2015", "%d/%m/%Y"), 
 	:app => App.find_by_name("CeDaR")
 	])
 
@@ -74,8 +74,8 @@ Envbooking.create!([
 	:env => Env.find_by_name('DEV2'), 
 	:project => Project.find_by_name("Dummy Project 1"), 
 	:user => User.find_by_email('test@admin.com'),
-	:start_date => Date.strptime("09/03/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/06/2015", "%d/%m/%Y"), 
+	:start_date => Date.strptime("09/10/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/11/2015", "%d/%m/%Y"), 
 	:app => App.find_by_name("Charles River")
 	])
 
@@ -83,8 +83,8 @@ Envbooking.create!([
 	:env => Env.find_by_name('DEV2'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
 	:user => User.find_by_email('test@admin.com'),
-	:start_date => Date.strptime("09/4/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y"), 
+	:start_date => Date.strptime("09/08/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/09/2015", "%d/%m/%Y"), 
 	:app => App.find_by_name("Phoenix")
 	])
 
@@ -92,8 +92,8 @@ Envbooking.create!([
 	:env => Env.find_by_name('DEV3'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
 	:user => User.find_by_email('test2@admin.com'),
-	:start_date => Date.strptime("09/04/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y"), 
+	:start_date => Date.strptime("09/07/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/08/2015", "%d/%m/%Y"), 
 	:app => App.find_by_name("Portree")
 	])
 
@@ -102,7 +102,7 @@ Envbooking.create!([
 	:project => Project.find_by_name("Dummy Project 3"), 
 	:user => User.find_by_email('test@admin.com'),
 	:start_date => Date.strptime("09/06/2015", "%d/%m/%Y"), 
-	:end_date => Date.strptime("28/08/2015", "%d/%m/%Y"), 
+	:end_date => Date.strptime("28/10/2015", "%d/%m/%Y"), 
 	:app => App.find_by_name("CADIS")
 	])
 
@@ -110,7 +110,7 @@ Envbooking.create!([
 	:env => Env.find_by_name('DEV4'), 
 	:project => Project.find_by_name("Dummy Project 2"), 
 	:user => User.find_by_email('test2@admin.com'),
-	:start_date => Date.strptime("09/05/2015", "%d/%m/%Y"), 
+	:start_date => Date.strptime("09/07/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/09/2015", "%d/%m/%Y"), 
 	:app => App.find_by_name("CADIS")
 	])

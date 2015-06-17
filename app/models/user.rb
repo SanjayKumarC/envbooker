@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :envbookings, :dependent => :destroy
 
-
   def admin?
   	admin
   end

@@ -1,8 +1,4 @@
 class Envbooking < ActiveRecord::Base
-  belongs_to :env
-  belongs_to :project
-  belongs_to :user
-  belongs_to :app
 
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -10,6 +6,11 @@ class Envbooking < ActiveRecord::Base
   validates :env, presence: true
   validates :project, presence: true
   validates :app, presence: true
+
+  belongs_to :app
+  belongs_to :env
+  belongs_to :project
+  belongs_to :user
 
   #validate :start_date_greater_than_today, :on => :create - might want to allow this actually.
   validate :end_date_greater_than_start_date, :on => :create

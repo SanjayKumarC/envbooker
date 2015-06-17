@@ -1,6 +1,6 @@
 class Env < ActiveRecord::Base
   belongs_to :envlevel
-  has_many :envbookings, :dependent => :delete_all
+  has_many :envbookings, dependent: :destroy
   
   validates :name, presence: true
   validates :envlevel, presence: true
