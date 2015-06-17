@@ -12,7 +12,7 @@ class EnvsController < ApplicationController
   # GET /envs
   # GET /envs.json
   def index
-    @envs = Env.all
+    @envs = Env.all.sort_by{|env| env.name.downcase}
   end
 
   # GET /envs/1
@@ -36,7 +36,7 @@ class EnvsController < ApplicationController
 
     respond_to do |format|
       if @env.save
-        format.html { redirect_to @env, notice: 'Env was successfully created.' }
+        format.html { redirect_to envs_url, notice: 'Env was successfully created.' }
         format.json { render :show, status: :created, location: @env }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class EnvsController < ApplicationController
   def update
     respond_to do |format|
       if @env.update(env_params)
-        format.html { redirect_to @env, notice: 'Env was successfully updated.' }
+        format.html { redirect_to envs_url, notice: 'Env was successfully updated.' }
         format.json { render :show, status: :ok, location: @env }
       else
         format.html { render :edit }
@@ -62,6 +62,11 @@ class EnvsController < ApplicationController
   # DELETE /envs/1
   # DELETE /envs/1.json
   def destroy
+    @bookings = Envbooking.find_by env_id:@env.id
+    if @bookings
+      redirect_to envs_url, alert: 'Env cannot be deleted as it has bookings' and return
+    end
+
     @env.destroy
     respond_to do |format|
       format.html { redirect_to envs_url, notice: 'Env was successfully destroyed.' }

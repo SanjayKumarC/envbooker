@@ -27,11 +27,14 @@ class EnvbookingsController < ApplicationController
     @user_map = User.all.map{|u|[u.email, u.id]}
     @proj_map = Project.all.map{|p|[p.name, p.id]}
     @app_map = App.all.map{|a|[a.name, a.id]}
-
   end
 
   # GET /envbookings/1/edit
   def edit
+    @env_map = Env.all.map{|e|[e.name, e.id]}
+    @user_map = User.all.map{|u|[u.email, u.id]}
+    @proj_map = Project.all.map{|p|[p.name, p.id]}
+    @app_map = App.all.map{|a|[a.name, a.id]}
   end
 
   def validate_date
@@ -68,7 +71,7 @@ class EnvbookingsController < ApplicationController
   def update
     respond_to do |format|
       if @envbooking.update(envbooking_params)
-        format.html { redirect_to @envbooking, notice: 'Envbooking was successfully updated.' }
+        format.html { redirect_to envbookings_url, notice: 'Envbooking was successfully updated.' }
         format.json { render :show, status: :ok, location: @envbooking }
       else
         format.html { render :edit }

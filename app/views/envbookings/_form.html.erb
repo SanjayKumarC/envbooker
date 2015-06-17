@@ -1,4 +1,12 @@
-<%= form_for @envbooking, :html => { :class => "form col-md-6 col-md-offset-2 well envbooking", :role => "form" } do |f| %>
+<%= form_for @envbooking, :html => { :class => "form panel panel-default col-md-6 col-md-offset-2 envbooking", :role => "form" } do |f| %>
+
+  <% if @envbooking.new_record? %>
+    <h3>New Booking</h3>
+  <% else %>
+    <h3>Edit Booking</h3>
+  <% end %>
+
+
 
   <% if @envbooking.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -14,6 +22,8 @@
       </div>
     </div>
   <% end %>
+
+  <br/>
   
   <!-- Environmnt -->
   <div class="form-group">
@@ -57,7 +67,16 @@
     <%= error_span(@envbooking[:end_date]) %>
   </div>
 
-  <%= f.submit "Create Booking", :class => 'btn btn-primary pull-right' %>
+  <% if @envbooking.new_record? %>
+    <%= f.submit "Create Booking", :class => 'btn btn-primary pull-right' %>
+  <% else %>
+    <%= f.submit "Save", :class => 'btn btn-primary pull-right' %>
+  <% end %>
+
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")), envbookings_path, :class => 'btn btn-default pull-right' %>
+
+  <br/>
+  <br/>
+  <br/>
 
 <% end %>

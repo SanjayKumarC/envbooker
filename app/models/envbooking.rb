@@ -11,10 +11,10 @@ class Envbooking < ActiveRecord::Base
   validates :project, presence: true
   validates :app, presence: true
 
-  validate :start_date_greater_than_end_date, :on => :create
+  #validate :start_date_greater_than_today, :on => :create - might want to allow this actually.
   validate :end_date_greater_than_start_date, :on => :create
 
-  def start_date_greater_than_end_date
+  def start_date_greater_than_today
     if start_date.present? && start_date < Date.today
       errors.add(:start_date, "Start Date Cannot be in the past.")
     end

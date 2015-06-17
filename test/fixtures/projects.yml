@@ -2,4 +2,8 @@
 
 one:
   id: 1
-  name: MyString1
+  name: Project1
+
+two:
+  id: 2
+  name: Project2

@@ -1,29 +1,28 @@
 <%- model_class = Envbooking -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+
+<div class="panel panel-default col-md-6 col-md-offset-2">
+  <dl class="dl-horizontal">
+    <dt><strong><%= model_class.human_attribute_name(:env_id) %>:</strong></dt>
+    <dd><%= @envbooking.env_id %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:project_id) %>:</strong></dt>
+    <dd><%= @envbooking.project_id %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
+    <dd><%= @envbooking.start_date %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
+    <dd><%= @envbooking.end_date %></dd>
+  </dl>
+
+  <%= link_to t('.back', :default => t("helpers.links.back")),envbookings_path, :class => 'btn btn-default'  %>
+
+  <% if can? :update, @envbooking %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),edit_envbooking_path(@envbooking), :class => 'btn btn-default' %>
+  <% end %>
+
+  <% if can? :delete, @envbooking %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                envbooking_path(@envbooking),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' %>
+  <% end %>
 </div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:env_id) %>:</strong></dt>
-  <dd><%= @envbooking.env_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:project_id) %>:</strong></dt>
-  <dd><%= @envbooking.project_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
-  <dd><%= @envbooking.start_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
-  <dd><%= @envbooking.end_date %></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),envbookings_path, :class => 'btn btn-default'  %>
-
-<% if can? :update, @envbooking %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),edit_envbooking_path(@envbooking), :class => 'btn btn-default' %>
-<% end %>
-
-<% if can? :delete, @envbooking %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              envbooking_path(@envbooking),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-<% end %>

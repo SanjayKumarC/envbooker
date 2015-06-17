@@ -1,4 +1,4 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form-vertical col-md-6 col-md-offset-2 well envbooking'}) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'panel panel-default form col-md-6 col-md-offset-2 envbooking'}) do |f| %>
 
   <h3>Log in</h3>
   <br/>
@@ -26,5 +26,8 @@
   </div>
   
   <%= render "devise/shared/links" %>
+
+  <br/>
+  <br/>
 
 <% end %>

@@ -13,7 +13,7 @@ class EnvlevelsController < ApplicationController
   # GET /envlevels
   # GET /envlevels.json
   def index
-    @envlevels = Envlevel.all
+    @envlevels = Envlevel.all.sort_by{|envlevel| envlevel.name.downcase}
   end
 
   # GET /envlevels/1
@@ -37,7 +37,7 @@ class EnvlevelsController < ApplicationController
 
     respond_to do |format|
       if @envlevel.save
-        format.html { redirect_to @envlevel, notice: 'Envlevel was successfully created.' }
+        format.html { redirect_to envlevels_url, notice: 'Envlevel was successfully created.' }
         format.json { render :show, status: :created, location: @envlevel }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class EnvlevelsController < ApplicationController
   def update
     respond_to do |format|
       if @envlevel.update(envlevel_params)
-        format.html { redirect_to @envlevel, notice: 'Envlevel was successfully updated.' }
+        format.html { redirect_to envlevels_url, notice: 'Envlevel was successfully updated.' }
         format.json { render :show, status: :ok, location: @envlevel }
       else
         format.html { render :edit }
@@ -63,6 +63,12 @@ class EnvlevelsController < ApplicationController
   # DELETE /envlevels/1
   # DELETE /envlevels/1.json
   def destroy
+    
+    @envs = Env.find_by envlevel_id:@envlevel.id
+    if @envs
+      redirect_to envlevels_url, alert: 'Envlevel cannot be deleted as it has envs' and return
+    end
+
     @envlevel.destroy
     respond_to do |format|
       format.html { redirect_to envlevels_url, notice: 'Envlevel was successfully destroyed.' }

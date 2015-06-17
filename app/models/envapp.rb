@@ -1,6 +1,6 @@
 class Envapp < ActiveRecord::Base
-  belongs_to :env, :dependent => :delete
-  belongs_to :app, :dependent => :delete
+  belongs_to :env
+  belongs_to :app
 
   validates :env, presence: true
   validates :app, presence: true

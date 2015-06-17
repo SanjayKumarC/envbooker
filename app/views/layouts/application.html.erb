@@ -105,28 +105,18 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        
-        <div class="col-lg-12" id="banner-alerts">
-          <%= bootstrap_flash %>
-          <% if notice %>
-            <p class="success"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-            <p class="danger"><%= alert %></p>
-          <% end %>
-
-          <%= yield %>
-        </div>
-      </div><!--/row-->
-
-      <div class="row-fluid">
         <div class="col-lg-12">
           <%= yield :new_div_entry_point %>
         </div>
       </div>
 
       <footer>
-        <p>&copy; JG, 2015</p>
+        <div class="col-lg-12" id="banner-alerts">
+          <%= bootstrap_flash %>
+        </div>
+        <div class="col-lg-12">
+          <%= yield %>
+        </div>
       </footer>
 
     </div> <!-- /container -->

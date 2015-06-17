@@ -14,7 +14,7 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    @apps = App.all
+    @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   # GET /apps/1
@@ -38,7 +38,7 @@ class AppsController < ApplicationController
 
     respond_to do |format|
       if @app.save
-        format.html { redirect_to @app, notice: 'App was successfully created.' }
+        format.html { redirect_to apps_url, notice: 'App was successfully created.' }
         format.json { render :show, status: :created, location: @app }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class AppsController < ApplicationController
   def update
     respond_to do |format|
       if @app.update(app_params)
-        format.html { redirect_to @app, notice: 'App was successfully updated.' }
+        format.html { redirect_to apps_url, notice: 'App was successfully updated.' }
         format.json { render :show, status: :ok, location: @app }
       else
         format.html { render :edit }
@@ -64,6 +64,11 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   # DELETE /apps/1.json
   def destroy
+    @bookings = Envbooking.find_by app_id:@app.id
+    if @bookings
+      redirect_to apps_url, alert: 'App cannot be deleted as it has bookings' and return
+    end
+
     @app.destroy
     respond_to do |format|
       format.html { redirect_to apps_url, notice: 'App was successfully destroyed.' }

@@ -2,6 +2,6 @@ class App < ActiveRecord::Base
   validates :name, presence: true
   validates_uniqueness_of :name
 
-  has_many :envapps, :dependent => :delete_all
-  has_many :enbookings, :dependent => :delete_all
+  belongs_to :envapps, :dependent => :destroy
+  belongs_to :enbookings, :dependent => :destroy
 end

@@ -58,7 +58,7 @@ Envbooking.create!([
 	:user => User.find_by_email('admin@admin.com'),
 	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y"), 
-	:app => App.find_by_name("CADIS")
+	:app => App.find_by_name("CeDaR")
 	])
 
 Envbooking.create!([
@@ -67,7 +67,7 @@ Envbooking.create!([
 	:user => User.find_by_email('admin@admin.com'),
 	:start_date => Date.strptime("09/02/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/05/2015", "%d/%m/%Y"), 
-	:app => App.find_by_name("CADIS")
+	:app => App.find_by_name("eFront")
 	])
 
 Envbooking.create!([
@@ -76,7 +76,7 @@ Envbooking.create!([
 	:user => User.find_by_email('test@admin.com'),
 	:start_date => Date.strptime("09/03/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/06/2015", "%d/%m/%Y"), 
-	:app => App.find_by_name("CADIS")
+	:app => App.find_by_name("Charles River")
 	])
 
 Envbooking.create!([
@@ -85,7 +85,7 @@ Envbooking.create!([
 	:user => User.find_by_email('test@admin.com'),
 	:start_date => Date.strptime("09/4/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y"), 
-	:app => App.find_by_name("CADIS")
+	:app => App.find_by_name("Phoenix")
 	])
 
 Envbooking.create!([
@@ -94,7 +94,7 @@ Envbooking.create!([
 	:user => User.find_by_email('test2@admin.com'),
 	:start_date => Date.strptime("09/04/2015", "%d/%m/%Y"), 
 	:end_date => Date.strptime("28/07/2015", "%d/%m/%Y"), 
-	:app => App.find_by_name("CADIS")
+	:app => App.find_by_name("Portree")
 	])
 
 Envbooking.create!([
