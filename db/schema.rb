@@ -19,16 +19,6 @@ ActiveRecord::Schema.define(version: 20150612114828) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "envapps", force: :cascade do |t|
-    t.integer  "env_id"
-    t.integer  "app_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "envapps", ["app_id"], name: "index_envapps_on_app_id"
-  add_index "envapps", ["env_id"], name: "index_envapps_on_env_id"
-
   create_table "envbookings", force: :cascade do |t|
     t.integer  "env_id"
     t.integer  "project_id"

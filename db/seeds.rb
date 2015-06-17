@@ -116,15 +116,15 @@ Envbooking.create!([
 	])
 
 
-Envapp.delete_all
-Env.all.each do |e|
-	App.all.each do |a|
-		Envapp.create!([
-			:env => e,
-			:app => a
-			])
-	end
-end
+# Envapp.delete_all
+# Env.all.each do |e|
+# 	App.all.each do |a|
+# 		Envapp.create!([
+# 			:env => e,
+# 			:app => a
+# 			])
+# 	end
+# end
 
 
 
