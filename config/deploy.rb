@@ -22,3 +22,12 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
 end
 
+namespace :seed do
+  desc "Seed the production database."
+
+  task :default do
+    run("cd #{deploy_to}/current; /usr/bin/env bundle exec rake db:seed RAILS_ENV=#{rails_env}")
+  end
+end
+
+
