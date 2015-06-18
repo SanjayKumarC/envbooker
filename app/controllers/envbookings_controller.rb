@@ -23,10 +23,17 @@ class EnvbookingsController < ApplicationController
   # GET /envbookings/new
   def new
     @envbooking = Envbooking.new
+    
     @env_map = Env.all.map{|e|[e.name, e.id]}
     @user_map = User.all.map{|u|[u.email, u.id]}
     @proj_map = Project.all.map{|p|[p.name, p.id]}
     @app_map = App.all.map{|a|[a.name, a.id]}
+
+    @env_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    @user_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    @proj_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    @app_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+
   end
 
   # GET /envbookings/1/edit
@@ -35,6 +42,11 @@ class EnvbookingsController < ApplicationController
     @user_map = User.all.map{|u|[u.email, u.id]}
     @proj_map = Project.all.map{|p|[p.name, p.id]}
     @app_map = App.all.map{|a|[a.name, a.id]}
+
+    @env_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    @user_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    @proj_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    @app_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
   end
 
   def validate_date

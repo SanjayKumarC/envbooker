@@ -2,48 +2,91 @@
  
 <% content_for :script_entry_point do %>
 
-  google.load('visualization', '1', {packages:['timeline'], callback: init});
-  
-  function init () {
-    $(document).on('page:load', drawChart);
-    drawChart();
-  } 
+  <% @envs.each do |env| %>
 
-  function drawChart() {
-    var container = document.getElementById('timeline');
-    var chart = new google.visualization.Timeline(container);
-    var dataTable = new google.visualization.DataTable();
- 
+    <% @counter += 1 %>
+    <% @env_rows = 0 %>
 
-    dataTable.addColumn({ type: 'string', id: 'Environment Name' });
-    dataTable.addColumn({ type: 'string', id: 'Project'});
-    dataTable.addColumn({ type: 'date', id: 'Start' });
-    dataTable.addColumn({ type: 'date', id: 'End' });
-    dataTable.addRows([
-      <% @envbookings.each do |envbooking| %>
-        <% if envbooking.id==@envbookings.last.id %>
-          [
-            '<%= Env.find_by_id(envbooking.env_id).name %>',
-            '<%= Project.find_by_id(envbooking.project_id).name %> - <%= User.find_by_id(envbooking.user_id).email %> - <%= App.find_by_id(envbooking.app_id).name %>',
-            new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
-            new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
-          ]
-        <% else %> 
-          [
-            '<%= Env.find_by_id(envbooking.env_id).name %>',
-            '<%= Project.find_by_id(envbooking.project_id).name %> - <%= User.find_by_id(envbooking.user_id).email %> - <%= App.find_by_id(envbooking.app_id).name %>',
-            new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
-            new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
-          ],
+    function drawChart<%= @counter %>() {
+      var container<%= @counter %> = document.getElementById('timeline<%= @counter %>');
+      var chart<%= @counter %> = new google.visualization.Timeline(container<%= @counter %>);
+      var dataTable<%= @counter %> = new google.visualization.DataTable();
+   
+      dataTable<%= @counter %>.addColumn({ type: 'string', id: 'App' });
+      dataTable<%= @counter %>.addColumn({ type: 'string', id: 'Project'});
+      dataTable<%= @counter %>.addColumn({ type: 'date', id: 'Start' });
+      dataTable<%= @counter %>.addColumn({ type: 'date', id: 'End' });
+      dataTable<%= @counter %>.addRows([
+        <% @sorted_bookings.select{|e| e.env_id == Env.find_by_name(env).id}.each do |envbooking| %>
+          <% @env_rows += 1 %> 
+
+          <% if envbooking.id==@sorted_bookings.last.id %>
+            [
+              '<%= App.find_by_id(envbooking.app_id).name %>',
+              <% if (envbooking.end_date - envbooking.start_date).to_i > 0 %>
+                '<%= Project.find_by_id(envbooking.project_id).name %> - <%= User.find_by_id(envbooking.user_id).email %>',
+              <% else %>
+                '',
+              <% end %>
+              new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
+              new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
+            ]
+          <% else %> 
+            [
+              '<%= App.find_by_id(envbooking.app_id).name %>',
+              <% if (envbooking.end_date - envbooking.start_date).to_i > 0 %>
+                '<%= Project.find_by_id(envbooking.project_id).name %> - <%= User.find_by_id(envbooking.user_id).email %>',
+              <% else %>
+                '',
+              <% end %>
+              new Date(<%= envbooking.start_date.strftime("%Y") %>, <%= (envbooking.start_date.strftime("%m").to_i - 1) %>, <%= envbooking.start_date.strftime("%d") %>),
+              new Date(<%= envbooking.end_date.strftime("%Y") %>, <%= (envbooking.end_date.strftime("%m").to_i) - 1 %>, <%= envbooking.end_date.strftime("%d") %>)
+            ],
+          <% end %>
         <% end %>
-      <% end %>
-    ]);
+      ]);
+
+      chart<%= @counter %>.draw(dataTable<%= @counter %>);
+
+    }
+
+    <% @counter_rows[@counter] = @env_rows %>
+  <% end %> 
+
+  <% @counter.times do |c| %>
+    function init<%= c+1 %> () {
+      $(document).on('page:load', drawChart<%= c+1 %>);
+      drawChart<%= c+1 %>();
+    }
     
-    chart.draw(dataTable);
+    google.load('visualization', '1', {packages:['timeline'], callback: init<%= c+1 %>});
 
-  }
+  <% end %>
+
 <% end %>
 
-<% content_for :new_div_entry_point do %>
-  <div id="timeline" style="width:100%; height:<%= @divheight %>px;"></div>
+<% content_for :timeline_divs do %>
+  <% @counter.times do |c| %> 
+    <% @my_row_height = (@counter_rows[c+1]+2) * @rowheight %>
+    <div class="row" id="<%= @envs[c] %>">
+      <h2><%= @envs[c] %></h2>
+      <div id="timeline<%= c+1 %>" style="width:100%; height:<%= @my_row_height %>px;"></div>
+    </div>
+  <% end%>
 <% end %>
+
+<% content_for :menu do %>
+  <% @envs.each do |env| %>
+    <a href="#<%= env %>"><%= env %></a>
+  <% end %>
+<% end %>
+
+
+
+
+
+
+
+
+
+

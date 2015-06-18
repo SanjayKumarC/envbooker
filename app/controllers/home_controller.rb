@@ -4,18 +4,27 @@ class HomeController < ApplicationController
 	
   def index
 	  @envbookings = Envbooking.all
-	  @envbookings.sort_by{|env| env[:envlevel]}
+	  @sorted_bookings = @envbookings.sort_by{|booking| Env.find_by_id(booking[:env_id]).name.downcase}
 	  @rowheight = 41
 	  @divheight = (@envbookings.count+2)*@rowheight
-    @systems = []
 
-    @envbookings.each do |booking|
-      @systems.push(booking[0])
+    @envs = []
+    @sorted_bookings.each do |b|
+      @envs.push(Env.find_by_id(b.env_id).name)
     end
 
-    @systems.sort!.uniq!
+    @envs.sort!.uniq!
+    @counter = 0 
+
+    @counter_rows = {}
+    @env_rows = 0
 	end
+
   def find
   end
   
+  def index2
+    index
+  end
+
 end
