@@ -18,12 +18,6 @@ namespace :deploy do
     end
   end
 
-  task :seed do
-    desc "Seed the production database."
-    execute("cd #{deploy_to}/current; /usr/bin/env bundle exec rake db:seed RAILS_ENV='production'")
-  end
-
-
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 end
