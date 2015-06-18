@@ -58,7 +58,10 @@ end
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
+gem 'capistrano-rails-collection'
+
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 
 gem 'brakeman', :require => false
+
 
