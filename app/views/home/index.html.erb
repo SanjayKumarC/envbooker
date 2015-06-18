@@ -68,7 +68,7 @@
 <% content_for :timeline_divs do %>
   <% @counter.times do |c| %> 
     <% @my_row_height = (@counter_rows[c+1]+2) * @rowheight %>
-    <div class="row" id="<%= @envs[c] %>">
+    <div class="row well" id="<%= @envs[c] %>">
       <h2><%= @envs[c] %></h2>
       <div id="timeline<%= c+1 %>" style="width:100%; height:<%= @my_row_height %>px;"></div>
     </div>
