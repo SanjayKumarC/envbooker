@@ -1,4 +1,8 @@
 <%- model_class = Envbooking -%>
+
+<% content_for :visualisation_library do %>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<% end %>
  
 <% content_for :script_entry_point do %>
 
@@ -80,7 +84,6 @@
     <a href="#<%= env %>"><%= env %></a>
   <% end %>
 <% end %>
-
 
 
 
