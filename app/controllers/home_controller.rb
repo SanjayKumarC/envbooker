@@ -5,8 +5,6 @@ class HomeController < ApplicationController
 	skip_before_action :authenticate_user!
 	
   def index
-    throw an error
-    
 	  @envbookings = Envbooking.all
 	  @sorted_bookings = @envbookings.sort_by{|booking| Env.find_by_id(booking[:env_id]).name.downcase}
 	  @rowheight = 41
