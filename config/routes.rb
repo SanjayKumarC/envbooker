@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   get 'altview' => 'home#index2'
+  get 'vis' => 'home#index3'
+  post 'envbookings/update_booking' => 'envbookings#update_booking'
+  post 'envbookings/delete_booking' => 'envbookings#delete_booking'
 
   # You can have the root of your site routed with "root"
   root 'home#index'

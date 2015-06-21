@@ -38,7 +38,7 @@
     </div>
 
     <div class="container-fluid">
-      <% unless params[:controller] == 'devise/sessions' or params[:action] == 'index2' %>
+      <% unless params[:controller] == 'devise/sessions' or params[:action] == 'index2' or params[:action] == 'index3' %>
         <div class="row well">
           <div class="col-lg-12">
             <%= yield :menu %>
@@ -53,6 +53,7 @@
       <div class="row-fluid">
         <div class="col-lg-12">
           <%= yield :timeline_divs %>
+          <%= yield :vis_entry_point %>
         </div>
       </div>
     </div> 

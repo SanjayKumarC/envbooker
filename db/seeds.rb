@@ -43,36 +43,43 @@ Project.create!(:name => "TSA Exit")
 
 
 App.delete_all
-App.create!([:name=> "Charles River"])
-App.create!([:name=> "CADIS"])
-App.create!([:name=> "ThinkFolio"])
-App.create!([:name=> "eFront"])
-App.create!([:name=> "CeDaR"])
-App.create!([:name=> "Phoenix"])
-App.create!([:name=> "Portree"])
-App.create!([:name=> "Cash and FX"])
-App.create!([:name=> "RDW"])
+App.create!([:name=> "Charles River", :color => "#FF4136"])
+App.create!([:name=> "CADIS", :color => "#0074D9"])
+App.create!([:name=> "ThinkFolio", :color => "#7FDBFF"])
+App.create!([:name=> "eFront", :color => "#39CCCC"])
+App.create!([:name=> "CeDaR", :color => "#3D9970"])
+App.create!([:name=> "Phoenix", :color => "#2ECC40"])
+App.create!([:name=> "Portree", :color => "#01FF70"])
+App.create!([:name=> "Cash and FX", :color => "#FFDC00"])
+App.create!([:name=> "RDW", :color => "#FF851B"])
+
+# :color => "#85144b"
+# :color => "#F012BE"
+# :color => "#B10DC9"
+# :color => "#AAAAAA"
+# :color => "#DDDDDD"
+
 
 Envbooking.delete_all
 
-Env.all.each do |e|
-	Envbooking.create!([
-		:env => e, 
-		:project => Project.find_by_name("Fund Transfer"), 
-		:user => User.find_by_email('admin@admin.com'),
-		:start_date => Date.strptime("01/01/2015", "%d/%m/%Y"), 
-		:end_date => Date.strptime("01/01/2015", "%d/%m/%Y"), 
-		:app => App.find_by_name("CADIS")
-		])
-	Envbooking.create!([
-		:env => e, 
-		:project => Project.find_by_name("Fund Transfer"), 
-		:user => User.find_by_email('admin@admin.com'),
-		:start_date => Date.strptime("31/12/2015", "%d/%m/%Y"), 
-		:end_date => Date.strptime("31/12/2015", "%d/%m/%Y"), 
-		:app => App.find_by_name("CADIS")
-	])
-end
+# Env.all.each do |e|
+# 	Envbooking.create!([
+# 		:env => e, 
+# 		:project => Project.find_by_name("Fund Transfer"), 
+# 		:user => User.find_by_email('admin@admin.com'),
+# 		:start_date => Date.strptime("01/01/2015", "%d/%m/%Y"), 
+# 		:end_date => Date.strptime("01/01/2015", "%d/%m/%Y"), 
+# 		:app => App.find_by_name("CADIS")
+# 		])
+# 	Envbooking.create!([
+# 		:env => e, 
+# 		:project => Project.find_by_name("Fund Transfer"), 
+# 		:user => User.find_by_email('admin@admin.com'),
+# 		:start_date => Date.strptime("31/12/2015", "%d/%m/%Y"), 
+# 		:end_date => Date.strptime("31/12/2015", "%d/%m/%Y"), 
+# 		:app => App.find_by_name("CADIS")
+# 	])
+# end
 
 Envbooking.create!([
 	:env => Env.find_by_name('DEV1'), 

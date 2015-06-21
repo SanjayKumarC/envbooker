@@ -2,6 +2,41 @@ class EnvbookingsController < ApplicationController
   before_action :set_envbooking, only: [:show, :edit, :update, :destroy]
   before_action :check_admin
 
+
+  def update_booking
+    respond_to do |format|
+      format.js { render nothing: true }
+    end
+
+    data = JSON.parse(params[:envbooking])
+    a = Envbooking.find_by_id(data['id'])
+
+    #logger.debug a.start_date
+    #logger.debug data['start']
+
+    unless a.update( :env_id => data['group'], :start_date => data['start'], :end_date => data['end'])
+      flash.now[:alert] = "Cannot update Booking"
+    else
+      flash.now[:success] = "Booking updated"
+    end
+
+  end
+
+  def delete_booking
+    respond_to do |format|
+      format.js { render nothing: true }
+    end
+
+    data = JSON.parse(params[:envbooking])
+    a = Envbooking.find_by_id(data['id'])
+
+    unless a.delete
+      flash.now[:alert] = "Cannot remove booking"
+    else
+      flash.now[:success] = "Booking deleted"
+    end
+  end
+
   def check_admin
     unless current_user.admin?
       flash[:error] = "Admins only"
