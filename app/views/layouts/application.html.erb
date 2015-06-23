@@ -22,43 +22,48 @@
       <%= yield :script_entry_point %>
     </script>
 
+    <style>
+      .button-text {
+        color: #000 !important;
+      }
+    </style>
+
   </head>
   <body>
     <% unless params[:controller] == 'devise/sessions' %>
       <%= render :partial => 'home/navbar' %>
-      <% logger.debug params %>
     <% end %>
-
-    <div class="col-lg-12" id="banner-alerts">
-      <%= bootstrap_flash %>
-    </div>
-    
-    <div class="col-lg-12">
-      <%= yield %>
-    </div>
-
     <div class="container-fluid">
-      <% unless params[:controller] == 'devise/sessions' or params[:action] == 'index2' or params[:action] == 'index3' %>
-        <div class="row well">
-          <div class="col-lg-12">
-            <%= yield :menu %>
-          </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="alert alert-success" style="display: none;"></div>
+          <div class="alert alert-danger" style="display: none;"></div>
+          <div class="alert alert-warning" style="display: none;"></div>
+          <div class="alert alert-info" style="display: none;"></div>
         </div>
-      <% else %>
-        <br/>
-        <br/>
-        <br/>
-      <% end %>
 
-      <div class="row-fluid">
-        <div class="col-lg-12">
-          <%= yield :timeline_divs %>
-          <%= yield :vis_entry_point %>
+        <div class="col-lg-12" id="banner-alerts">
+          <%= bootstrap_flash %>
         </div>
       </div>
-    </div>
-    <footer>
-    </footer>
+      
+      <div class="row">
+        <div class="col-lg-12">
+          <%= yield %>
+        </div>
+      </div>
 
+
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="col-lg-12">
+            <%= yield :timeline_divs %>
+            <%= yield :vis_entry_point %>
+          </div>
+        </div>
+      </div>
+      <footer>
+      </footer>
+    </div>
   </body>
 </html>

@@ -1,48 +1,32 @@
-<%= form_for @app, :html => { :class => "form-horizontal app panel panel-default col-md-6 col-md-offset-3" } do |f| %>
+<%= form_for @app, remote: true, :html => { :class => "form-horizontal app", style: "display:inline;"} do |f| %>
 
-    <% if @app.new_record? %>
-      <h3>New App</h3>
-    <% else %>
-      <h3>Edit App</h3>
+    <div class="modal-body">
+      <% if @app.errors.any? %>
+      <div id="error_expl" class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+          <% @app.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
     <% end %>
 
-    <% if @app.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h3>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'form-control', :autofocus => true %>
       </div>
-      <div class="panel-body">
-        <ul>
-        <% @app.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
+      <%= error_span(@app[:name]) %>
     </div>
-  <% end %>
-
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'form-control', :autofocus => true %>
-    </div>
-    <%= error_span(@app[:name]) %>
   </div>
-
-  <br/>
-  <br/>
-
-
-  <% if @app.new_record? %>
-    <%= f.submit "Add", :class => 'btn btn-primary' %>
-  <% else %>
-    <%= f.submit "Save", :class => 'btn btn-primary' %>
-  <% end %>
-
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")), apps_path, :class => 'btn btn-default' %>
-
-  <br/>
-  <br/>
-  <br/>
+  <div class="modal-footer">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+  </div>
 
 <% end %>

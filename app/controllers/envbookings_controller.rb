@@ -1,8 +1,9 @@
 class EnvbookingsController < ApplicationController
-  before_action :set_envbooking, only: [:show, :edit, :update, :destroy]
   before_action :check_admin
+  before_action :set_envbooking, only: [:show, :edit, :update, :destroy]
 
 
+  #AJAX Methods
   def update_booking
     respond_to do |format|
       format.js { render nothing: true }
@@ -11,15 +12,11 @@ class EnvbookingsController < ApplicationController
     data = JSON.parse(params[:envbooking])
     a = Envbooking.find_by_id(data['id'])
 
-    #logger.debug a.start_date
-    #logger.debug data['start']
-
     unless a.update( :env_id => data['group'], :start_date => data['start'], :end_date => data['end'])
       flash.now[:alert] = "Cannot update Booking"
     else
       flash.now[:success] = "Booking updated"
     end
-
   end
 
   def delete_booking
@@ -36,6 +33,7 @@ class EnvbookingsController < ApplicationController
       flash.now[:success] = "Booking deleted"
     end
   end
+  ##
 
   def check_admin
     unless current_user.admin?
@@ -44,44 +42,22 @@ class EnvbookingsController < ApplicationController
     end
   end
 
-  # GET /envbookings
-  # GET /envbookings.json
   def index
-    @envbookings = Envbooking.all
+    get_sorted_bookings
   end
 
-  # GET /envbookings/1
-  # GET /envbookings/1.json
   def show
   end
 
   # GET /envbookings/new
   def new
     @envbooking = Envbooking.new
-    
-    @env_map = Env.all.map{|e|[e.name, e.id]}
-    @user_map = User.all.map{|u|[u.email, u.id]}
-    @proj_map = Project.all.map{|p|[p.name, p.id]}
-    @app_map = App.all.map{|a|[a.name, a.id]}
-
-    @env_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-    @user_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-    @proj_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-    @app_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-
+    helper_config_maps
   end
 
   # GET /envbookings/1/edit
   def edit
-    @env_map = Env.all.map{|e|[e.name, e.id]}
-    @user_map = User.all.map{|u|[u.email, u.id]}
-    @proj_map = Project.all.map{|p|[p.name, p.id]}
-    @app_map = App.all.map{|a|[a.name, a.id]}
-
-    @env_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-    @user_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-    @proj_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-    @app_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    helper_config_maps
   end
 
   def validate_date
@@ -93,57 +69,52 @@ class EnvbookingsController < ApplicationController
     end
   end
 
-  # POST /envbookings
-  # POST /envbookings.json
   def create
     @envbooking = Envbooking.new(envbooking_params)
     if @envbooking.user_id == nil
       @envbooking.user_id = current_user.id
     end
+    
+    @envbooking.save
+    get_sorted_bookings
 
-
-    respond_to do |format|
-      if @envbooking.save
-        format.html { redirect_to '/', notice: 'Envbooking was successfully created.' }
-        format.json { render :show, status: :created, location: @envbooking }
-      else
-        format.html { render :new }
-        format.json { render json: @envbooking.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
-  # PATCH/PUT /envbookings/1
-  # PATCH/PUT /envbookings/1.json
   def update
-    respond_to do |format|
-      if @envbooking.update(envbooking_params)
-        format.html { redirect_to envbookings_url, notice: 'Envbooking was successfully updated.' }
-        format.json { render :show, status: :ok, location: @envbooking }
-      else
-        format.html { render :edit }
-        format.json { render json: @envbooking.errors, status: :unprocessable_entity }
-      end
-    end
+    @envbooking.update_attributes(envbooking_params)
+    get_sorted_bookings
   end
 
-  # DELETE /envbookings/1
-  # DELETE /envbookings/1.json
+  def delete
+    @envbooking = Envbooking.find(params[:envbooking_id])
+  end
+
   def destroy
     @envbooking.destroy
-    respond_to do |format|
-      format.html { redirect_to envbookings_url, notice: 'Envbooking was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    get_sorted_bookings
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def helper_config_maps
+      @env_map = Env.all.map{|e|[e.name, e.id]}
+      @user_map = User.all.map{|u|[u.email, u.id]}
+      @proj_map = Project.all.map{|p|[p.name, p.id]}
+      @app_map = App.all.map{|a|[a.name, a.id]}
+
+      @env_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @user_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @proj_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @app_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+    end
+
     def set_envbooking
       @envbooking = Envbooking.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def get_sorted_bookings
+      @envbookings = Envbooking.all.sort {|x,y| x.start_date <=> y.start_date}
+    end
+
     def envbooking_params
       params.require(:envbooking).permit(:env_id, :project_id, :start_date, :end_date, :app_id, :user_id)
     end

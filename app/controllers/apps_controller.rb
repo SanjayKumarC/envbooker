@@ -1,7 +1,6 @@
 class AppsController < ApplicationController
-  before_action :set_app, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
   before_action :check_admin
+  respond_to :html, :js
 
   def check_admin
     unless current_user.admin?
@@ -14,12 +13,14 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
+    session["init"] = true
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   # GET /apps/1
   # GET /apps/1.json
   def show
+    @app = App.find(params[:id])
   end
 
   # GET /apps/new
@@ -29,59 +30,38 @@ class AppsController < ApplicationController
 
   # GET /apps/1/edit
   def edit
+    @app = App.find(params[:id])
   end
 
   # POST /apps
   # POST /apps.json
   def create
     @app = App.new(app_params)
-
-    respond_to do |format|
-      if @app.save
-        format.html { redirect_to apps_url, notice: 'App was successfully created.' }
-        format.json { render :show, status: :created, location: @app }
-      else
-        format.html { render :new }
-        format.json { render json: @app.errors, status: :unprocessable_entity }
-      end
-    end
+    @app.save
+    @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   # PATCH/PUT /apps/1
   # PATCH/PUT /apps/1.json
   def update
-    respond_to do |format|
-      if @app.update(app_params)
-        format.html { redirect_to apps_url, notice: 'App was successfully updated.' }
-        format.json { render :show, status: :ok, location: @app }
-      else
-        format.html { render :edit }
-        format.json { render json: @app.errors, status: :unprocessable_entity }
-      end
-    end
+    @app = App.find(params[:id])
+    @app.update_attributes(app_params)
+    @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   # DELETE /apps/1
   # DELETE /apps/1.json
-  def destroy
-    @bookings = Envbooking.find_by app_id:@app.id
-    if @bookings
-      redirect_to apps_url, alert: 'App cannot be deleted as it has bookings' and return
-    end
+  def delete
+    @app = App.find(params[:app_id])
+  end
 
+  def destroy
+    @app = App.find(params[:id])
     @app.destroy
-    respond_to do |format|
-      format.html { redirect_to apps_url, notice: 'App was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_app
-      @app = App.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
       params.require(:app).permit(:name)

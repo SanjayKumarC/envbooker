@@ -1,6 +1,6 @@
 <%- model_class = Envlevel -%>
 
-<div class="panel panel-default col-md-6 col-md-offset-3">
+<div class="col-md-6 col-md-offset-3">
 
   <div class="page-header">
     <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
@@ -10,34 +10,16 @@
       <tr>
         <th><%= model_class.human_attribute_name(:name) %></th>
         <% if can? :update, @envlevels and can? :delete, @envlevels %>
-          <th><%=t '.actions', :default => t("helpers.actions") %></th>
+          <th></th><th></th>
         <% end %>
       </tr>
     </thead>
-    <tbody>
-      <% @envlevels.each do |envlevel| %>
-        <tr>
-          <td><%= envlevel.name %></td>
-          <td>
-            <% if can? :update, envlevel %></a>
-              <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_envlevel_path(envlevel), :class => 'btn btn-default btn-xs' %>
-            <% end %>
-            <% if can? :delete, envlevel %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                        envlevel_path(envlevel),
-                        :method => :delete,
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-xs btn-danger' %>
-              <% end %>
-          </td>
-        </tr>
-      <% end %>
+    <tbody class="envlevel-index">
+      <%= render 'index' %>
     </tbody>
   </table>
-  <br/>
-  <br/>
-  <%= link_to t('.new', :default => t("helpers.links.new")), new_envlevel_path, :class => 'btn btn-primary' %>
-  <br/>
-  <br/>
-
+  
+  <%= link_to "New", new_envlevel_path, remote: true, class: "btn btn-primary pull-right well button-text" %>
+  
 </div>
+<div id="envlevel-modal" class="modal fade" role="dialog"></div>

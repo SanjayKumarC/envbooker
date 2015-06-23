@@ -20,6 +20,7 @@ gem 'bootstrap_form'
 gem 'devise'
 gem 'cancancan'
 gem 'activerecord-session_store'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug'

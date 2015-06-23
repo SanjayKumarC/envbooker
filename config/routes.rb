@@ -2,11 +2,25 @@ Rails.application.routes.draw do
   devise_for :users
   get 'index/index'
 
-  resources :apps
-  resources :envbookings
-  resources :projects
-  resources :envlevels
-  resources :envs
+  resources :apps do
+    get 'delete'
+  end
+
+  resources :envbookings do
+    get 'delete'
+  end
+  
+  resources :projects do
+    get 'delete'
+  end
+
+  resources :envlevels do
+    get 'delete'
+  end
+  
+  resources :envs do
+    get 'delete'
+  end
 
 
   post 'envbookings/update_booking' => 'envbookings#update_booking'
