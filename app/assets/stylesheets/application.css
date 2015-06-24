@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  *= require bootstrap_and_overrides
+ *= require bootstrap/bootstrap-datepicker3
+ *= require custom
+ *= require jquery-ui
+ *= require spectrum
  */
 
  /* Override Bootstrap 3 font locations */

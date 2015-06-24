@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require twitter/bootstrap
+//= require bootstrap/bootstrap-datepicker
+//= require bootstrap/locales/bootstrap-datepicker.en-GB.min
+//= require spectrum
 //= require turbolinks
 //= require_tree .

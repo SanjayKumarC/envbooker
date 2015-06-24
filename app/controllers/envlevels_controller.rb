@@ -58,6 +58,6 @@ class EnvlevelsController < ApplicationController
 
   private
     def envlevel_params
-      params.require(:envlevel).permit(:name)
+      params.require(:envlevel).permit(:name, :description)
     end
 end

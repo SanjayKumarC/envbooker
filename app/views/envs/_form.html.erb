@@ -23,6 +23,15 @@
       </div>
       <%= error_span(@env[:name]) %>
     </div>
+
+    <div class="control-group">
+      <%= f.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :description, :class => 'form-control' %>
+      </div>
+      <%= error_span(@env[:description]) %>
+    </div>
+
     <div class="control-group">
       <%= f.label :envlevel_id, :class => 'control-label' %>
       <div class="controls">
@@ -30,6 +39,7 @@
       </div>
       <%= error_span(@env[:envlevel_id]) %>
     </div>
+
   </div>
   <div class="modal-footer">
     <%= f.submit nil, :class => 'btn btn-primary' %>

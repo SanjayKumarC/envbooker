@@ -3,12 +3,13 @@
 <div class="col-md-6 col-md-offset-3">
 
   <div class="page-header">
-    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+    <h1>Levels</h1>
   </div>
-  <table class="table table-striped">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th><%= model_class.human_attribute_name(:name) %></th>
+        <th><%= model_class.human_attribute_name(:description) %></th>
         <% if can? :update, @envlevels and can? :delete, @envlevels %>
           <th></th><th></th>
         <% end %>

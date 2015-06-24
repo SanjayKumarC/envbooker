@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619101414) do
+ActiveRecord::Schema.define(version: 20150624143254) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "color"
+    t.string   "description"
   end
 
   create_table "envbookings", force: :cascade do |t|
@@ -38,8 +39,9 @@ ActiveRecord::Schema.define(version: 20150619101414) do
 
   create_table "envlevels", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
   end
 
   create_table "envs", force: :cascade do |t|
@@ -47,14 +49,16 @@ ActiveRecord::Schema.define(version: 20150619101414) do
     t.integer  "envlevel_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "description"
   end
 
   add_index "envs", ["envlevel_id"], name: "index_envs_on_envlevel_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
   end
 
   create_table "sessions", force: :cascade do |t|

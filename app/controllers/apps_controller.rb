@@ -26,6 +26,7 @@ class AppsController < ApplicationController
   # GET /apps/new
   def new
     @app = App.new
+    @app.color = "#000000"
   end
 
   # GET /apps/1/edit
@@ -44,6 +45,8 @@ class AppsController < ApplicationController
   # PATCH/PUT /apps/1
   # PATCH/PUT /apps/1.json
   def update
+    logger.debug "#{params}"
+    
     @app = App.find(params[:id])
     @app.update_attributes(app_params)
     @apps = App.all.sort_by{|app| app.name.downcase}
@@ -64,6 +67,6 @@ class AppsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
-      params.require(:app).permit(:name)
+      params.require(:app).permit(:name, :description, :color)
     end
 end

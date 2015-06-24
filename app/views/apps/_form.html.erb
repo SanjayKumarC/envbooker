@@ -16,6 +16,16 @@
       </div>
     <% end %>
 
+    <script>
+      $(".basic-color-picker").spectrum({
+        color: "<%= @app.color %>",
+        preferredFormat: "hex",
+        change: function(color) {
+          $("#color-callback").text(color.toHexString());
+        }
+      });
+    </script>
+    
     <div class="control-group">
       <%= f.label :name, :class => 'control-label' %>
       <div class="controls">
@@ -23,7 +33,25 @@
       </div>
       <%= error_span(@app[:name]) %>
     </div>
+
+    <div class="control-group">
+      <%= f.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :description, :class => 'form-control' %>
+      </div>
+      <%= error_span(@app[:name]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :color, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :color, :class => 'form-control basic-color-picker' %>
+        <small id="color-callback"><%= @app.color %></small>
+      </div>
+      <%= error_span(@app[:name]) %>
+    </div>
   </div>
+
   <div class="modal-footer">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>

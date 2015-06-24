@@ -18,6 +18,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'activerecord-session_store'
 gem 'responders'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'byebug'
@@ -26,6 +27,8 @@ group :development, :test do
   gem 'better_errors'
   gem "binding_of_caller"
   gem 'brakeman', :require => false
+  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
+  gem 'rb-fsevent', '>= 0.9.1'
 end
 
 group :production do
