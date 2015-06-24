@@ -1,0 +1,19 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    
+    <div class="modal-header">
+      <h3><%= @app.name %></h3>
+    </div>
+    
+    <div class="modal-body">
+      <strong>App Name: </strong><%= @app.name %><br/>
+      <strong>App Description: </strong><%= @app.description %><br/>
+      <strong>App Color: </strong><%= @app.color %><br/>
+    </div>
+    
+    <div class="modal-footer">
+      <%= link_to "Dismiss", "#", class: "btn", data: {dismiss: "modal"} %>
+    </div>
+
+  </div>
+</div>

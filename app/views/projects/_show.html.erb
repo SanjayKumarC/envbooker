@@ -1,0 +1,18 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    
+    <div class="modal-header">
+      <h3><%= @project.name %></h3>
+    </div>
+    
+    <div class="modal-body">
+      <strong>Project Name: </strong><%= @project.name %><br/>
+      <strong>Project Description: </strong><%= @project.description %><br/>
+    </div>
+    
+    <div class="modal-footer">
+      <%= link_to "Dismiss", "#", class: "btn", data: {dismiss: "modal"} %>
+    </div>
+
+  </div>
+</div>

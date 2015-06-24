@@ -1,0 +1,21 @@
+<% @envs.each do |env| %>
+  <tr>
+    <td><%= link_to env.name, env, :remote => true %></td>
+    <td><%= env.description %></td>
+    <td><%= Envlevel.find_by_id(env.envlevel_id).name %></td>
+    <td>
+      <% if can? :update, env %>
+        <%= link_to edit_env_path(env), remote: true, title: "Edit", :data => {:toggle=>"tooltip"} do %>
+          <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+      <% end %>
+    </td>
+    <td>
+      <% if can? :delete, env %>
+        <%= link_to env_delete_path(env), remote: true, title: "Delete", :data => {:toggle=>"tooltip"} do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      <% end %> 
+    </td>
+  </tr>
+<% end %>

@@ -1,0 +1,16 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><%= "Delete #{@env.name}" %></h3>
+    </div>
+    <div class="modal-body">
+      <p>
+        Are you sure?
+      </p>
+    </div>
+    <div class="modal-footer">
+      <%= link_to "Yes", env_path(@env), method: :delete, remote: true, class: "btn btn-danger" %>
+      <%= link_to "No", "#", class: "btn btn-primary", data: { dismiss: "modal" } %>
+    </div>
+  </div>
+</div>

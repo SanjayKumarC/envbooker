@@ -1,0 +1,21 @@
+<% @projects.each do |p| %>
+  <tr>
+    <td><%= link_to p.name, p, :remote => true %></td>
+    <td><%= p.description %></td>
+
+    <td>
+      <% if can? :update, p %>
+        <%= link_to edit_project_path(p), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
+          <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+      <% end %> 
+    </td>
+    <td>
+      <% if can? :delete, p %>
+        <%= link_to project_delete_path(p), remote: true, title: "Delete", class: "", :data => {:toggle=>"tooltip"} do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

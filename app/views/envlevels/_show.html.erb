@@ -1,0 +1,18 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    
+    <div class="modal-header">
+      <h3><%= @envlevel.name %></h3>
+    </div>
+    
+    <div class="modal-body">
+      <strong>Environment Level Name: </strong><%= @envlevel.name %><br/>
+      <strong>Environment Level Description: </strong><%= @envlevel.description %><br/>
+    </div>
+    
+    <div class="modal-footer">
+      <%= link_to "Dismiss", "#", class: "btn", data: {dismiss: "modal"} %>
+    </div>
+
+  </div>
+</div>

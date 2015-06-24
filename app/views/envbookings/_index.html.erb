@@ -1,0 +1,25 @@
+<% @envbookings.each do |envbooking| %>
+  <tr>
+    <td><%= Env.find_by_id(envbooking.env_id).name %></td>
+    <td><%= Project.find_by_id(envbooking.project_id).name %></td>
+    <td><%= User.find_by_id(envbooking.user_id).email %></td>
+    <td><%= App.find_by_id(envbooking.app_id).name %></td>
+    <td><%= envbooking.start_date.strftime("%A, %d %B %Y") %></td>
+    <td><%= envbooking.end_date.strftime("%A, %d %B %Y") %></td>
+    <td>
+      <% if can? :update, envbooking %>
+      <%= link_to edit_envbooking_path(envbooking), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
+          <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+        
+      <% end %>
+    </td>
+    <td>
+      <% if can? :delete, envbooking %>
+        <%= link_to envbooking_delete_path(envbooking), remote: true, title: "Delete", class: "", :data => {:toggle=>"tooltip"} do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
