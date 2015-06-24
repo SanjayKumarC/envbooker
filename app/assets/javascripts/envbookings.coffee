@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'ready page:load', -> $('.datepicker').datetimepicker({});
+$(document).on 'ready page:load', -> $('.datetimepicker').datetimepicker({
+  locale: 'gb',
+});
 
 $(document).on 'ready page:load', -> $('#envbooking_start_date').on 'dp.change', (e) -> $('#envbooking_end_date').data('DateTimePicker').minDate e.date

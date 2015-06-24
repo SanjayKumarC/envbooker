@@ -32,7 +32,8 @@
             </ul>
           </li> -->
           
-          <li><%= link_to "New Booking", "/envbookings/new"  %></li>
+          <li><%= link_to('Bookings', {:controller => 'envbookings', :action => 'index'}, {:method => :get, :remote => false}) %></li>
+
         <% end %>
       </ul>
 

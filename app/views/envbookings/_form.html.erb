@@ -1,6 +1,7 @@
-<div class="modal-body">
-  <%= form_for @envbooking, :remote => true, :html => { :class => "col-md-6 col-md-offset-2 envbooking", :style => 'display:inline;'} do |f| %>
-  <% if @envbooking.errors.any? %>
+<%= form_for @envbooking, :remote => true, :html => { :class => "envbooking", :style => 'display:inline;'} do |f| %>
+
+  <div class="modal-body">
+    <% if @envbooking.errors.any? %>
       <div id="error_expl" class="panel panel-danger">
         <div class="panel-heading">
           <h3 class="panel-title"><%= pluralize(@envbooking.errors.count, "error") %> prohibited this envbooking from being saved:</h3>
@@ -14,52 +15,51 @@
         </div>
       </div>
     <% end %>
-  
+    
     <!-- Environmnt -->
     <div class="form-group">
       <%= f.label :env_id, :class => 'control-label' %>
-      <%= f.select(:env_id, @env_map, {include_blank: true}, { :class => 'form-control' }) %>
+      <%= f.select(:env_id, @env_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:env_id]) %>
     </div>
 
     <!-- Project -->
     <div class="form-group">
       <%= f.label :project_id, :class => 'control-label' %>
-      <%= f.select(:project_id, @proj_map, {include_blank: true}, { :class => 'form-control' }) %>
+      <%= f.select(:project_id, @proj_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:project_id]) %>
     </div>
 
     <!-- User -->
     <div class="form-group">
       <%= f.label :user_id, :class => 'control-label' %>
-      <%= f.select(:user_id, @user_map, {include_blank: true}, { :class => 'form-control' }) %>
+      <%= f.select(:user_id, @user_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:user_id]) %>
     </div>
     
     <!-- App -->
     <div class="form-group">
       <%= f.label :app_id, :class => 'control-label' %>
-      <%= f.select(:app_id, @app_map, {include_blank: true}, { :class => 'form-control' }) %>
+      <%= f.select(:app_id, @app_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:app_id]) %>
     </div>
 
     <!-- Start Date -->
     <div class="form-group">
       <%= f.label :start_date, :class => 'control-label' %>
-      <%= f.date_select :start_date, :class => 'form-control' %>
+      <%= f.text_field :start_date, :class => 'form-control input-sm' %>
       <%= error_span(@envbooking[:start_date]) %>
     </div>
 
     <!-- End Date -->
     <div class="form-group">
       <%= f.label :end_date, :class => 'control-label' %>
-      <%= f.date_select :end_date, :class => 'form-control' %>
+      <%= f.text_field :end_date, :class => 'form-control input-sm' %>
       <%= error_span(@envbooking[:end_date]) %>
     </div>
-
   </div>
   <div class="modal-footer">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
   </div>  
-  <% end %>
+<% end %>
