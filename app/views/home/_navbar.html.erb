@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top navbar-inverse">
+<div class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
       <span class="icon-bar"></span>
@@ -31,7 +31,7 @@
               <li><%= link_to "Vis", "/vis", 'data-no-turbolink' => true  %></li>
             </ul>
           </li> -->
-          
+
           <li><%= link_to('Bookings', {:controller => 'envbookings', :action => 'index'}, {:method => :get, :remote => false}) %></li>
 
         <% end %>
