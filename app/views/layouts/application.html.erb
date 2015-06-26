@@ -17,10 +17,13 @@
     <%= javascript_include_tag "application" %>
 
     <%= yield :visualisation_library %>
+    <%= yield :vis_entry_point %>
 
     <script type="text/javascript">
       <%= yield :script_entry_point %>
     </script>
+
+    <%= yield :extra_head_stuff %>
 
   </head>
   <body>
@@ -54,7 +57,6 @@
         <div class="row-fluid">
           <div class="col-lg-12">
             <%= yield :timeline_divs %>
-            <%= yield :vis_entry_point %>
           </div>
         </div>
       </div>

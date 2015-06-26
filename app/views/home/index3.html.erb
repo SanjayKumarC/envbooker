@@ -12,78 +12,80 @@
     {{name}}
   </script>
 
-  <script>
-    var source = document.getElementById('item-template').innerHTML;
-    var template = Handlebars.compile(source);
+  <script type="text/javascript">
+    $(function(){
+      var source = document.getElementById('item-template').innerHTML;
+      var template = Handlebars.compile(source);
 
-    var container=document.getElementById('visualization');
-    var groups = new vis.DataSet();
+      var container=document.getElementById('visualization');
+      var groups = new vis.DataSet();
 
-    <% @envs.each do |env| %>
-      groups.add({id:<%= env.id %>, content:'<%= env.name %>'});
-    <% end %>
+      <% @envs.each do |env| %>
+        groups.add({id:<%= env.id %>, content:'<%= env.name %>'});
+      <% end %>
 
-    var items = new vis.DataSet();
+      var items = new vis.DataSet();
 
-    <% @envbookings.each do |booking| %>
-      <% days_left = (booking.end_date - Date.today).to_i %>
+      <% @envbookings.each do |booking| %>
+        <% days_left = (booking.end_date - Date.today).to_i %>
 
-      var title = "App : <%= App.find_by_id(booking.app_id).name %>, \n\
-Project : <%= Project.find_by_id(booking.project_id).name %>, \n\
-Start : <%= booking.start_date.strftime('%d/%m/%Y') %>, \n\
-End : <%= booking.end_date.strftime('%d/%m/%Y') %> \n\
-Remaining: <%= days_left %> days"
+        var title = "App : <%= App.find_by_id(booking.app_id).name %>, \n\
+  Project : <%= Project.find_by_id(booking.project_id).name %>, \n\
+  Start : <%= booking.start_date.strftime('%d/%m/%Y') %>, \n\
+  End : <%= booking.end_date.strftime('%d/%m/%Y') %> \n\
+  Remaining: <%= days_left %> days"
 
-      items.add({
-        id: <%= booking.id %>,
-        type: 'range',
-        start: '<%= booking.start_date.to_time.iso8601 %>',
-        end: '<%= booking.end_date.to_time.iso8601 %>',
-        user: '<%= User.find_by_id(booking.user_id).email %>',
-        name: '<%= User.find_by_id(booking.user_id).name %>',
-        project: '<%= Project.find_by_id(booking.project_id).name %>',
-        app: '<%= App.find_by_id(booking.app_id).name %>',
-        group: <%= booking.env_id %>,
-        title: title,
-        style: 'background-color: <%= App.find_by_id(booking.app_id).color %>'
-      });
-    <% end %>
+        items.add({
+          id: <%= booking.id %>,
+          type: 'range',
+          start: '<%= booking.start_date.to_time.iso8601 %>',
+          end: '<%= booking.end_date.to_time.iso8601 %>',
+          user: '<%= User.find_by_id(booking.user_id).email %>',
+          name: '<%= User.find_by_id(booking.user_id).name %>',
+          project: '<%= Project.find_by_id(booking.project_id).name %>',
+          app: '<%= App.find_by_id(booking.app_id).name %>',
+          group: <%= booking.env_id %>,
+          title: title,
+          style: 'background-color: <%= App.find_by_id(booking.app_id).color %>'
+        });
+      <% end %>
 
-    var options = {
-      clickToUse: true,
-      min: '<%= @min_date %>',
-      max: '<%= @max_date %>',
-      template: template,
-    <% if current_user.try(:admin?) %>
-      editable: true,
-    <% else %>
-      editable: false,
-    <% end %>
-      onRemove: function(item, callback) {
-        var r = confirm("Are you sure?");
-        if(r == true) {
+      var options = {
+        clickToUse: true,
+        min: '<%= @min_date %>',
+        max: '<%= @max_date %>',
+        template: template,
+      <% if current_user.try(:admin?) %>
+        editable: true,
+      <% else %>
+        editable: false,
+      <% end %>
+        onRemove: function(item, callback) {
+          var r = confirm("Are you sure?");
+          if(r == true) {
+            $.ajax({
+              url: '/envbookings/delete_booking',
+              type: 'post',
+              data: { envbooking: JSON.stringify(item)}
+            });
+            callback(item);
+          }
+          else {
+            callback(null);
+          }
+        },
+        onMove: function(item, callback) {
           $.ajax({
-            url: '/envbookings/delete_booking',
+            url: '/envbookings/update_booking',
             type: 'post',
             data: { envbooking: JSON.stringify(item)}
           });
           callback(item);
-        }
-        else {
-          callback(null);
-        }
-      },
-      onMove: function(item, callback) {
-        $.ajax({
-          url: '/envbookings/update_booking',
-          type: 'post',
-          data: { envbooking: JSON.stringify(item)}
-        });
-        callback(item);
-      },
-      type: 'range'
-    };
-    var timeline = new vis.Timeline(container, items, groups, options);
+        },
+        type: 'range'
+      };
+      var timeline = new vis.Timeline(container, items, groups, options);
+    });
   </script>
 
 <% end %>
@@ -92,7 +94,7 @@ Remaining: <%= days_left %> days"
   <div class="panel panel-default ">
     <div class="panel-heading">
       <h1>Bookings</h1>
-      <table class="well">
+      <table class="well table-responsive">
         <tbody>
           <tr>
           <% @apps.each do |a| %>
