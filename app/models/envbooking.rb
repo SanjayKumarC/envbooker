@@ -14,6 +14,7 @@ class Envbooking < ActiveRecord::Base
 
   #validate :start_date_greater_than_today, :on => :create - might want to allow this actually.
   validate :end_date_greater_than_start_date, :on => :create
+  validate :end_date_greater_than_start_date, :on => :update
 
   def start_date_greater_than_today
     if start_date.present? && start_date < Date.today

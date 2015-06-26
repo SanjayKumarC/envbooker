@@ -29,6 +29,7 @@ group :development, :test do
   gem 'brakeman', :require => false
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
   gem 'rb-fsevent', '>= 0.9.1'
+  gem 'test-unit'
 end
 
 group :production do

@@ -1,7 +1,7 @@
 <%- model_class = Envbooking -%>
 
 <% content_for :vis_entry_point do %>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.3.0/vis.min.js"></script>
@@ -9,11 +9,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.3.0/vis.min.css" rel="stylesheet" type="text/css" />
 
   <script id="item-template" type="text/x-handlebars-template">
-    <strong>Project    : </strong>{{project}}
-    <strong>Application: </strong>{{app}}
-    <strong>User       : </strong>{{user}}
+    {{name}}
   </script>
-  
+
   <script>
     var source = document.getElementById('item-template').innerHTML;
     var template = Handlebars.compile(source);
@@ -28,15 +26,25 @@
     var items = new vis.DataSet();
 
     <% @envbookings.each do |booking| %>
+      <% days_left = (booking.end_date - Date.today).to_i %>
+
+      var title = "App : <%= App.find_by_id(booking.app_id).name %>, \n\
+Project : <%= Project.find_by_id(booking.project_id).name %>, \n\
+Start : <%= booking.start_date.strftime('%d/%m/%Y') %>, \n\
+End : <%= booking.end_date.strftime('%d/%m/%Y') %> \n\
+Remaining: <%= days_left %> days"
+
       items.add({
         id: <%= booking.id %>,
         type: 'range',
         start: '<%= booking.start_date.to_time.iso8601 %>',
-        end: '<%= booking.end_date.to_time.iso8601 %>', 
+        end: '<%= booking.end_date.to_time.iso8601 %>',
         user: '<%= User.find_by_id(booking.user_id).email %>',
+        name: '<%= User.find_by_id(booking.user_id).name %>',
         project: '<%= Project.find_by_id(booking.project_id).name %>',
         app: '<%= App.find_by_id(booking.app_id).name %>',
         group: <%= booking.env_id %>,
+        title: title,
         style: 'background-color: <%= App.find_by_id(booking.app_id).color %>'
       });
     <% end %>
@@ -83,10 +91,27 @@
 <% content_for :timeline_divs do %>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3>Bookings</h3>
+      <h1>Bookings</h1>
+      <table class="well">
+        <tbody>
+          <tr>
+          <% @apps.each do |a| %>
+              <td>
+                <div class="color-box" style="background-color: <%= a.color %>;"></div>
+              </td>
+              <td>
+                <%= a.name %>
+              </td>
+              <td>&nbsp;</td>
+          <% end %>
+        </tbody>
+      </table>
     </div>
     <div class="panel-body">
       <div id="visualization"></div>
     </div>
+    <div class="panel-footer">
+    </div>
   </div>
+
 <% end %>

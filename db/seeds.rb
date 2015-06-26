@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.delete_all
-User.create! :email => 'admin@admin.com', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
-User.create! :email => 'notadmin@admin.com', :admin => false, :password => 'admin455', :password_confirmation => 'admin455'
+User.create! :email => 'admin@admin.com', :name => 'Admistrator', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
+User.create! :email => 'notadmin@admin.com', :name => 'Not the Administrator', :admin => false, :password => 'admin455', :password_confirmation => 'admin455'
 
 
 Envlevel.delete_all
@@ -64,22 +64,22 @@ Envbooking.delete_all
 
 Env.all.each do |e|
 	Envbooking.create!([
-		:env => e, 
-		:project => Project.find_by_id( rand(Project.minimum(:id)..Project.maximum(:id)) ), 
-		:user => User.find_by_email('admin@admin.com'),
-		:start_date => Date.today - (rand(180)), 
-		:end_date => Date.today + (rand(180)), 
+		:env => e,
+		:project => Project.find_by_id( rand(Project.minimum(:id)..Project.maximum(:id)) ),
+		:user => User.find_by_id( rand( User.minimum(:id) .. User.maximum(:id) ) ),
+		:start_date => Date.today - (rand(180)),
+		:end_date => Date.today + (rand(180)),
 		:app => App.find_by_id( rand(App.minimum(:id)..App.maximum(:id)) )
 		])
 end
 
 App.all.each do |a|
 	Envbooking.create!([
-		:env => Env.find_by_id( rand(Env.minimum(:id)..Env.maximum(:id)) ), 
-		:project => Project.find_by_id( rand(Project.minimum(:id)..Project.maximum(:id)) ), 
-		:user => User.find_by_email('admin@admin.com'),
-		:start_date => Date.today - (rand(180)), 
-		:end_date => Date.today + (rand(180)), 
+		:env => Env.find_by_id( rand(Env.minimum(:id)..Env.maximum(:id)) ),
+		:project => Project.find_by_id( rand(Project.minimum(:id)..Project.maximum(:id)) ),
+		:user => User.find_by_id(rand(User.minimum(:id)..User.maximum(:id))),
+		:start_date => Date.today - (rand(180)),
+		:end_date => Date.today + (rand(180)),
 		:app => a
 	])
 end
@@ -93,6 +93,3 @@ end
 # 			])
 # 	end
 # end
-
-
-

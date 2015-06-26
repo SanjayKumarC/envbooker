@@ -11,7 +11,7 @@
         <th><%= model_class.human_attribute_name(:name) %></th>
         <th><%= model_class.human_attribute_name(:description) %></th>
         <th><%= model_class.human_attribute_name(:color) %></th>
-        
+
         <% if can? :update, @apps and can? :delete, @apps %>
           <th></th><th></th>
         <% end %>
@@ -21,9 +21,7 @@
       <%= render 'index' %>
     </tbody>
   </table>
-  
   <%= link_to "New", new_app_path, remote: true, class: "btn btn-primary pull-right well button-text" %>
-  
 </div>
 
 <div id="app-modal" class="modal fade" role="dialog"></div>

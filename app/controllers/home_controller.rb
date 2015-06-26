@@ -50,7 +50,9 @@ class HomeController < ApplicationController
   
   def index3
     index
-    @envs = {}
+    
     @envs = Env.all.sort {|x,y| x.name <=> y.name}
+    @apps = App.all.sort {|x,y| x.name <=> y.name}
+
   end
 end

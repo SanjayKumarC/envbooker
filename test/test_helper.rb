@@ -4,7 +4,11 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  # fixtures :all
+  # Use seeds.rb instead
 
-  # Add more helper methods to be used by all tests here...  
+  require "#{Rails.root}/db/seeds.rb"
+  
+
+  # Add more helper methods to be used by all tests here...
 end

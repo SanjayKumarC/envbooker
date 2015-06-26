@@ -15,24 +15,20 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
     <%= javascript_include_tag "application" %>
-    
+
     <%= yield :visualisation_library %>
-    
+
     <script type="text/javascript">
       <%= yield :script_entry_point %>
     </script>
 
-    <style>
-      .button-text {
-        color: #000 !important;
-      }
-    </style>
-
   </head>
   <body>
-    <% unless params[:controller] == 'devise/sessions' %>
+
+    <% unless params[:controller].starts_with?('devise') %>
       <%= render :partial => 'home/navbar' %>
     <% end %>
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -46,7 +42,7 @@
           <%= bootstrap_flash %>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="col-lg-12">
           <%= yield %>

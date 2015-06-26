@@ -74,7 +74,7 @@ class EnvbookingsController < ApplicationController
     if @envbooking.user_id == nil
       @envbooking.user_id = current_user.id
     end
-    
+
     @envbooking.save
     get_sorted_bookings
 
