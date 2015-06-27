@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  *= require bootstrap_and_overrides
- *= require bootstrap/bootstrap-datepicker3
+ *= require bootstrap/bootstrap-datepicker3.min
  *= require custom
  *= require jquery-ui
  *= require spectrum
