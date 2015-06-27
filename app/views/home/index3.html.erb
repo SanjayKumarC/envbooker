@@ -33,7 +33,7 @@
   Project : <%= Project.find_by_id(booking.project_id).name %>, \n\
   Start : <%= booking.start_date.strftime('%d/%m/%Y') %>, \n\
   End : <%= booking.end_date.strftime('%d/%m/%Y') %> \n\
-  Remaining: <%= days_left %> days"
+  Remaining: <%= days_left %> days";
 
         items.add({
           id: <%= booking.id %>,
