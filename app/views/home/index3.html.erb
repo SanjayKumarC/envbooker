@@ -30,10 +30,10 @@
         <% days_left = (booking.end_date - Date.today).to_i %>
 
         var title = "App : <%= App.find_by_id(booking.app_id).name %>, \n\
-  Project : <%= Project.find_by_id(booking.project_id).name %>, \n\
-  Start : <%= booking.start_date.strftime('%d/%m/%Y') %>, \n\
-  End : <%= booking.end_date.strftime('%d/%m/%Y') %> \n\
-  Remaining: <%= days_left %> days";
+Project : <%= Project.find_by_id(booking.project_id).name %>, \n\
+Start : <%= booking.start_date.strftime('%d/%m/%Y') %>, \n\
+End : <%= booking.end_date.strftime('%d/%m/%Y') %> \n\
+Remaining: <%= days_left %> days";
 
         items.add({
           id: <%= booking.id %>,
@@ -46,7 +46,7 @@
           app: '<%= App.find_by_id(booking.app_id).name %>',
           group: <%= booking.env_id %>,
           title: title,
-          style: 'background-color: <%= App.find_by_id(booking.app_id).color %>'
+          style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>'
         });
       <% end %>
 

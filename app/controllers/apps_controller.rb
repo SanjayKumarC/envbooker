@@ -9,51 +9,44 @@ class AppsController < ApplicationController
     end
   end
 
-
-  # GET /apps
-  # GET /apps.json
   def index
     session["init"] = true
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
-  # GET /apps/1
-  # GET /apps/1.json
   def show
     @app = App.find(params[:id])
   end
 
-  # GET /apps/new
   def new
     @app = App.new
     @app.color = "#000000"
   end
 
-  # GET /apps/1/edit
   def edit
     @app = App.find(params[:id])
   end
 
-  # POST /apps
-  # POST /apps.json
   def create
     @app = App.new(app_params)
+
+    text_color = get_text_color(@app.color)
+    @app.text_color = text_color
+
     @app.save
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
-  # PATCH/PUT /apps/1
-  # PATCH/PUT /apps/1.json
   def update
-    logger.debug "#{params}"
-    
     @app = App.find(params[:id])
+    
+    text_color = get_text_color(@app.color)
+    @app.text_color = text_color
+
     @app.update_attributes(app_params)
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
-  # DELETE /apps/1
-  # DELETE /apps/1.json
   def delete
     @app = App.find(params[:app_id])
   end
@@ -64,9 +57,31 @@ class AppsController < ApplicationController
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
+  def get_text_color(color)
+    rgb = rgb_values(color)
+    c = Sass::Script::Color.new(rgb)
+
+    if(c.lightness > 50.0)
+      return "#000000"
+    else
+      return "#FFFFFF"
+    end
+  end
+
+  def rgb_values(hex_color)
+    hex_color[0]='' #string the leading #character
+    r = hex_color[0..1]
+    g = hex_color[2..3]
+    b = hex_color[4..5]
+    r = '0x' + r
+    g = '0x' + g
+    b = '0x' + b
+
+    return [r.hex, g.hex, b.hex]
+  end
+
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
-      params.require(:app).permit(:name, :description, :color)
+      params.require(:app).permit(:name, :description, :color, :text_color)
     end
 end

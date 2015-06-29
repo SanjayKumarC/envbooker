@@ -1,10 +1,25 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+def get_text_color(color)
+	rgb = rgb_values(color)
+	c = Sass::Script::Color.new(rgb)
+
+	if(c.lightness > 50.0)
+		return "#000000"
+	else
+		return "#FFFFFF"
+	end
+end
+
+def rgb_values(hex_color)
+	hex_color[0]='' #string the leading #character
+	r = hex_color[0..1]
+	g = hex_color[2..3]
+	b = hex_color[4..5]
+	r = '0x' + r
+	g = '0x' + g
+	b = '0x' + b
+
+	return [r.hex, g.hex, b.hex]
+end
 
 User.delete_all
 User.create! :email => 'admin@admin.com', :name => 'Admistrator', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
@@ -33,32 +48,30 @@ Env.create!(:name => "Model 3",  :envlevel => Envlevel.find_by_name("PROD-SUPPOR
 
 
 Project.delete_all
-Project.create!(:name => "QUANTS", :description => "Prod CR Copy")
-Project.create!(:name => "Panther", :description => "SWIP -> AAM")
-Project.create!(:name => "Cash and FX", :description => "Cash and FX")
-Project.create!(:name => "Fund Transfer", :description => "SWIP -> AAM")
-Project.create!(:name => "BAU", :description => "Busines as Usual")
-Project.create!(:name => "CADIS rebuild", :description => "Amalgamate Edinbugh and London CADII")
-Project.create!(:name => "Prod Support", :description => "Production Support Work")
-Project.create!(:name => "CI", :description => "Continuous Integration")
-Project.create!(:name => "TSA Exit", :description => "SWIP -> AAM")
-
+10.times do |i|
+	Project.create!(:name => "Project #{i}", :description => "Project #{i}")
+end
 
 App.delete_all
-App.create!([:name=> "Charles River", :description => "Trading System", :color => "#FF4136"])
-App.create!([:name=> "CADIS", :description => "Data/ETL", :color => "#0074D9"])
-App.create!([:name=> "ThinkFolio", :description => "Trading System", :color => "#7FDBFF"])
-App.create!([:name=> "eFront", :description => "Property System", :color => "#39CCCC"])
-App.create!([:name=> "CeDaR", :description => "Data Master", :color => "#3D9970"])
-App.create!([:name=> "Portree", :description => "Trade Enrichment", :color => "#01FF70"])
-App.create!([:name=> "RDW", :description => "Data Warehousing", :color => "#FF851B"])
+10.times do |i|
+	c = rand(16777215).to_s(16)
 
-# :color => "#85144b"
-# :color => "#F012BE"
-# :color => "#B10DC9"
-# :color => "#AAAAAA"
-# :color => "#DDDDDD"
+	len = 6 - c.to_s.length
+	str = ''
+	len.times do |x|
+		str+="0"
+	end
+	full_string = str + c.to_s
+	my_color = "\##{full_string}"
 
+	app = App.new
+	app.name = "App #{i}"
+	app.description = "App #{i}"
+	app.color = my_color
+	app.text_color = get_text_color(my_color)
+	app.save!
+	#App.create!([:name=> , :description => "App #{i}", :color => my_color, :text_color => get_text_color(my_color) ])
+end
 
 Envbooking.delete_all
 
@@ -83,13 +96,3 @@ App.all.each do |a|
 		:app => a
 	])
 end
-
-# Envapp.delete_all
-# Env.all.each do |e|
-# 	App.all.each do |a|
-# 		Envapp.create!([
-# 			:env => e,
-# 			:app => a
-# 			])
-# 	end
-# end

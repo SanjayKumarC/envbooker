@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625221629) do
+ActiveRecord::Schema.define(version: 20150628121329) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150625221629) do
     t.datetime "updated_at",  null: false
     t.string   "color"
     t.string   "description"
+    t.string   "text_color"
   end
 
   create_table "envbookings", force: :cascade do |t|
