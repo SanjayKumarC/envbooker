@@ -1,31 +1,42 @@
 <div class="login-page">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'panel panel-default form col-lg-4 col-lg-offset-4 envbooking'}) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'panel panel-default form col-lg-4 col-lg-offset-4'}) do |f| %>
 
     <h3>Log in</h3>
     <br/>
     <br/>
-    
-    <div class="field">
-      <%= f.label :email, :class => 'control-label'%><br />
-      <%= f.email_field :email, autofocus: true, :tabindex => 1, :class => 'form-control' %>
+
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :email, autofocus: true, :tabindex => 1, :class => 'form-control' %>
+      </div>
+      <%= error_span(@user[:email]) %>
     </div>
 
-    <div class="field">
+    <div class="control-group">
       <%= f.label :password, :class => 'control-label' %><br />
-      <%= f.password_field :password, autocomplete: "off", :tabindex => 2, :class => 'form-control' %>
+      <div class="controls">
+        <%= f.password_field :password, autocomplete: "off", :tabindex => 2, :class => 'form-control' %>
+      </div>
+      <%= error_span(@user[:password]) %>
     </div>
 
     <% if devise_mapping.rememberable? -%>
-      <div class="field">
-        <%= f.check_box :remember_me, :tabindex => 3, :class => 'form-control' %>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.check_box :remember_me, :tabindex => 3, :class => 'form-control' %>
+        </div>
         <%= f.label :remember_me, :class => 'control-label' %>
+        <%= error_span(@user[:remember_me]) %>
       </div>
     <% end -%>
 
-    <div class="actions">
-      <%= f.submit "Log in", :tabindex => 4 %>
+    <div class="control-group">
+      <div class="actions">
+        <%= f.submit "Log in", :tabindex => 4 %>
+      </div>
     </div>
-    
+
     <%= render "devise/shared/links" %>
 
     <br/>
