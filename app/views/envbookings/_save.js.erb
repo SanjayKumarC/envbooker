@@ -3,7 +3,7 @@
     <% flash[:alert] = message %>
     $(".alert-danger").html("<%= escape_javascript flash[:alert]%> ");
     <% flash.discard %>
-    
+
     $(".alert-danger").show(500);
 
   <% end %>
@@ -16,4 +16,5 @@
 <% end %>
 
 $("#envbooking-modal").modal("hide");
+$("#envbooking-delete-modal").modal("hide");
 $(".envbooking-index").html("<%= escape_javascript(render 'index') %>");

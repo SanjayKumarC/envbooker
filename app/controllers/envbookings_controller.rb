@@ -53,6 +53,7 @@ class EnvbookingsController < ApplicationController
   def new
     @envbooking = Envbooking.new
     helper_config_maps
+
   end
 
   # GET /envbookings/1/edit

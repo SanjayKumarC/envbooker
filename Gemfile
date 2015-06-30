@@ -30,6 +30,7 @@ group :development, :test do
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
   gem 'rb-fsevent', '>= 0.9.1'
   gem 'test-unit'
+  gem 'thin'
 end
 
 group :production do

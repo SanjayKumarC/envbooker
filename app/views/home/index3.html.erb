@@ -94,21 +94,20 @@ Remaining: <%= days_left %> days";
   <div class="panel panel-default ">
     <div class="panel-heading">
       <h1>Bookings</h1>
-      <table class="table table-responsive">
-        <tbody>
-          <tr>
-          <% @apps.each do |a| %>
-              <td>
-                <div class="color-rect" style="background-color: <%= a.color %>;"><%= a.name %></div>
-              </td>
-          <% end %>
-        </tbody>
-      </table>
     </div>
     <div class="panel-body">
       <div id="visualization"></div>
     </div>
     <div class="panel-footer">
+      <table class="table table-responsive">
+        <tbody>
+          <% @apps.each do |a| %>
+            <td>
+              <div class="color-rect" style="background-color: <%= a.color %>; color: <%= a.text_color %>;"><%= a.name %></div>
+            </td>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 

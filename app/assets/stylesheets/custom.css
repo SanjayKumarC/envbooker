@@ -11,7 +11,7 @@
 
 .color-rect {
   float: left;
-  width: 80px;
+  width: 85px;
   height: 20px;
   margin: 5px 5px 5px 5px;
   border-width: 1px;
@@ -28,7 +28,7 @@
 }
 
 .vis-group:nth-child(even) {
-  background-color: #f5f5f5;
+  background-color: #e0e0e0;
 }
 
 .vis-label:nth-child(odd) {
@@ -36,5 +36,5 @@
 }
 
 .vis-label:nth-child(even) {
-  background-color: #f5f5f5;
+  background-color: #e0e0e0;
 }

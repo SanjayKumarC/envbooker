@@ -52,23 +52,26 @@ Project.delete_all
 	Project.create!(:name => "Project #{i}", :description => "Project #{i}")
 end
 
+colors = ["\#00b159","\#4aa7db","\#ffc425","\#f37735","\#bc0f3a","\#002663","\#0083cd","\#d6d6d4","\#ffffff","\#111111"]
+
 App.delete_all
 10.times do |i|
-	c = rand(16777215).to_s(16)
-
-	len = 6 - c.to_s.length
-	str = ''
-	len.times do |x|
-		str+="0"
-	end
-	full_string = str + c.to_s
-	my_color = "\##{full_string}"
+	# c = rand(16777215).to_s(16)
+	#
+	# len = 6 - c.to_s.length
+	# str = ''
+	# len.times do |x|
+	# 	str+="0"
+	# end
+	# full_string = str + c.to_s
+	# my_color = "\##{full_string}"
 
 	app = App.new
 	app.name = "App #{i}"
 	app.description = "App #{i}"
-	app.color = my_color
-	app.text_color = get_text_color(my_color)
+	c = colors.pop
+	app.color = c
+	app.text_color = get_text_color(c)
 	app.save!
 	#App.create!([:name=> , :description => "App #{i}", :color => my_color, :text_color => get_text_color(my_color) ])
 end
