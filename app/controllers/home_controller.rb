@@ -1,9 +1,9 @@
 require 'json'
 
 class HomeController < ApplicationController
-	
+
 	skip_before_action :authenticate_user!
-	
+
   def index
 	  @envbookings = Envbooking.all
 	  @sorted_bookings = @envbookings.sort_by{|booking| Env.find_by_id(booking[:env_id]).name.downcase}
@@ -16,8 +16,8 @@ class HomeController < ApplicationController
     end
 
     @envs.sort!.uniq!
-    
-    @counter = 0 
+
+    @counter = 0
     @counter_rows = {}
     @env_rows = 0
 
@@ -26,31 +26,31 @@ class HomeController < ApplicationController
 
     begin
       @min_date = first.start_date.to_time.iso8601.to_date
-    rescue 
+    rescue
       @min_date = Time.parse(Time.now.iso8601).strftime('%Y-01-01').to_date
     end
-    
+
     begin
       @max_date = last.end_date.to_time.iso8601.to_date
     rescue
       @max_date = Time.parse(Time.now.iso8601).strftime('%Y-12-31').to_date
     end
 
-    @min_date <<= 1
-    @max_date >>= 1
+    @min_date <<= 2
+    @max_date >>= 2
 
 	end
 
   def find
   end
-  
+
   def index2
     index
   end
-  
+
   def index3
     index
-    
+
     @envs = Env.all.sort {|x,y| x.name <=> y.name}
     @apps = App.all.sort {|x,y| x.name <=> y.name}
 

@@ -55,6 +55,7 @@ Remaining: <%= days_left %> days";
         min: '<%= @min_date %>',
         max: '<%= @max_date %>',
         template: template,
+        orientation: 'both',
       <% if current_user.try(:admin?) %>
         editable: true,
       <% else %>

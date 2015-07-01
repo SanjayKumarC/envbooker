@@ -28,7 +28,7 @@
   </head>
   <body>
 
-    <% unless params[:controller].starts_with?('devise') %>
+    <% unless params[:controller].include?('devise') || params[:controller].include?('registrations') %>
       <%= render :partial => 'home/navbar' %>
     <% end %>
 

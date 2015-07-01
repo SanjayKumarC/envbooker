@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
+  
   get 'index/index'
 
   resources :apps do
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   resources :envbookings do
     get 'delete'
   end
-  
+
   resources :projects do
     get 'delete'
   end
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
   resources :envlevels do
     get 'delete'
   end
-  
+
   resources :envs do
     get 'delete'
   end
