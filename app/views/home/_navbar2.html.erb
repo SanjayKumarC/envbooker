@@ -43,12 +43,9 @@
         </li>
     </ul>
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <% if current_user.try(:admin?) %>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li>
-                <a class="navbar-brand" href="/" data-no-turbolink="true">Home</a>
-            </li>
-            <% if current_user.try(:admin?) %>
               <li>
                 <a href="/apps"><i class="fa fa-fw fa-server"></i> Apps</a>
               </li>
@@ -64,8 +61,7 @@
               <li>
                 <a href="/envbookings"><i class="fa fa-fw fa-list-ul"></i> Bookings</a>
               </li>
-            <% end %>
         </ul>
     </div>
-    <!-- /.navbar-collapse -->
+    <% end %>
 </nav>
