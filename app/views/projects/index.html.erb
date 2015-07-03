@@ -1,7 +1,7 @@
 <%- model_class = Project -%>
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-12">
   <div class="page-header">
-    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+    <%= link_to "", new_project_path, remote: true, class: "btn btn-primary fa fa-lg fa-plus button-text" %>
   </div>
   <table class="table table-striped">
     <thead>
@@ -17,12 +17,6 @@
       <%= render 'index' %>
     </tbody>
   </table>
-
-  <br/>
-  <br/>
-    <%= link_to "New", new_project_path, remote: true, class: "btn btn-primary pull-right well button-text" %>
-  <br/>
-  <br/>
 
 </div>
 <div id="project-modal" class="modal fade" role="dialog"></div>

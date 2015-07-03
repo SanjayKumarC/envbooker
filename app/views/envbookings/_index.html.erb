@@ -9,15 +9,15 @@
     <td>
       <% if can? :update, envbooking %>
       <%= link_to edit_envbooking_path(envbooking), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
-          <span class="glyphicon glyphicon-edit"></span>
+          <span class="fa fa-fw fa-edit"></span>
         <% end %>
-        
+
       <% end %>
     </td>
     <td>
       <% if can? :delete, envbooking %>
         <%= link_to envbooking_delete_path(envbooking), remote: true, title: "Delete", class: "", :data => {:toggle=>"tooltip"} do %>
-          <span class="glyphicon glyphicon-trash"></span>
+          <span class="fa fa-fw fa-trash"></span>
         <% end %>
       <% end %>
     </td>

@@ -19,6 +19,8 @@ gem 'cancancan'
 gem 'activerecord-session_store'
 gem 'responders'
 gem 'jquery-ui-rails'
+gem "font-awesome-rails"
+
 
 group :development, :test do
   gem 'byebug'

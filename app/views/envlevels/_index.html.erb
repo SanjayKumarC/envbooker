@@ -5,16 +5,17 @@
     <td>
       <% if can? :update, envlevel %></a>
         <%= link_to edit_envlevel_path(envlevel), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
-          <span class="glyphicon glyphicon-edit"></span>
+          <span class="fa fa-fw fa-edit"></span>
+
         <% end %>
       <% end %>
     </td>
     <td>
       <% if can? :delete, envlevel %>
         <%= link_to envlevel_delete_path(envlevel), remote: true, title: "Delete", class: "", :data => {:toggle=>"tooltip"} do %>
-          <span class="glyphicon glyphicon-trash"></span>
+          <span class="fa fa-fw fa-trash"></span>
         <% end %>
       <% end %>
     </td>
   </tr>
-<% end %> 
+<% end %>

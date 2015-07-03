@@ -6,16 +6,16 @@
     <td>
       <% if can? :update, env %>
         <%= link_to edit_env_path(env), remote: true, title: "Edit", :data => {:toggle=>"tooltip"} do %>
-          <span class="glyphicon glyphicon-edit"></span>
+          <span class="fa fa-fw fa-edit"></span>
         <% end %>
       <% end %>
     </td>
     <td>
       <% if can? :delete, env %>
         <%= link_to env_delete_path(env), remote: true, title: "Delete", :data => {:toggle=>"tooltip"} do %>
-          <span class="glyphicon glyphicon-trash"></span>
+          <span class="fa fa-fw fa-trash"></span>
         <% end %>
-      <% end %> 
+      <% end %>
     </td>
   </tr>
 <% end %>
