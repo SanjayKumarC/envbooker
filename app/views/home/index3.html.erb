@@ -21,7 +21,7 @@
       var groups = new vis.DataSet();
 
       <% @envs.each do |env| %>
-        groups.add({id:<%= env.id %>, content:'<%= env.name %>'});
+        groups.add({id:<%= env.id %>, content:'<b><%= env.name %></b>'});
       <% end %>
 
       var items = new vis.DataSet();

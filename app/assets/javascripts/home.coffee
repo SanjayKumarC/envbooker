@@ -23,8 +23,3 @@ setInterval (->
 ), 10000
 
 $('[data-toggle="tooltip"]').tooltip()
-
-$('#refresh').click ->
-  vis = document.getElementById('visualization')
-  vis.redraw()
-  return
