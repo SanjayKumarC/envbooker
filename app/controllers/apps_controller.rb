@@ -33,13 +33,13 @@ class AppsController < ApplicationController
     text_color = get_text_color(@app.color)
     @app.text_color = text_color
 
-    @app.save
+    @app.save!
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   def update
     @app = App.find(params[:id])
-    
+
     text_color = get_text_color(@app.color)
     @app.text_color = text_color
 

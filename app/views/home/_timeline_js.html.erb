@@ -78,5 +78,6 @@ Remaining: <%= days_left %> days";
       type: 'range'
     };
     var timeline = new vis.Timeline(container, items, groups, options);
+    timeline.focus();
   });
 </script>
