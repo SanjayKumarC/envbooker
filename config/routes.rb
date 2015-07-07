@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
-  
+
   get 'index/index'
 
   resources :apps do
@@ -26,8 +26,9 @@ Rails.application.routes.draw do
 
   post 'envbookings/update_booking' => 'envbookings#update_booking'
   post 'envbookings/delete_booking' => 'envbookings#delete_booking'
+  post '/' => 'home#index'
 
   # You can have the root of your site routed with "root"
-  root 'home#index3'
+  root 'home#index'
 
 end

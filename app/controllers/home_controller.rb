@@ -1,25 +1,28 @@
 require 'json'
 
 class HomeController < ApplicationController
+	respond_to :html, :js
 
 	skip_before_action :authenticate_user!
 
   def index
-	  @envbookings = Envbooking.all
+		if params[:env].present?
+			@env_filter = params[:env]
+		else
+			@env_filter = nil
+		end
+
+	  if @env_filter && @env_filter != 'All'
+			@envbookings = Envbooking.where(env: Env.find_by_name(@env_filter))
+			@envs = Env.where(name: @env_filter)
+		else
+			@envbookings = Envbooking.all
+			@envs = Env.all
+		end
+
 	  @sorted_bookings = @envbookings.sort_by{|booking| Env.find_by_id(booking[:env_id]).name.downcase}
 	  @rowheight = 41
-	  @divheight = (@envbookings.count+2)*@rowheight
-
-    @envs = []
-    @sorted_bookings.each do |b|
-      @envs.push(Env.find_by_id(b.env_id).name)
-    end
-
-    @envs.sort!.uniq!
-
-    @counter = 0
-    @counter_rows = {}
-    @env_rows = 0
+	  @divheight = (@envbookings.count+2) * @rowheight
 
     first = Envbooking.all.sort {|x,y| x.start_date <=> y.start_date}.first
     last = Envbooking.all.sort {|x,y| x.end_date <=> y.end_date}.last
@@ -39,20 +42,10 @@ class HomeController < ApplicationController
     @min_date <<= 2
     @max_date >>= 2
 
+		# @apps = App.all
+		# @apps.sort {|x,y| x.name <=> y.name}
+
+		@envs.sort {|x,y| x.name <=> y.name}
+		@all_envs = Env.all.sort {|x,y| x.name <=> y.name}
 	end
-
-  def find
-  end
-
-  def index2
-    index
-  end
-
-  def index3
-    index
-
-    @envs = Env.all.sort {|x,y| x.name <=> y.name}
-    @apps = App.all.sort {|x,y| x.name <=> y.name}
-
-  end
 end

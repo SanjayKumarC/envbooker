@@ -1,64 +1,67 @@
-<div class="navbar navbar-default navbar-static-top navbar-inverse">
-  <div class="container-fluid">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Home", '/', 'data-no-turbolink' => true %></li>
-        <% if current_user.try(:admin?) %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Config <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><%= link_to "Apps", "/apps"  %></li>
-              <li><%= link_to "Environments", "/envs"  %></li>
-              <li><%= link_to "Levels", "/envlevels"  %></li>
-              <li><%= link_to "Projects", "/projects"  %></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Bookings</li>
-              <li><%= link_to "Bookings", "/envbookings"  %></li>
-            </ul>
-          </li>
-
-          <!-- <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Views <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><%= link_to "Compressed", "/altview", 'data-no-turbolink' => true  %></li>
-              <li><%= link_to "Standard", "/", 'data-no-turbolink' => true  %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Vis", "/vis", 'data-no-turbolink' => true  %></li>
-            </ul>
-          </li> -->
-
-          <li><%= link_to('Bookings', {:controller => 'envbookings', :action => 'index'}, {:method => :get, :remote => false}) %></li>
-
-        <% end %>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <% if user_signed_in? %>
-              <%= current_user.email %>
-            <% else %>
-              Login
-            <% end %>
-            <span class="caret"></span>
-          </a>
-
-          <ul class="dropdown-menu" role="menu">
-            <% if user_signed_in? %>
-              <li><%= link_to "Account", edit_user_registration_path, :class => 'navbar-link' %></li>
-              <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
-            <% else %>
-              <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-              <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-            <% end %>
-          </ul>
-        </li>
-      </ul>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/" data-no-turbolink="true">Bookings</a>
     </div>
-  </div>
-</div>
+    <!-- Top Menu Items -->
+    <ul class="nav navbar-right top-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-user"></i>
+              <% if user_signed_in? %>
+                <%= current_user.name %>
+              <% else %>
+                Login
+              <% end %>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <% if user_signed_in? %>
+                <li>
+                  <a href="/users/edit"><i class="fa fa-fw fa-user"></i> Account</a>
+                </li>
+                <li>
+                  <a rel="nofollow" data-method="delete" href="/users/sign_out">
+                    <i class="fa fa-fw fa-power-off"></i> Logout
+                  </a>
+                </li>
+              <% else %>
+                <li>
+                  <a href="/users/sign_in"><i class="fa fw-fw fa-sign-in"></i> Login</a>
+                </li>
+                <li>
+                  <a href="/users/sign_up"><i class="fa fw-fw fa-plus-circle"></i> Sign Up</a>
+                </li>
+              <% end %>
+            </ul>
+        </li>
+    </ul>
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <% if current_user.try(:admin?) %>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+                <li>
+                  <a href="/apps" class="sidebar_link"><i class="fa fa-fw fa-server"></i> Apps</a>
+                </li>
+                <li>
+                  <a href="/projects"><i class="fa fa-fw fa-file"></i> Projects</a>
+                </li>
+                <li>
+                  <a href="/envs"><i class="fa fa-fw fa-globe"></i> Environments</a>
+                </li>
+                <li>
+                  <a href="/envlevels"><i class="fa fa-fw fa-asterisk"></i> Environment Levels</a>
+                </li>
+                <li>
+                  <a href="/envbookings"><i class="fa fa-fw fa-list-ul"></i> Bookings</a>
+                </li>
+          </ul>
+      </div>
+    <% end %>
+</nav>

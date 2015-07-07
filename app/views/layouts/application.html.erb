@@ -21,20 +21,15 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
     <%= javascript_include_tag "application" %>
 
-    <%= yield :visualisation_library %>
-    <%= yield :vis_entry_point %>
-
-    <script type="text/javascript">
-      <%= yield :script_entry_point %>
-    </script>
-
-    <%= yield :extra_head_stuff %>
+    <%= yield :vis_javascript %>
 
   </head>
   <body>
+  <% if user_signed_in? %>
     <div id="wrapper">
+  <% end %>
       <!-- Navigation -->
-      <%= render :partial => 'home/navbar2' %>
+      <%= render :partial => 'home/navbar' %>
 
       <div id="page-wrapper">
         <div class="container-fluid">
@@ -51,20 +46,24 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-lg-12">
-              <%= yield %>
-            </div>
+          <div id="js_content_for_timeline">
+            <%= yield :vis_timeline %>
           </div>
 
-          <!-- Page Heading -->
+          <div class="col-md-12">
+            <!-- Don't remove this -->
+            <%= yield %>
+          </div>
+
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" id="html_content_for_timeline">
               <%= yield :timeline_divs %>
             </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div><!-- /#page-wrapper -->
+  <% if user_signed_in? %>
     </div><!-- /#wrapper -->
+  <% end %>
   </body>
 </html>
