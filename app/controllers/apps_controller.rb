@@ -29,20 +29,18 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(app_params)
-    c = @app.color
 
-    text_color = get_text_color(c)
+    text_color = get_text_color(@app.color)
     @app.text_color = text_color
 
-    @app.save!
+    @app.save
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   def update
     @app = App.find(params[:id])
 
-    c = @app.color
-    text_color = get_text_color(c)
+    text_color = get_text_color(@app.color)
     @app.text_color = text_color
 
     @app.update_attributes(app_params)
@@ -60,10 +58,11 @@ class AppsController < ApplicationController
   end
 
   def get_text_color(color)
-    rgb = rgb_values(color)
-    c = Sass::Script::Color.new(rgb)
+    _color = color
+    _rgb = rgb_values(_color)
+    _c = Sass::Script::Color.new(_rgb)
 
-    if(c.lightness > 50.0)
+    if(_c.lightness > 50.0)
       return "#000000"
     else
       return "#FFFFFF"
@@ -71,15 +70,15 @@ class AppsController < ApplicationController
   end
 
   def rgb_values(hex_color)
-    hex_color[0]='' #string the leading #character
-    r = hex_color[0..1]
-    g = hex_color[2..3]
-    b = hex_color[4..5]
-    r = '0x' + r
-    g = '0x' + g
-    b = '0x' + b
+    _hex_color = hex_color[1..-1]
+    _r = _hex_color[0..1]
+    _g = _hex_color[2..3]
+    _b = _hex_color[4..5]
+    _r = '0x' + _r
+    _g = '0x' + _g
+    _b = '0x' + _b
 
-    return [r.hex, g.hex, b.hex]
+    return [_r.hex, _g.hex, _b.hex]
   end
 
   private
