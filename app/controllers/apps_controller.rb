@@ -29,8 +29,9 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(app_params)
+    c = @app.color
 
-    text_color = get_text_color(@app.color)
+    text_color = get_text_color(c)
     @app.text_color = text_color
 
     @app.save!
@@ -40,7 +41,8 @@ class AppsController < ApplicationController
   def update
     @app = App.find(params[:id])
 
-    text_color = get_text_color(@app.color)
+    c = @app.color
+    text_color = get_text_color(c)
     @app.text_color = text_color
 
     @app.update_attributes(app_params)
