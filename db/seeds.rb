@@ -21,9 +21,20 @@ def rgb_values(hex_color)
 	return [r.hex, g.hex, b.hex]
 end
 
+#reset the sequences
+sql = 'update sqlite_sequence set seq = 0'
+ActiveRecord::Base.connection.execute(sql)
+
+Appconfig.delete_all
+a = Appconfig.new
+a.singleton_guard=0
+
+a.template = "{{name}} {{{br}}} {{app}} {{{br}}} {{project}}"
+a.save!
+
 User.delete_all
-User.create! :email => 'admin@admin.com', :name => 'Admistrator', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
-User.create! :email => 'notadmin@admin.com', :name => 'Not the Administrator', :admin => false, :password => 'admin455', :password_confirmation => 'admin455'
+User.create! :email => 'admin@admin.com', :name => 'John', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
+User.create! :email => 'notadmin@admin.com', :name => 'Someone Else', :admin => false, :password => 'admin455', :password_confirmation => 'admin455'
 
 
 Envlevel.delete_all

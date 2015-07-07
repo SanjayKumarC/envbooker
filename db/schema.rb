@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628121329) do
+ActiveRecord::Schema.define(version: 20150707142448) do
+
+  create_table "appconfigs", force: :cascade do |t|
+    t.integer  "singleton_guard"
+    t.string   "template"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "appconfigs", ["singleton_guard"], name: "index_appconfigs_on_singleton_guard", unique: true
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +70,18 @@ ActiveRecord::Schema.define(version: 20150628121329) do
     t.datetime "updated_at",  null: false
     t.string   "description"
   end
+
+  create_table "requests", force: :cascade do |t|
+    t.string   "project"
+    t.string   "apps"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false

@@ -1,5 +1,5 @@
 <script id="item-template" type="text/x-handlebars-template">
-  {{name}}
+  <%= Appconfig.find(1).template %>
 </script>
 
 <script type="text/javascript">
@@ -38,7 +38,8 @@ Remaining: <%= days_left %> days";
         app: '<%= App.find_by_id(booking.app_id).name %>',
         group: <%= booking.env_id %>,
         title: title,
-        style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>'
+        style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>',
+        br: '<br/>'
       });
     <% end %>
 
