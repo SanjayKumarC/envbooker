@@ -1,0 +1,15 @@
+<form action="/" accept-charset="UTF-8" data-remote="true" method="post">
+  <select name="env" class="input-small">
+    <option value="All">All</option>
+    <% @envs.each do |env| %>
+      <option value="<%= env.name %>"><%= env.name %></option>
+    <% end %>
+  </select>
+  <select name="app" class="input-small">
+    <option value="All">All</option>
+    <% @apps.each do |app| %>
+      <option value="<%= app.name %>"><%= app.name %></option>
+    <% end %>
+  </select>
+  <input type="submit" value="Filter" class=""/>
+</form>
