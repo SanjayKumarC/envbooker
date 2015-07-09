@@ -54,6 +54,6 @@ class EnvsController < ApplicationController
     end
 
     def env_params
-      params.require(:env).permit(:name, :envlevel_id, :description)
+      params.require(:env).permit(:name, :envlevel_id, :description, :last_refresh_date)
     end
 end

@@ -25,9 +25,7 @@
 
   </head>
   <body>
-  <% if user_signed_in? %>
     <div id="wrapper">
-  <% end %>
       <!-- Navigation -->
       <%= render :partial => 'home/navbar' %>
 
@@ -64,8 +62,6 @@
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div><!-- /#page-wrapper -->
-  <% if user_signed_in? %>
     </div><!-- /#wrapper -->
-  <% end %>
   </body>
 </html>

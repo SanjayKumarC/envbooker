@@ -63,6 +63,10 @@ class HomeController < ApplicationController
 	def saveconfig
 		@appconfig = Appconfig.find(1)
 		@appconfig.template = params[:appconfig][:template]
-		@appconfig.save
+		@appconfig.update_attributes(appconfig_params)
 	end
+	private
+		def appconfig_params
+			params.require(:appconfig).permit(:template)
+		end
 end

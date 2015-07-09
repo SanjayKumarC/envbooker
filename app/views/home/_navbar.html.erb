@@ -43,31 +43,38 @@
     </li>
   </ul>
   <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-  <% if current_user.try(:admin?) %>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav side-nav">
         <li>
-          <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
+          <a href="/" data-no-turbolink="true"><i class="fa fa-fw fa-home"></i> Home</a>
         </li>
+        <% if current_user.try(:admin?) %>
+          <li>
+            <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
+          </li>
+          <li>
+            <a href="/apps" class="sidebar_link"><i class="fa fa-fw fa-bullseye"></i> Apps</a>
+          </li>
+          <li>
+            <a href="/projects"><i class="fa fa-fw fa-file"></i> Projects</a>
+          </li>
+          <li>
+            <a href="/envs"><i class="fa fa-fw fa-globe"></i> Environments</a>
+          </li>
+          <li>
+            <a href="/envlevels"><i class="fa fa-fw fa-asterisk"></i> Environment Levels</a>
+          </li>
+          <li>
+            <a href="/envbookings"><i class="fa fa-fw fa-list-ul"></i> Bookings</a>
+          </li>
+          <li>
+            <a href="/appconfig" data-remote="true"><i class="fa fa-fw fa-gear"></i> App Config</a>
+          </li>
+        <% end %>
         <li>
-          <a href="/apps" class="sidebar_link"><i class="fa fa-fw fa-bullseye"></i> Apps</a>
+          <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Env Refreshes</a>
         </li>
-        <li>
-          <a href="/projects"><i class="fa fa-fw fa-file"></i> Projects</a>
-        </li>
-        <li>
-          <a href="/envs"><i class="fa fa-fw fa-globe"></i> Environments</a>
-        </li>
-        <li>
-          <a href="/envlevels"><i class="fa fa-fw fa-asterisk"></i> Environment Levels</a>
-        </li>
-        <li>
-          <a href="/envbookings"><i class="fa fa-fw fa-list-ul"></i> Bookings</a>
-        </li>
-        <li>
-          <a href="/appconfig" data-remote="true"><i class="fa fa-fw fa-gear"></i> App Config</a>
-        </li>
+
       </ul>
     </div>
-  <% end %>
 </nav>
