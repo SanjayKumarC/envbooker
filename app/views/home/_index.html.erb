@@ -1,0 +1,19 @@
+<%- model_class = Envbooking -%>
+
+<% content_for :vis_javascript do %>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.3.0/vis.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.3.0/vis.min.css" rel="stylesheet" type="text/css" />
+
+<% end %>
+
+<% content_for :vis_timeline do %>
+  <%= render partial: "timeline_js" %>
+<% end %>
+
+<% content_for :timeline_divs do %>
+  <%= render partial: "timeline_html" %>
+<% end %>

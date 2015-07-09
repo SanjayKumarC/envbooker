@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   post '/' => 'home#index'
 
   # You can have the root of your site routed with "root"
+  get 'appconfig', to: 'home#appconfig'
+  patch 'appconfig', controller: 'home', action: :saveconfig
   root 'home#index'
 
 end

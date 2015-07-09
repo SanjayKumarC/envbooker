@@ -55,4 +55,14 @@ class HomeController < ApplicationController
     @min_date <<= 2
     @max_date >>= 2
 	end
+
+	def appconfig
+		@appconfig = Appconfig.find(1)
+	end
+
+	def saveconfig
+		@appconfig = Appconfig.find(1)
+		@appconfig.template = params[:appconfig][:template]
+		@appconfig.save
+	end
 end
