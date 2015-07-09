@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <th>Environment</th>
+    <th>Last Refresh Date</th>
+    <th>How Long?</th>
+  </thead>
+  <tbody>
+    <% @envs.each do |env| %>
+      <tr>
+        <td><%= env.name %></td>
+        <td><%= env.last_refresh_date.strftime("%A, %d %B %Y") %></td>
+        <% days_ago = (Date.today - env.last_refresh_date).to_i %>
+        <% case days_ago %>
+        <% when 0 %>
+        <%   days_ago_message = "Today" %>
+        <% when 1 %>
+        <%   days_ago_message = "Yesterday" %>
+        <% else %>
+        <%   days_ago_message = time_ago_in_words(env.last_refresh_date) %>
+        <% end %>
+        <td><%= days_ago_message %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
