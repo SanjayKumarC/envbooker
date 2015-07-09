@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   post 'envbookings/delete_booking' => 'envbookings#delete_booking'
   post '/' => 'home#index'
 
+  get 'newenvbooking', to: 'envbookings#new'
+
   # You can have the root of your site routed with "root"
   get 'appconfig', to: 'home#appconfig'
   patch 'appconfig', controller: 'home', action: :saveconfig

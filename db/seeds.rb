@@ -29,7 +29,7 @@ Appconfig.delete_all
 a = Appconfig.new
 a.singleton_guard=0
 
-a.template = "{{name}} {{{br}}} {{app}} {{{br}}} {{project}}"
+a.template = "{{name}} {{{br}}} {{app}} {{{br}}} {{project}} {{{br}}} {{user}}"
 a.save!
 
 User.delete_all
