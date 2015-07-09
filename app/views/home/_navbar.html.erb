@@ -48,6 +48,9 @@
         <li>
           <a href="/" data-no-turbolink="true"><i class="fa fa-fw fa-home"></i> Home</a>
         </li>
+        <li>
+          <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Env Refreshes</a>
+        </li>
         <% if current_user.try(:admin?) %>
           <li>
             <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
@@ -71,9 +74,6 @@
             <a href="/appconfig" data-remote="true"><i class="fa fa-fw fa-gear"></i> App Config</a>
           </li>
         <% end %>
-        <li>
-          <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Env Refreshes</a>
-        </li>
 
       </ul>
     </div>
