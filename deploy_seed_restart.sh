@@ -1,4 +1,4 @@
-git commit -am "Fixes"
+git commit -a
 git push -u origin --all
 git push -u origin --tags
 bin/cap production deploy
