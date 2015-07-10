@@ -23,16 +23,3 @@ setInterval (->
 ), 10000
 
 $('[data-toggle="tooltip"]').tooltip()
-
-$(document).ready ->
-  $('#app-select').change ->
-    $('#app-select option:selected').each ->
-      app_name = $(this).text()
-      $.ajax(
-        url: '/'
-        method: 'get'
-        data: app: app_name).done ->
-        return
-      return
-    return
-  return

@@ -18,15 +18,15 @@ class HomeController < ApplicationController
 			@app_filter = nil
 		end
 
-		#Make sone decision about whether we're filtering by App or by Env
+		#Make some decision about whether we're filtering by App or by Env.
 	  if @env_filter
 			@envbookings = Envbooking.where(env: Env.find_by_name(@env_filter))
 			@envs = Env.where(name: @env_filter)
-			@apps = App.find(Envbooking.pluck(:app_id))
+			@apps = App.find(@envbookings.pluck(:app_id))
 		elsif @app_filter
 			@envbookings = Envbooking.where(app: App.find_by_name(@app_filter))
 			@apps = App.where(name: @app_filter)
-			@envs = Env.find(Envbooking.pluck(:env_id))
+			@envs = Env.find(@envbookings.pluck(:env_id))
 		else
 			@envbookings = Envbooking.all
 			@envs = Env.all.sort {|x,y| x.name <=> y.name}
@@ -54,6 +54,10 @@ class HomeController < ApplicationController
 
     @min_date <<= 2
     @max_date >>= 2
+
+		logger.debug "ENVS: #{@envs.count}"
+		logger.debug "APPS: #{@apps.count}"
+		logger.debug "BOOKINGS: #{@envbookings.count}"
 	end
 
 	def appconfig

@@ -1,14 +1,1 @@
-#TODO: To Do List:
-
-#TODO: - -------------------------------------------------------------------------------------------------------------------
-#TODO: Highest: Sort out model schema. Env's have apps. Remove assumption that all Env's have an app.
-#TODO: Low: Sort filtering idiosyncracies
-#TODO: Low: Make defining 'box' layout template less of a ball ache.
-#TODO: High: Add reservations system. Book and env. Book a refresh.
-#TODO: - -------------------------------------------------------------------------------------------------------------------
-
-
-#TODO - -------------------------------------------------------------------------------------------------------------------
-#TODO - Done
-#TODO: Possibly port to vis.js for the timeline output. Not as pretty as google visualise but much more flexible.
-#TODO - -------------------------------------------------------------------------------------------------------------------
+#TODO: check trello.com dude
