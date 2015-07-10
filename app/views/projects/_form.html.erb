@@ -1,5 +1,15 @@
 <%= form_for @project, remote: true, :html => { :class => "form-horizontal project", style: "display:inline;" } do |f| %>
 
+  <script>
+    $(".basic-color-picker").spectrum({
+      color: "<%= @project.color %>",
+      preferredFormat: "hex",
+      change: function(color) {
+        $("#color-callback").text(color.toHexString());
+      }
+    });
+  </script>
+
   <div class="modal-body">
     <% if @project.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -30,6 +40,15 @@
         <%= f.text_field :description, :class => 'form-control' %>
       </div>
       <%= error_span(@project[:description]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :color, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :color, :class => 'form-control basic-color-picker' %>
+        <small id="color-callback"><%= @project.color %></small>
+      </div>
+      <%= error_span(@project[:name]) %>
     </div>
 
   </div>

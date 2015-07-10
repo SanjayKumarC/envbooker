@@ -10,10 +10,9 @@ def get_text_color(color)
 end
 
 def rgb_values(hex_color)
-	hex_color[0]='' #string the leading #character
-	r = hex_color[0..1]
-	g = hex_color[2..3]
-	b = hex_color[4..5]
+	r = hex_color[1..2]
+	g = hex_color[3..4]
+	b = hex_color[5..6]
 	r = '0x' + r
 	g = '0x' + g
 	b = '0x' + b
@@ -58,12 +57,20 @@ Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "Model 2",  
 Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "Model 3",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy")
 
 
+project_colors = ["\#00c159","\#4ac7db","\#fff425","\#f3a735","\#bc1d3a","\#002ab3","\#3383cd","\#d6a9d4","\#ff55ff","\#454545"]
+
 Project.delete_all
 10.times do |i|
-	Project.create!(:name => "Project #{i}", :description => "Project #{i}")
+	p = Project.new
+	p.name = "Project #{i}"
+	p.description = "Project #{i}"
+	p.color = project_colors.pop
+	p.text_color = get_text_color(p.color)
+	p.save!
+
 end
 
-colors = ["\#00b159","\#4aa7db","\#ffc425","\#f37735","\#bc0f3a","\#002663","\#0083cd","\#d6d6d4","\#ffffff","\#111111"]
+app_colors = ["\#00b159","\#4aa7db","\#ffc425","\#f37735","\#bc0f3a","\#002663","\#0083cd","\#d6d6d4","\#ffffff","\#111111"]
 
 App.delete_all
 10.times do |i|
@@ -80,11 +87,9 @@ App.delete_all
 	app = App.new
 	app.name = "App #{i}"
 	app.description = "App #{i}"
-	c = colors.pop
-	app.color = c
-	app.text_color = get_text_color(c)
+	app.color = app_colors.pop
+	app.text_color = get_text_color(app.color)
 	app.save!
-	#App.create!([:name=> , :description => "App #{i}", :color => my_color, :text_color => get_text_color(my_color) ])
 end
 
 Envbooking.delete_all

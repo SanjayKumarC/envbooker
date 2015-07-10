@@ -8,6 +8,7 @@
       <tr>
         <th><%= model_class.human_attribute_name(:name) %></th>
         <th><%= model_class.human_attribute_name(:description) %></th>
+        <th>Color</th>
         <% if can? :update, @projects and can? :delete, @projects %>
           <th></th><th></th>
         <% end %>

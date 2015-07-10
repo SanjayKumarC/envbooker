@@ -29,20 +29,14 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(app_params)
-
-    text_color = get_text_color(@app.color)
-    @app.text_color = text_color
-
+    @app.text_color = get_text_color(@app.color)
     @app.save
     @apps = App.all.sort_by{|app| app.name.downcase}
   end
 
   def update
     @app = App.find(params[:id])
-
-    text_color = get_text_color(@app.color)
-    @app.text_color = text_color
-
+    @app.text_color = get_text_color(@app.color)
     @app.update_attributes(app_params)
     @apps = App.all.sort_by{|app| app.name.downcase}
   end

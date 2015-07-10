@@ -8,9 +8,16 @@
           <div class="form-group">
             <%= f.label :template, :class => 'control-label' %>
             <%= f.text_area :template, :cols => 30, :rows => 5, :class => 'form-control'%>
+
+            <%= f.label :color_by_project do %>
+              <%= f.check_box :color_by_project %>
+                Color by Project <small>(Default is by Application.)</small>
+            <% end %>
+
             <%= error_span(@appconfig[:template]) %>
           </div>
       </div>
+
       <div class="modal-footer">
         <%= f.submit "Save", :class => 'btn btn-primary' %>
         <%= link_to "Cancel", "#", class: "btn btn-default", data: { dismiss: "modal" } %>

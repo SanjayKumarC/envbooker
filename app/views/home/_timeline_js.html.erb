@@ -38,7 +38,11 @@ Remaining: <%= days_left %> days";
         app: '<%= App.find_by_id(booking.app_id).name %>',
         group: <%= booking.env_id %>,
         title: title,
-        style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>',
+        <% if @appconfig.color_by_project %>
+          style: 'background-color: <%= Project.find_by_id(booking.project_id).color %>; color: <%= Project.find_by_id(booking.project_id).text_color %>',
+        <% else %>
+          style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>',
+        <% end %>
         br: '<br/>'
       });
     <% end %>

@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709112135) do
+ActiveRecord::Schema.define(version: 20150710110145) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
     t.string   "template"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "color_by_project", default: false, null: false
   end
 
   add_index "appconfigs", ["singleton_guard"], name: "index_appconfigs_on_singleton_guard", unique: true
@@ -70,6 +71,8 @@ ActiveRecord::Schema.define(version: 20150709112135) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "description"
+    t.string   "color"
+    t.string   "text_color"
   end
 
   create_table "requests", force: :cascade do |t|

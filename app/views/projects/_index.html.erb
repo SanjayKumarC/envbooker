@@ -2,6 +2,9 @@
   <tr>
     <td><%= link_to p.name, p, :remote => true %></td>
     <td><%= p.description %></td>
+    <td>
+      <div class="color-box" style="background-color: <%= p.color %>;"></div>
+    </td>
 
     <td>
       <% if can? :update, p %>

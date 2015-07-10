@@ -55,9 +55,7 @@ class HomeController < ApplicationController
     @min_date <<= 2
     @max_date >>= 2
 
-		logger.debug "ENVS: #{@envs.count}"
-		logger.debug "APPS: #{@apps.count}"
-		logger.debug "BOOKINGS: #{@envbookings.count}"
+		@appconfig = Appconfig.find(1)
 	end
 
 	def appconfig
@@ -71,6 +69,6 @@ class HomeController < ApplicationController
 	end
 	private
 		def appconfig_params
-			params.require(:appconfig).permit(:template)
+			params.require(:appconfig).permit(:template, :color_by_project)
 		end
 end
