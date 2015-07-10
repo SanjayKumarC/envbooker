@@ -53,8 +53,14 @@ Remaining: <%= days_left %> days";
       max: '<%= @max_date %>',
       template: template,
       orientation: 'both',
+      fit: true,
     <% if current_user.try(:admin?) %>
-      editable: true,
+      editable: {
+        add: false,
+        updateTime: true,
+        updateGroup: true,
+        remove: true
+      },
     <% else %>
       editable: false,
     <% end %>
@@ -80,7 +86,7 @@ Remaining: <%= days_left %> days";
         });
         callback(item);
       },
-      type: 'range'
+      type: 'range',
     };
     var timeline = new vis.Timeline(container, items, groups, options);
     timeline.focus();
