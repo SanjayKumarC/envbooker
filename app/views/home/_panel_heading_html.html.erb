@@ -11,7 +11,8 @@
 </div>
 
 <div id="filter_form" class="well" style="display:none;">
-  <form action="/" accept-charset="UTF-8" data-remote="true" method="post" class="form-inline">
+  <form action="/" accept-charset="UTF-8" data-remote="true" method="post" class="form">
+
     <div class="form-group">
       <label class="control-label" for="env_id"> Environment </label>
       <select name="env" id="env_id" class="input-small form-control ">
@@ -21,6 +22,7 @@
         <% end %>
       </select>
     </div>
+
     <div class="form-group">
       <label class="control-label" for="app_id"> Application </label>
       <select name="app" id="app_id" class="form-control input-small">
@@ -30,6 +32,17 @@
         <% end %>
       </select>
     </div>
+
+    <div class="form-group">
+      <label class="control-label" for="app_id"> Project </label>
+      <select name="project" id="project_id" class="form-control input-small">
+        <option value="All">All</option>
+        <% @projects.each do |project| %>
+          <option value="<%= project.name %>"><%= project.name %></option>
+        <% end %>
+      </select>
+    </div>
+
     <button type="submit" class="btn btn-primary">Filter</button>
     <button type="submit" class="btn btn-default">Reset</button>
   </form>
