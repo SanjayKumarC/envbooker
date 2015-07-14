@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   end
 
   resources :refreshes
+  resources :environments
+
 
   post 'envbookings/update_booking' => 'envbookings#update_booking'
   post 'envbookings/delete_booking' => 'envbookings#delete_booking'

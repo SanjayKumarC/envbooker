@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710110145) do
+ActiveRecord::Schema.define(version: 20150714122036) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -55,6 +55,12 @@ ActiveRecord::Schema.define(version: 20150710110145) do
     t.string   "description"
   end
 
+  create_table "envproperties", force: :cascade do |t|
+    t.integer "env_id"
+    t.string  "key"
+    t.string  "value"
+  end
+
   create_table "envs", force: :cascade do |t|
     t.string   "name"
     t.integer  "envlevel_id"
@@ -74,18 +80,6 @@ ActiveRecord::Schema.define(version: 20150710110145) do
     t.string   "color"
     t.string   "text_color"
   end
-
-  create_table "requests", force: :cascade do |t|
-    t.string   "project"
-    t.string   "apps"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "requests", ["user_id"], name: "index_requests_on_user_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false

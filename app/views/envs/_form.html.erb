@@ -60,6 +60,12 @@
       <%= error_span(@env[:last_refresh_date]) %>
     </div>
 
+    <div class="control-group">
+      <%= f.label :envproperties, :class => 'control-label' %>
+      <%= f.text_area :envproperties, :value => @envproperties, :rows => 10, :class => 'form-control input-sm' %>
+      <%= error_span(@env[:envproperties]) %>
+    </div>
+
   </div>
   <div class="modal-footer">
     <%= f.submit nil, :class => 'btn btn-primary' %>
