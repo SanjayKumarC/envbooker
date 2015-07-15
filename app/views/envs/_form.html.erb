@@ -61,8 +61,14 @@
     </div>
 
     <div class="control-group">
+      <%= f.label :notes, :class => 'control-label' %>
+      <%= f.text_area :notes, :value => @env.notes, :rows => 6, :class => 'form-control input-sm' %>
+      <%= error_span(@env[:envproperties]) %>
+    </div>
+
+    <div class="control-group">
       <%= f.label :envproperties, :class => 'control-label' %>
-      <%= f.text_area :envproperties, :value => @envproperties, :rows => 10, :class => 'form-control input-sm' %>
+      <%= f.text_area :envproperties, :value => @envproperties, :rows => 6, :class => 'form-control input-sm' %>
       <%= error_span(@env[:envproperties]) %>
     </div>
 

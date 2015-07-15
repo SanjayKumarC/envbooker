@@ -2,7 +2,9 @@
   <thead>
     <th>Environment</th>
     <th>Last Refresh Date</th>
-    <th>How Long Ago?</th>
+    <th>Ago?</th>
+    <th>Notes</th>
+    <th>Properties</th>
   </thead>
   <tbody>
     <% @envs.each do |env| %>
@@ -18,7 +20,17 @@
         <% else %>
         <%   days_ago_message = time_ago_in_words(env.last_refresh_date) %>
         <% end %>
-        <td><%= days_ago_message %></td>
+        <td><%= days_ago_message %> ago</td>
+        <td><%= env.notes %></td>
+
+        <% props = Envproperty.where(env_id:env.id) %>
+
+        <td colspan="3">
+          <% props.each do |p| %>
+            <%= p.key %> - <%= p.value %><br/>
+          <% end %>
+        </td>
+
       </tr>
     <% end %>
   </tbody>
