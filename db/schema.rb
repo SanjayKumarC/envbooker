@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715094939) do
+ActiveRecord::Schema.define(version: 20150717140516) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150715094939) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.boolean  "color_by_project", default: false, null: false
+    t.integer  "total_hours"
   end
 
   add_index "appconfigs", ["singleton_guard"], name: "index_appconfigs_on_singleton_guard", unique: true
@@ -31,6 +32,18 @@ ActiveRecord::Schema.define(version: 20150715094939) do
     t.string   "description"
     t.string   "text_color"
   end
+
+  create_table "downtimes", force: :cascade do |t|
+    t.integer  "env_id"
+    t.integer  "hours"
+    t.string   "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "notes"
+    t.date     "date"
+  end
+
+  add_index "downtimes", ["env_id"], name: "index_downtimes_on_env_id"
 
   create_table "envbookings", force: :cascade do |t|
     t.integer  "env_id"

@@ -77,6 +77,6 @@ class HomeController < ApplicationController
 	end
 	private
 		def appconfig_params
-			params.require(:appconfig).permit(:template, :color_by_project)
+			params.require(:appconfig).permit(:template, :color_by_project, :total_hours)
 		end
 end

@@ -8,13 +8,17 @@
           <div class="form-group">
             <%= f.label :template, :class => 'control-label' %>
             <%= f.text_area :template, :cols => 30, :rows => 5, :class => 'form-control'%>
-
-            <%= f.label :color_by_project do %>
-              <%= f.check_box :color_by_project %>
+          </div>
+          <div class="form-group">
+            <%= f.label :color_by_project, :class => 'control-label' do %>
+              <%= f.check_box :color_by_project, :class => 'form-control' %>
                 Color by Project <small>(Default is by Application.)</small>
             <% end %>
-
-            <%= error_span(@appconfig[:template]) %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :total_hours, :class => 'control-label' %>
+            <%= f.number_field :total_hours, :class => 'form-control'  %>
           </div>
       </div>
 

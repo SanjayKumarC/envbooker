@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :downtimes do
+    get 'delete'
+  end
+
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   get 'index/index'

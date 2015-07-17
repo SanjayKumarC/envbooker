@@ -124,3 +124,16 @@ App.all.each do |a|
 		:app => a
 	])
 end
+
+Downtime.delete_all
+reasons = ['Batch not complete', 'Out for refresh', 'Access Problems', 'Someone else using', 'Other' ]
+
+(1..50).each do |i|
+	Downtime.create!(
+		:env => Env.find_by_id( rand(Env.minimum(:id)..Env.maximum(:id)) ),
+		:date => Date.today - (rand(180)),
+		:notes => '',
+		:hours => rand(10),
+		:reason => reasons[rand(5)]
+	)
+end

@@ -1,3 +1,7 @@
+ul.ui-autocomplete {
+    z-index: 1100;
+}
+
 .color-box {
   float: left;
   width: 20px;
