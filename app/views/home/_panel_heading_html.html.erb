@@ -2,6 +2,12 @@
   $(function() {
     $('#show_hide_filtering').click(function() {
       $('#filter_form').toggle();
+      if($('#filter_form').is(':hidden')) {
+        $('#show_hide_filtering').html('<a href="#"><i class="fa fa-fw fa-plus-square"></i> Filtering</a>');
+      }
+      else {
+        $('#show_hide_filtering').html('<a href="#"><i class="fa fa-fw fa-minus-square"></i> Filtering</a>');
+      }
     });
   });
 </script>
