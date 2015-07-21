@@ -3,6 +3,7 @@ require 'json'
 class HomeController < ApplicationController
 	respond_to :html, :js
 
+	before_filter :set_appconfig
 	skip_before_action :authenticate_user!
 
   def index
@@ -62,11 +63,9 @@ class HomeController < ApplicationController
 
     @min_date <<= 2
     @max_date >>= 2
-
-		@appconfig = Appconfig.find(1)
 	end
 
-	def appconfig
+	def set_appconfig
 		@appconfig = Appconfig.find(1)
 	end
 
@@ -77,6 +76,6 @@ class HomeController < ApplicationController
 	end
 	private
 		def appconfig_params
-			params.require(:appconfig).permit(:template, :color_by_project, :total_hours)
+			params.require(:appconfig).permit(:template, :color_by_project, :show_extra_color_box, :total_hours)
 		end
 end
