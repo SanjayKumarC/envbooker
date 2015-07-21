@@ -29,6 +29,7 @@ a = Appconfig.new
 a.singleton_guard=0
 
 a.template = "{{name}} {{{br}}} {{app}} {{{br}}} {{project}} {{{br}}} {{user}}"
+a.total_hours = 160
 a.save!
 
 User.delete_all
