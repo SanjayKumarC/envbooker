@@ -1,0 +1,18 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h3><%= Env.find(@downtime.env.id).name   %></h3>
+    </div>
+
+    <div class="modal-body">
+      <p><strong>Hours:</strong><%= @downtime.hours %></p>
+      <p><strong>Reason:</strong><%= @downtime.reason %></p>
+      <p><strong>Notes:</strong><%= @downtime.notes %></p>
+    </div>
+
+    <div class="modal-footer">
+      <%= link_to "Dismiss", "#", class: "btn", data: {dismiss: "modal"} %>
+    </div>
+  </div>
+</div>

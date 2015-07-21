@@ -1,0 +1,17 @@
+<% if @downtime.errors.any? %>
+  <% @downtime.errors.full_messages.each do |message| %>
+    <% flash[:alert] = message %>
+    $(".alert-danger").html("<%= escape_javascript flash[:alert]%> ");
+    $(".alert-danger").show(500);
+    <% flash.discard %>
+  <% end %>
+<% else %>
+  <% flash[:success] = "Success" %>
+  $(".alert-success").html("<%= escape_javascript flash[:success]%> ");
+  $(".alert-success").show(500);
+  <% flash.discard %>
+<% end %>
+
+$('#downtime-modal').modal('hide');
+$('#downtime-table-body').html("<%= escape_javascript(render 'index.top') %>");
+$('#downtime-table-bottom').html("<%= escape_javascript(render 'index.bottom') %>");

@@ -1,0 +1,94 @@
+<%= form_for @downtime, remote: true, :html => { :class => "form-horizontal downtime", style: "display:inline;"} do |f| %>
+  
+  <script>
+    <% reasons = Downtime.pluck(:reason).uniq.sort %>
+    $(function() {
+      var availableTags = [
+        <% reasons.each do |r| %>
+          <% if r == reasons.last %>
+            "<%= r %>"
+          <% else %>
+            "<%= r %>",
+          <% end %>
+        <% end %>
+      ];
+      $( "#downtime-reasons" ).autocomplete({
+        source: availableTags,
+        minLength:0
+      }).bind('focus', function(){ $(this).autocomplete("search"); } );
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.datepicker').datepicker({
+        todayBtn: "linked",
+        clearBtn: true,
+        language: "en-GB",
+        calendarWeeks: true,
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+      });
+    });
+  </script>
+
+  <div class="modal-body">
+    <% if @downtime.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@downtime.errors.count, "error") %> prohibited this downtime from being saved:</h2>
+
+        <ul>
+        <% @downtime.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :env, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:env_id, Env.all.map{|e|[e.name, e.id]}, {include_blank: true, :autofocus => true}, { :class => 'form-control input-sm' }) %>
+      </div>
+      <%= error_span(@downtime[:env]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :hours, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :hours, :class => 'form-control' %>
+      </div>
+      <%= error_span(@downtime[:hours]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :reason, :class => 'control-label' %>
+      <small>Select existing reason or create new reason.</small>
+      <div class="controls">
+        <%= f.text_field :reason, :class => 'form-control', :id => 'downtime-reasons' %>
+      </div>
+      <%= error_span(@downtime[:reason]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :date, :class => 'control-label' %>
+      <%= f.text_field :date, :value => @downtime.date.strftime('%d-%m-%Y'), :class => 'form-control input-sm datepicker' %>
+      <%= error_span(@downtime[:date]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :notes, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :notes, :class => 'form-control', :rows => 4 %>
+      </div>
+      <%= error_span(@downtime[:notes]) %>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+  </div>
+<% end %>

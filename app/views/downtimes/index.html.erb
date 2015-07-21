@@ -1,0 +1,37 @@
+<%= link_to '', new_downtime_path, :remote=> true, :class => 'btn btn-primary fa fa-lg fa-plus button-text' %>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Environment</th>
+      <th>Availability over last month</th>
+    </tr>
+  </thead>
+
+  <tbody id="downtime-table-bottom">
+    <%= render 'index.bottom' %>
+  </tbody>
+
+</table>
+<br/>
+<br/>
+
+<% if current_user.try(:admin?) %>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Environment</th>
+        <th>Hours</th>
+        <th>Reason</th>
+        <th>Date</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody id="downtime-table-body">
+      <%= render 'index.top' %>
+    </tbody>
+
+  </table>
+  <br>
+<% end %>

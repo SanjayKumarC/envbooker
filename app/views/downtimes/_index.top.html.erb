@@ -1,0 +1,24 @@
+
+<% @downtimes.each do |downtime| %>
+  <tr>
+    <td><%= link_to Env.find(downtime.env.id).name, downtime, :remote => true  %></td>
+    <td><%= downtime.hours %></td>
+    <td><%= downtime.reason %></td>
+    <td><%= downtime.date.strftime("%A, %d %B %Y") %></td>
+
+    <td>
+      <% if can? :update, downtime %>
+        <%= link_to edit_downtime_path(downtime), remote: true, title: "Edit", :data => {:toggle=>"tooltip"} do %>
+          <span class="fa fa-fw fa-edit"></span>
+        <% end %>
+      <% end %>
+    </td>
+    <td>
+      <% if can? :delete, downtime %>
+        <%= link_to downtime_delete_path(downtime), remote: true, title: "Delete", :data => {:toggle=>"tooltip"} do %>
+          <span class="fa fa-fw fa-trash"></span>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

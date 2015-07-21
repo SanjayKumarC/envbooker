@@ -1,0 +1,6 @@
+<% @summed_downtime.each do |k,v| %>
+  <tr>
+    <td><%= Env.find(k).name %></td>
+    <td><%= @availability[k] %> %</td>
+  </tr>
+<% end %>
