@@ -51,6 +51,10 @@
         <li>
           <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Env Refreshes</a>
         </li>
+        <li>
+          <a href="/downtimes"><i class="fa fa-fw fa-clock-o"></i> Downtime Tracking</a>
+        </li>
+
         <% if current_user.try(:admin?) %>
           <li>
             <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
@@ -68,7 +72,7 @@
             <a href="/envlevels"><i class="fa fa-fw fa-asterisk"></i> Environment Levels</a>
           </li>
           <li>
-            <a href="/envbookings"><i class="fa fa-fw fa-list-ul"></i> Bookings</a>
+            <a href="/envbookings"><i class="fa fa-fw fa-list"></i> Bookings</a>
           </li>
           <li>
             <a href="/appconfig" data-remote="true"><i class="fa fa-fw fa-gear"></i> App Config</a>
