@@ -32,7 +32,7 @@
 
     <% @envbooking.start_date ||= Date.today() %>
     <% @envbooking.end_date ||= Date.today() %>
-    
+
     <!-- Environmnt -->
     <div class="form-group">
       <%= f.label :env_id, :class => 'control-label' %>
@@ -53,11 +53,11 @@
       <%= f.select(:user_id, @user_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:user_id]) %>
     </div>
-    
+
     <!-- App -->
     <div class="form-group">
       <%= f.label :app_id, :class => 'control-label' %>
-      <%= f.select(:app_id, @app_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
+      <%= f.select(:app_id, @app_map, {include_blank: false}, { :class => 'form-control input-sm', multiple: true, :size => App.count }) %>
       <%= error_span(@envbooking[:app_id]) %>
     </div>
 
@@ -78,5 +78,5 @@
   <div class="modal-footer">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
-  </div>  
+  </div>
 <% end %>

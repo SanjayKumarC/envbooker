@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717140516) do
+ActiveRecord::Schema.define(version: 20150721104942) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150717140516) do
   end
 
   add_index "envbookings", ["app_id"], name: "index_envbookings_on_app_id"
-  add_index "envbookings", ["env_id", "project_id", "start_date", "end_date"], name: "index_envbookings_env_project_start_date_end_date", unique: true
+  add_index "envbookings", ["env_id", "project_id", "start_date", "end_date", "app_id"], name: "index_envbookings_env_project_start_date_end_date", unique: true
   add_index "envbookings", ["env_id"], name: "index_envbookings_on_env_id"
   add_index "envbookings", ["project_id"], name: "index_envbookings_on_project_id"
 

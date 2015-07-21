@@ -1,20 +1,3 @@
-<% if @envbooking.errors.any? %>
-  <% @envbooking.errors.full_messages.each do |message| %>
-    <% flash[:alert] = message %>
-    $(".alert-danger").html("<%= escape_javascript flash[:alert]%> ");
-    <% flash.discard %>
-
-    $(".alert-danger").show(500);
-
-  <% end %>
-<% else %>
-  <% flash[:success] = "Success" %>
-  $(".alert-success").html("<%= escape_javascript flash[:success]%> ");
-  <% flash.discard %>
-
-  $(".alert-success").show(500);
-<% end %>
-
 $("#envbooking-modal").modal("hide");
 $("#envbooking-delete-modal").modal("hide");
 $(".envbooking-index").html("<%= escape_javascript(render 'index') %>");

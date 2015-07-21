@@ -37,7 +37,13 @@ Remaining: <%= days_left %> days";
         project: '<%= Project.find_by_id(booking.project_id).name %>',
         app: '<%= App.find_by_id(booking.app_id).name %>',
         group: <%= booking.env_id %>,
+        subgroup: <%= booking.project_id %>,
         title: title,
+        <% if Appconfig.find(1).color_by_project %>
+          extra_color_box: '<div class="extra_color_box" style="background-color: <%= App.find(booking.app_id).color %>;"></div>',
+        <% else %>
+          extra_color_box: '<div class="extra_color_box" style="background-color: <%= Project.find(booking.project_id).color %>;"></div>',
+        <% end %>
         <% if @appconfig.color_by_project %>
           style: 'background-color: <%= Project.find_by_id(booking.project_id).color %>; color: <%= Project.find_by_id(booking.project_id).text_color %>',
         <% else %>
@@ -48,6 +54,7 @@ Remaining: <%= days_left %> days";
     <% end %>
 
     var options = {
+      stack:true,
       clickToUse: true,
       min: '<%= @min_date %>',
       max: '<%= @max_date %>',

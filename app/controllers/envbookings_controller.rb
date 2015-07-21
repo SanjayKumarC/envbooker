@@ -71,14 +71,21 @@ class EnvbookingsController < ApplicationController
   end
 
   def create
-    @envbooking = Envbooking.new(envbooking_params)
-    if @envbooking.user_id == nil
-      @envbooking.user_id = current_user.id
+    app_ids = envbooking_params[:app_id]
+    app_ids.reject! {|id| id.empty?}
+
+    app_ids.each do |id|
+      b = Envbooking.new
+      b.env_id = envbooking_params[:env_id]
+      b.project_id = envbooking_params[:project_id]
+      b.user_id = envbooking_params[:user_id]
+      b.start_date = envbooking_params[:start_date]
+      b.end_date = envbooking_params[:end_date]
+      b.app_id = id
+      b.save
     end
 
-    @envbooking.save
     get_sorted_bookings
-
   end
 
   def update
@@ -117,6 +124,6 @@ class EnvbookingsController < ApplicationController
     end
 
     def envbooking_params
-      params.require(:envbooking).permit(:env_id, :project_id, :start_date, :end_date, :app_id, :user_id)
+      params.require(:envbooking).permit(:env_id, :project_id, :start_date, :end_date, :user_id, :app_id => [])
     end
 end
