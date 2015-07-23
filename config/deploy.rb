@@ -18,7 +18,7 @@ namespace :deploy do
     end
   end
 
-  desk 'Backup production database'
+  desc 'Backup production database'
   task :backup do
     on roles(:db) do
       execute :copy, release_path.join('db/production.sqlite3'), '/db_backup/'
