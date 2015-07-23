@@ -1,0 +1,81 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Environment', 'Available', 'Unavailable', {role: 'style'}],
+      <% @availability.each do |k,v| %>
+        ['<%= Env.find(k).name %>', <%= v.round(2) %>, <%= (100 - v).round(2) %>, ''],
+      <% end %>
+    ]);
+
+    var options = {
+      legend: { position: 'bottom' },
+      bar: { groupWidth: '40%' },
+      height: <%= Env.count * 60 %>,
+      isStacked: true,
+      width: 400,
+      height: 400,
+      hAxis: {
+        viewWindow: {
+          min: <%= @availability.values.min - 2  %>,
+          max: 100
+        },
+        format: 'decimal'
+      },
+      axes: {
+        x: {
+          distance: {
+            label: 'Availability (percent)'
+          }
+        }
+      }
+    };
+
+    var view = new google.visualization.DataView(data);
+    var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+
+    chart.draw(view, options);
+  }
+</script>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Availability
+        </div>
+        <div class="panel-body">
+          <div id="barchart_values" ></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Availability
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered table-condensed table-striped table-bordered">
+            <thead>
+              <th>Env</th>
+              <th>Percentage Available</th>
+            </thead>
+            <tbody>
+              <% @availability.each do |k,v| %>
+                <tr>
+                  <td><%= Env.find(k).name %></td>
+                  <td> <%= v.round(2) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
