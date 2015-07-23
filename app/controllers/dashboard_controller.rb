@@ -1,4 +1,7 @@
 class DashboardController < ApplicationController
+
+  skip_before_action :authenticate_user!
+  
   def index
     set_downtimes
   end
