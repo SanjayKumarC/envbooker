@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721134447) do
+ActiveRecord::Schema.define(version: 20150723113210) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150721134447) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "app_id"
+    t.string   "notes"
   end
 
   add_index "envbookings", ["app_id"], name: "index_envbookings_on_app_id"

@@ -1,16 +1,49 @@
 <div class="modal-dialog">
   <div class="modal-content">
-    
+
     <div class="modal-header">
       <h3><%= @app.name %></h3>
     </div>
-    
+
     <div class="modal-body">
-      <strong>App Name: </strong><%= @app.name %><br/>
-      <strong>App Description: </strong><%= @app.description %><br/>
-      <strong>App Color: </strong><%= @app.color %><br/>
+      <table class="table table-bordered table-condensed table-striped table-hover">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td>
+              App Name
+            </td>
+            <td>
+              <%= @app.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              App Description
+            </td>
+            <td>
+              <%= @app.description %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              App Color
+            </td>
+            <td>
+              <%= @app.color %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <div class="color-box" style="background-color: <%= @app.color %>;"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
+
     <div class="modal-footer">
       <%= link_to "Dismiss", "#", class: "btn", data: {dismiss: "modal"} %>
     </div>

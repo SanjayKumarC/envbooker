@@ -1,6 +1,6 @@
 <% @envbookings.each do |envbooking| %>
   <tr>
-    <td><%= Env.find_by_id(envbooking.env_id).name %></td>
+    <td><%= link_to Env.find(envbooking.env_id).name, envbooking, :remote => true %></td>
     <td><%= Project.find_by_id(envbooking.project_id).name %></td>
     <td><%= User.find_by_id(envbooking.user_id).email %></td>
     <td><%= App.find_by_id(envbooking.app_id).name %></td>

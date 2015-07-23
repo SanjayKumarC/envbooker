@@ -34,46 +34,53 @@
     <% @envbooking.end_date ||= Date.today() %>
 
     <!-- Environmnt -->
-    <div class="form-group">
+    <div class="control-group">
       <%= f.label :env_id, :class => 'control-label' %>
       <%= f.select(:env_id, @env_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:env_id]) %>
     </div>
 
     <!-- Project -->
-    <div class="form-group">
+    <div class="control-group">
       <%= f.label :project_id, :class => 'control-label' %>
       <%= f.select(:project_id, @proj_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:project_id]) %>
     </div>
 
     <!-- User -->
-    <div class="form-group">
+    <div class="control-group">
       <%= f.label :user_id, :class => 'control-label' %>
       <%= f.select(:user_id, @user_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:user_id]) %>
     </div>
 
     <!-- App -->
-    <div class="form-group">
+    <div class="control-group">
       <%= f.label :app_id, :class => 'control-label' %>
       <%= f.select(:app_id, @app_map, {include_blank: false}, { :class => 'form-control input-sm', multiple: true, :size => App.count }) %>
       <%= error_span(@envbooking[:app_id]) %>
     </div>
 
     <!-- Start Date -->
-    <div class="form-group">
+    <div class="control-group">
       <%= f.label :start_date, :class => 'control-label' %>
       <%= f.text_field :start_date, :value => @envbooking.start_date.strftime('%d-%m-%Y'), :class => 'form-control input-sm datepicker' %>
       <%= error_span(@envbooking[:start_date]) %>
     </div>
 
     <!-- End Date -->
-    <div class="form-group">
+    <div class="control-group">
       <%= f.label :end_date, :class => 'control-label' %>
       <%= f.text_field :end_date, :value => @envbooking.end_date.strftime('%d-%m-%Y'), :class => 'form-control input-sm datepicker' %>
       <%= error_span(@envbooking[:end_date]) %>
     </div>
+
+    <div class="control-group">
+      <%= f.label :notes, :class => 'control-label' %>
+      <%= f.text_area :notes, :value => @envbooking.notes, :rows => 6, :class => 'form-control' %>
+      <%= error_span(@envbooking[:notes]) %>
+    </div>
+
   </div>
   <div class="modal-footer">
     <%= f.submit nil, :class => 'btn btn-primary' %>

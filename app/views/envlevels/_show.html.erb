@@ -1,15 +1,35 @@
 <div class="modal-dialog">
   <div class="modal-content">
-    
+
     <div class="modal-header">
       <h3><%= @envlevel.name %></h3>
     </div>
-    
+
     <div class="modal-body">
-      <strong>Environment Level Name: </strong><%= @envlevel.name %><br/>
-      <strong>Environment Level Description: </strong><%= @envlevel.description %><br/>
+      <table class="table table-hover table-striped table-bordered table-condensed">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Environment Level Name
+            </td>
+            <td>
+              <%= @envlevel.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Environment Level Description
+            </td>
+            <td>
+              <%= @envlevel.description %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
+
     <div class="modal-footer">
       <%= link_to "Dismiss", "#", class: "btn", data: {dismiss: "modal"} %>
     </div>

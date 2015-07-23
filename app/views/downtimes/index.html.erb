@@ -1,6 +1,6 @@
 <%= link_to '', new_downtime_path, :remote=> true, :class => 'btn btn-primary fa fa-lg fa-plus button-text' %>
 
-<table class="table table-striped table-hover">
+<table class="table table-bordered table-condensed table-striped table-hover">
   <thead>
     <tr>
       <th>Environment</th>
@@ -17,7 +17,7 @@
 <br/>
 
 <% if current_user.try(:admin?) %>
-  <table class="table table-striped table-hover">
+  <table class="table table-bordered table-condensed table-striped table-hover">
     <thead>
       <tr>
         <th>Environment</th>
