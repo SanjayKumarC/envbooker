@@ -63,22 +63,27 @@
             <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
           </li>
           <li>
-            <a href="/apps" class="sidebar_link"><i class="fa fa-fw fa-bullseye"></i> Apps</a>
-          </li>
-          <li>
-            <a href="/projects"><i class="fa fa-fw fa-file"></i> Projects</a>
-          </li>
-          <li>
-            <a href="/envs"><i class="fa fa-fw fa-globe"></i> Environments</a>
-          </li>
-          <li>
-            <a href="/envlevels"><i class="fa fa-fw fa-asterisk"></i> Environment Levels</a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#config"><i class="fa fa-fw fa-cogs"></i> Config <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="config" class="collapse">
+              <li>
+                <a href="/apps" class="sidebar_link"><i class="fa fa-fw fa-bullseye"></i> Apps</a>
+              </li>
+              <li>
+                <a href="/projects"><i class="fa fa-fw fa-file"></i> Projects</a>
+              </li>
+              <li>
+                <a href="/envs"><i class="fa fa-fw fa-globe"></i> Environments</a>
+              </li>
+              <li>
+                <a href="/envlevels"><i class="fa fa-fw fa-asterisk"></i> Environment Levels</a>
+              </li>
+            </ul>
           </li>
           <li>
             <a href="/envbookings"><i class="fa fa-fw fa-list"></i> Bookings</a>
           </li>
           <li>
-            <a href="/appconfig" data-remote="true"><i class="fa fa-fw fa-gear"></i> App Config</a>
+            <a href="/appconfig" data-remote="true"><i class="fa fa-fw fa-gear"></i> Preferences</a>
           </li>
         <% end %>
 
