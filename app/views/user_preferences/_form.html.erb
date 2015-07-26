@@ -1,0 +1,38 @@
+<%= form_for @user_preference, :html => { :class => "form-horizontal user_preference" }  do |f| %>
+
+  <% if @user_preference.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_preference.errors.count, "error") %> prohibited this user_preference from being saved:</h2>
+
+      <ul>
+      <% @user_preference.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :template, :class => 'control-label' %>
+    <%= f.text_area :template, :class => 'form-control', :rows => 6 %>
+    <%= error_span(@user_preference[:template]) %>
+  </div>
+
+  <div class="control-group">
+    <%= f.check_box :color_by_project, :class => 'checkbox-inline' %>
+    <%= f.label :color_by_project, :class => 'control-label' %>
+    <%= error_span(@user_preference[:color_by_project]) %>
+  </div>
+
+  <div class="control-group">
+    <%= f.check_box :show_extra_color_box, :class => 'checkbox-inline' %>
+    <%= f.label :show_extra_color_box, :class => 'control-label' %>
+    <%= error_span(@user_preference[:show_extra_color_box]) %>
+  </div>
+  <br/>
+  <br/>
+  <div class="actions">
+    <%= f.submit "Update Preferences", :class => 'btn btn-primary' %>
+    <%= link_to "Cancel", "/", data: { no_turbolink: true }, class: "btn" %>
+  </div>
+<% end %>

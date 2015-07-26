@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_preferences
   get 'dashboard', to: 'dashboard#index'
 
   resources :downtimes do

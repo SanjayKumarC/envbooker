@@ -67,6 +67,16 @@ class HomeController < ApplicationController
 
 	def set_appconfig
 		@appconfig = Appconfig.find(1)
+
+		if current_user
+			@userconfig = UserPreference.find_by user_id: current_user.id
+		end
+
+		if @userconfig
+			@config_var = @userconfig
+		else
+			@config_var = @appconfig
+		end
 	end
 
 	def saveconfig

@@ -24,7 +24,7 @@ end
 sql = 'update sqlite_sequence set seq = 0'
 ActiveRecord::Base.connection.execute(sql)
 
-Appconfig.delete_all
+Appconfig.destroy_all
 a = Appconfig.new
 a.singleton_guard=0
 
@@ -32,10 +32,9 @@ a.template = "{{name}} {{{br}}} {{app}} {{{br}}} {{project}} {{{br}}} {{user}} {
 a.total_hours = 160
 a.save!
 
-User.delete_all
+User.destroy_all
 User.create! :email => 'admin@admin.com', :name => 'John', :admin => true, :password => 'admin455', :password_confirmation => 'admin455'
 User.create! :email => 'notadmin@admin.com', :name => 'Someone Else', :admin => false, :password => 'admin455', :password_confirmation => 'admin455'
-
 
 Envlevel.delete_all
 Envlevel.create!(:name => "DEV", :description => "Development Environment")

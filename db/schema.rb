@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723113210) do
+ActiveRecord::Schema.define(version: 20150724092844) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -79,11 +79,12 @@ ActiveRecord::Schema.define(version: 20150723113210) do
   create_table "envs", force: :cascade do |t|
     t.string   "name"
     t.integer  "envlevel_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "description"
     t.date     "last_refresh_date"
     t.string   "notes"
+    t.boolean  "multi",             default: true
   end
 
   add_index "envs", ["envlevel_id"], name: "index_envs_on_envlevel_id"
@@ -106,6 +107,17 @@ ActiveRecord::Schema.define(version: 20150723113210) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "user_preferences", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "template"
+    t.boolean  "color_by_project",     default: false
+    t.boolean  "show_extra_color_box", default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "user_preferences", ["user_id"], name: "index_user_preferences_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

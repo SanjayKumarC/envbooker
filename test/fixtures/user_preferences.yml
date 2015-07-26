@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  template: MyString
+  color_by_project: false
+  total_hours: 1
+  show_extra_color_box: false
+
+two:
+  user_id: 
+  template: MyString
+  color_by_project: false
+  total_hours: 1
+  show_extra_color_box: false

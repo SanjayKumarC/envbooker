@@ -1,5 +1,5 @@
 <script id="item-template" type="text/x-handlebars-template">
-  <%= @appconfig.template %>
+  <%= @config_var.template %>
 </script>
 
 <script type="text/javascript">
@@ -40,13 +40,13 @@ Remaining: <%= days_left %> days";
         subgroup: <%= booking.project_id %>,
         br: '<br/>',
         title: title,
-        <% if @appconfig.color_by_project %>
+        <% if @config_var.color_by_project %>
           style: 'background-color: <%= Project.find_by_id(booking.project_id).color %>; color: <%= Project.find_by_id(booking.project_id).text_color %>',
         <% else %>
           style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>',
         <% end %>
-        <% if @appconfig.show_extra_color_box %>
-          <% if @appconfig.color_by_project %>
+        <% if @config_var.show_extra_color_box %>
+          <% if @config_var.color_by_project %>
             extra_color_box: '<div class="extra_color_box" style="background-color: <%= App.find(booking.app_id).color %>;"></div>',
           <% else %>
             extra_color_box: '<div class="extra_color_box" style="background-color: <%= Project.find(booking.project_id).color %>;"></div>',
