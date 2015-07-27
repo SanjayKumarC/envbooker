@@ -10,21 +10,24 @@
             <%= f.text_area :template, :cols => 30, :rows => 5, :class => 'form-control'%>
           </div>
 
-          <div class="form-group">
-            <%= f.label :color_by_project, :class => 'control-label' do %>
-              <%= f.check_box :color_by_project, :class => 'form-control' %>
-                Color by Project <small>(Default is by Application.)</small>
-            <% end %>
+          <div class="control-group">
+            <%= f.check_box :color_by_project, :class => 'checkbox-inline' %>
+            <%= f.label :color_by_project, :class => 'control-label' %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :show_extra_color_box, :class => 'control-label' do %>
-              <%= f.check_box :show_extra_color_box, :class => 'form-control' %>
-                Show color box for project when coloring by App and vice versa.
-            <% end %>
+          <div class="control-group">
+            <%= f.check_box :show_extra_color_box, :class => 'checkbox-inline' %>
+            <%= f.label :show_extra_color_box, :class => 'control-label' %>
           </div>
 
-          <div class="form-group">
+          <div class="control-group">
+            <%= f.check_box :sidebar, :class => 'checkbox-inline' %>
+            <%= f.label :sidebar, :class => 'control-label' %>
+          </div>
+
+          <br/>
+
+          <div class="control-group">
             <%= f.label :total_hours, :class => 'control-label' %>
             <%= f.number_field :total_hours, :class => 'form-control'  %>
           </div>

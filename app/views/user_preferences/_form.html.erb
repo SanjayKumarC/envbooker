@@ -29,6 +29,13 @@
     <%= f.label :show_extra_color_box, :class => 'control-label' %>
     <%= error_span(@user_preference[:show_extra_color_box]) %>
   </div>
+
+  <div class="control-group">
+    <%= f.check_box :sidebar, :class => 'checkbox-inline' %>
+    <%= f.label :sidebar, :class => 'control-label' %>
+    <%= error_span(@user_preference[:sidebar]) %>
+  </div>
+
   <br/>
   <br/>
   <div class="actions">

@@ -60,10 +60,10 @@ class DowntimesController < ApplicationController
           if calc < 0.0
             calc = 0.0
           end
-          @availability[env.id] = calc
+          @availability[env.id] = calc.round(2)
         else
           @availability[env.id] = 100.0
-        end        
+        end
       end
     end
 

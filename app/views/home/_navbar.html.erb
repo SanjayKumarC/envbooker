@@ -9,6 +9,54 @@
     </button>
     <a class="navbar-brand" href="/" data-no-turbolink="true">Bookings</a>
   </div>
+
+  <% if !current_user.try(:user_preference).try(:sidebar) %>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/" data-no-turbolink="true"><i class="fa fa-fw fa-home"></i> Home</a>
+      </li>
+      <li>
+        <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Env Refreshes</a>
+      </li>
+      <li>
+        <a href="/downtimes"><i class="fa fa-fw fa-clock-o"></i> Downtime Tracking</a>
+      </li>
+      <li>
+        <a href="/dashboard" data-no-turbolink="true"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+      </li>
+
+      <% if current_user.try(:admin?) %>
+        <li>
+          <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
+        </li>
+
+        <li>
+          <a href="/envbookings"><i class="fa fa-fw fa-list"></i> Bookings</a>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-fw fa-cogs"></i> Config <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="/apps" class="sidebar_link"><i class="fa fa-fw fa-bullseye"></i> Apps</a>
+            </li>
+            <li>
+              <a href="/projects"><i class="fa fa-fw fa-file"></i> Projects</a>
+            </li>
+            <li>
+              <a href="/envs"><i class="fa fa-fw fa-globe"></i> Environments</a>
+            </li>
+            <li>
+              <a href="/envlevels"><i class="fa fa-fw fa-asterisk"></i> Environment Levels</a>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <!-- Top Menu Items -->
   <ul class="nav navbar-right top-nav">
     <% if current_user.try(:admin?) %>
@@ -52,6 +100,7 @@
     </li>
   </ul>
   <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+  <% if current_user.try(:user_preference).try(:sidebar) %>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav side-nav">
         <li>
@@ -94,4 +143,5 @@
         <% end %>
       </ul>
     </div>
+  <% end %>
 </nav>
