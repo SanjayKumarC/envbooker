@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EnvironmentsControllerTest < ActionController::TestCase
+class RefreshRequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

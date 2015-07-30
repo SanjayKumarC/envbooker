@@ -18,9 +18,9 @@
         <% when 1 %>
         <%   days_ago_message = "Yesterday" %>
         <% else %>
-        <%   days_ago_message = time_ago_in_words(env.last_refresh_date) %>
+        <%   days_ago_message = time_ago_in_words(env.last_refresh_date) + " ago" %>
         <% end %>
-        <td><%= days_ago_message %> ago</td>
+        <td><%= days_ago_message %> </td>
         <td><%= env.notes %></td>
 
         <% props = Envproperty.where(env_id:env.id) %>

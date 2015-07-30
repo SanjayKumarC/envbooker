@@ -1,0 +1,29 @@
+<% @refresh_requests.each do |refresh_request| %>
+  <tr>
+    <td><%= link_to refresh_request.env.name, refresh_request, :remote => true %></td>
+    <td><%= refresh_request.app.name %></td>
+    <td><%= refresh_request.refresh_date %></td>
+    <td><%= refresh_request.status %></td>
+    <td><%= refresh_request.notes %></td>
+
+    <% if can? :update, refresh_request %>
+      <td>
+        <%= link_to edit_refresh_request_path(refresh_request), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
+          <span class="fa fa-fw fa-edit"></span>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to refresh_request_delete_path(refresh_request), remote: true, title: "Delete", class: "", :data => {:toggle=>"tooltip"} do %>
+          <span class="fa fa-fw fa-trash"></span>
+        <% end %>
+      </td>
+
+      <td>
+        <%= link_to refresh_request_complete_path(refresh_request), remote: true, title: "Coplete Request", class: "", :data => {:toggle=>"tooltip"} do %>
+          <span class="fa fa-fw fa-arrow-circle-o-right"></span>
+        <% end %>
+      </td>
+
+    <% end %>
+  </tr>
+<% end %>

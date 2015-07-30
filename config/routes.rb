@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   resources :user_preferences
+
   get 'dashboard', to: 'dashboard#index'
+
+  resources :refresh_requests do
+    get 'delete'
+    get 'complete'
+    post 'complete', :to => 'refresh_requests#update_request'
+  end
 
   resources :downtimes do
     get 'delete'

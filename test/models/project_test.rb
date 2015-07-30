@@ -25,12 +25,4 @@ class ProjectTest < ActiveSupport::TestCase
     pr = Project.find(booking.project_id)
     assert_not pr.destroy
   end
-
-
-  test "valid and works" do
-    p = Project.new
-    p.name = "Unique Name"
-    p.description = "description"
-    assert p.save
-  end
 end

@@ -104,15 +104,10 @@ class EnvbookingsController < ApplicationController
 
   private
     def helper_config_maps
-      @env_map = Env.all.map{|e|[e.name, e.id]}
-      @user_map = User.all.map{|u|[u.email, u.id]}
-      @proj_map = Project.all.map{|p|[p.name, p.id]}
-      @app_map = App.all.map{|a|[a.name, a.id]}
-
-      @env_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-      @user_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-      @proj_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-      @app_map.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @env_map = Env.all.map{|e|[e.name, e.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @user_map = User.all.map{|u|[u.email, u.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @proj_map = Project.all.map{|p|[p.name, p.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @app_map = App.all.map{|a|[a.name, a.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
     end
 
     def set_envbooking

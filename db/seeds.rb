@@ -137,3 +137,16 @@ reasons = ['Batch not complete', 'Out for refresh', 'Access Problems', 'Someone 
 		:reason => reasons[rand(5)]
 	)
 end
+
+statuses = ["In Progress", "New", "Complete"]
+
+RefreshRequest.delete_all
+(1..10).each do |i|
+	RefreshRequest.create!([
+		:env => Env.find(rand(Env.maximum(:id))+1),
+		:app => App.find(rand(App.maximum(:id))+1),
+		:refresh_date => Date.today + rand(30),
+		:notes => Forgery(:lorem_ipsum).words(rand(50)),
+		:status => statuses[rand(statuses.count)]
+	])
+end

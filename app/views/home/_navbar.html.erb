@@ -15,16 +15,26 @@
       <li>
         <a href="/" data-no-turbolink="true"><i class="fa fa-fw fa-home"></i> Home</a>
       </li>
-      <li>
-        <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Env Refreshes</a>
-      </li>
-      <li>
-        <a href="/downtimes"><i class="fa fa-fw fa-clock-o"></i> Downtime Tracking</a>
-      </li>
-      <li>
-        <a href="/dashboard" data-no-turbolink="true"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
-      </li>
 
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-fw fa-globe"></i> Environments <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Status</a>
+          </li>
+          <li>
+            <a href="/refresh_requests"><i class="fa fa-fw fa-paper-plane"></i> Refresh Request</a>
+          </li>
+          <li>
+            <a href="/downtimes"><i class="fa fa-fw fa-clock-o"></i> Downtime Tracking</a>
+          </li>
+          <li>
+            <a href="/dashboard" data-no-turbolink="true"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+          </li>
+        </ul>
+      </li>
       <% if current_user.try(:admin?) %>
         <li>
           <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
@@ -107,13 +117,21 @@
           <a href="/" data-no-turbolink="true"><i class="fa fa-fw fa-home"></i> Home</a>
         </li>
         <li>
-          <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Env Refreshes</a>
-        </li>
-        <li>
-          <a href="/downtimes"><i class="fa fa-fw fa-clock-o"></i> Downtime Tracking</a>
-        </li>
-        <li>
-          <a href="/dashboard" data-no-turbolink="true"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+          <a href="javascript:;" data-toggle="collapse" data-target="#Environments"><i class="fa fa-fw fa-globe"></i> Environments <i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="Environments" class="collapse">
+            <li>
+              <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Statuses</a>
+            </li>
+            <li>
+              <a href="/refresh_requests"><i class="fa fa-fw fa-paper-plane"></i> Refresh Requests</a>
+            </li>
+            <li>
+              <a href="/downtimes"><i class="fa fa-fw fa-clock-o"></i> Downtime Tracking</a>
+            </li>
+            <li>
+              <a href="/dashboard" data-no-turbolink="true"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+            </li>
+          </ul>
         </li>
 
         <% if current_user.try(:admin?) %>
