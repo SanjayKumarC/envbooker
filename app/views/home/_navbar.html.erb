@@ -25,7 +25,7 @@
             <a href="/refreshes"><i class="fa fa-fw fa-support"></i> Status</a>
           </li>
           <li>
-            <a href="/refresh_requests"><i class="fa fa-fw fa-paper-plane"></i> Refresh Request</a>
+            <a href="/refresh_requests"><i class="fa fa-fw fa-paper-plane"></i> Refresh Requests</a>
           </li>
           <li>
             <a href="/downtimes"><i class="fa fa-fw fa-clock-o"></i> Downtime Tracking</a>
@@ -90,7 +90,7 @@
             <a href="/users/edit"><i class="fa fa-fw fa-user"></i> Account</a>
           </li>
           <li>
-            <a href="<%= edit_user_preference_path(UserPreference.where(user_id: current_user.id)) %>"><i class="fa fa-fw fa-gear"></i> User Preferences</a>
+            <a href="<%= edit_user_preference_path(current_user.user_preference) %>"><i class="fa fa-fw fa-gear"></i> User Preferences</a>
           </li>
 
           <li>

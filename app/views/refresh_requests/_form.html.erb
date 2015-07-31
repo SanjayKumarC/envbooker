@@ -30,7 +30,6 @@
       });
     </script>
 
-
     <!-- Environmnt -->
     <div class="control-group">
       <%= f.label :env_id, :class => 'control-label' %>
@@ -45,13 +44,16 @@
       <%= error_span(@refresh_request[:app_id]) %>
     </div>
 
+    <%= params.inspect %>
 
-    <!-- Status -->
-    <div class="control-group">
-      <%= f.label :status, :class => 'control-label' %>
-      <%= f.select(:status, @statuses, {include_blank: false}, { :class => 'form-control input-sm'}) %>
-      <%= error_span(@refresh_request[:refresh_date]) %>
-    </div>
+    <% unless params[:action] == 'new' %>
+      <!-- Status -->
+      <div class="control-group">
+        <%= f.label :status, :class => 'control-label' %>
+        <%= f.select(:status, @statuses, {include_blank: false}, { :class => 'form-control input-sm'}) %>
+        <%= error_span(@refresh_request[:refresh_date]) %>
+      </div>
+    <% end %>
 
     <!-- Notes -->
     <div class="control-group">

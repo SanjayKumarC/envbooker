@@ -1,3 +1,11 @@
+<script>
+  $(document).ready(function(){
+    $('#refresh_request-modal').on('shown.bs.modal', function () {
+      $('#modal-yes').focus();
+    });
+  });
+</script>
+
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -10,7 +18,7 @@
       </p>
     </div>
     <div class="modal-footer">
-      <%= link_to "Yes", refresh_request_complete_path(@refresh_request), method: :post, remote: true, class: "btn btn-danger" %>
+      <%= link_to "Yes", refresh_request_complete_path(@refresh_request), method: :post, remote: true, :autofocus => true, class: "btn btn-danger", id: "modal-yes"%>
       <%= link_to "No", "#", class: "btn btn-primary", data: { dismiss: "modal" } %>
     </div>
   </div>

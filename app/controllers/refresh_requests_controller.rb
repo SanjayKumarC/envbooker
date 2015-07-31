@@ -1,10 +1,10 @@
 class RefreshRequestsController < ApplicationController
-  before_action :set_refresh_request, only: [:show, :edit, :update, :destroy]
-  before_action :set_env_maps, only: [:edit, :update, :create]
-  before_action :set_statues, only: [:edit, :update, :create]
+  skip_before_action :authenticate_user!
 
+  before_action :set_refresh_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_env_maps, only: [:edit, :update, :create, :new]
+  before_action :set_statues, only: [:edit, :update, :create, :new]
   before_action :set_refresh_requests, only: [:index]
-  after_action :set_refresh_requests, only: [:index, :create, :update, :delete, :destroy]
 
   def index
   end
@@ -14,6 +14,7 @@ class RefreshRequestsController < ApplicationController
 
   def new
     @refresh_request = RefreshRequest.new
+    @refresh_request.refresh_date = Date.today()
   end
 
   def edit
@@ -41,7 +42,9 @@ class RefreshRequestsController < ApplicationController
 
   def create
     @refresh_request = RefreshRequest.new(refresh_request_params)
+    @refresh_request.status = 'New'
     @refresh_request.save
+    set_refresh_requests
   end
 
   def update
