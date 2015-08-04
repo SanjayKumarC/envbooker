@@ -6,4 +6,5 @@ class App < ActiveRecord::Base
 
   validates_uniqueness_of :name
   has_many :envbookings, :dependent => :restrict_with_error
+  has_many :envs, :through => :envsapps
 end

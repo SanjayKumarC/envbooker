@@ -39,7 +39,7 @@ User.create! :email => 'notadmin@admin.com', :name => 'Someone Else', :admin => 
 Envlevel.delete_all
 Envlevel.create!(:name => "DEV", :description => "Development Environment")
 Envlevel.create!(:name => "UAT", :description => "User Testing")
-Envlevel.create!(:name => "SIT", :description => "System Testin")
+Envlevel.create!(:name => "SIT", :description => "System Testing")
 Envlevel.create!(:name => "PROD-SUPPORT", :description => "Production Support")
 
 Env.delete_all

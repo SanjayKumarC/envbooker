@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729133250) do
+ActiveRecord::Schema.define(version: 20150803140111) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
