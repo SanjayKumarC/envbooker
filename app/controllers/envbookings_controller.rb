@@ -53,7 +53,6 @@ class EnvbookingsController < ApplicationController
   def new
     @envbooking = Envbooking.new
     helper_config_maps
-
   end
 
   # GET /envbookings/1/edit
@@ -93,6 +92,13 @@ class EnvbookingsController < ApplicationController
     get_sorted_bookings
   end
 
+  def update_apps
+    @apps = Env.find(params[:env_id]).apps
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def delete
     @envbooking = Envbooking.find(params[:envbooking_id])
   end
@@ -104,10 +110,10 @@ class EnvbookingsController < ApplicationController
 
   private
     def helper_config_maps
-      @env_map = Env.all.map{|e|[e.name, e.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-      @user_map = User.all.map{|u|[u.email, u.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-      @proj_map = Project.all.map{|p|[p.name, p.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-      @app_map = App.all.map{|a|[a.name, a.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @users = User.all.sort{|x,y| x.name.downcase <=> y.name.downcase}
+      @projects = Project.all.sort{|x,y| x.name.downcase <=> y.name.downcase}
+      @envs = Env.all.sort{|x,y| x.name.downcase <=> y.name.downcase}
+      @apps = Env.find(@envs.first.id).apps
     end
 
     def set_envbooking

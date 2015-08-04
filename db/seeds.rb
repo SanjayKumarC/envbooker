@@ -150,3 +150,14 @@ RefreshRequest.delete_all
 		:status => statuses[rand(statuses.count)]
 	])
 end
+
+System.delete_all
+
+Env.all.each do |e|
+	(1..rand(App.count)).each do |i|
+		s = System.new
+		s.env = e
+		s.app = App.find(i)
+		s.save!
+	end
+end

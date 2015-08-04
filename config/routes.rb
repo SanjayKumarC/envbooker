@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     get 'delete'
   end
 
+  get 'update_apps', to: 'envbookings#update_apps'
+
   resources :projects do
     get 'delete'
   end
