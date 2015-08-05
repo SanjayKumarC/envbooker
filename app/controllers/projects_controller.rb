@@ -9,59 +9,45 @@ class ProjectsController < ApplicationController
     end
   end
 
-
-  # GET /projects
-  # GET /projects.json
   def index
-    session["init"] = true
-    @projects = Project.all.sort_by{|p| p.name.downcase}
+    set_projects
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
-    @project = Project.find(params[:id])
+    set_project
   end
 
-  # GET /projects/new
+  def edit
+    set_project
+  end
+
   def new
     @project = Project.new
     @project.color = "#000000"
   end
 
-  # GET /projects/1/edit
-  def edit
-    @project = Project.find(params[:id])
-  end
-
-  # POST /projects
-  # POST /projects.json
   def create
     @project = Project.new(project_params)
     @project.text_color = get_text_color(@project.color)
     @project.save
-    @projects = Project.all.sort_by{|p| p.name.downcase}
+    set_projects
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
-    @project = Project.find(params[:id])
+    set_project
     @project.text_color = get_text_color(@project.color)
     @project.update_attributes(project_params)
-    @projects = Project.all.sort_by{|p| p.name.downcase}
+    set_projects
   end
 
   def delete
     @project = Project.find(params[:project_id])
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
-    @project = Project.find(params[:id])
+    set_project
     @project.destroy
-    @projects = Project.all.sort_by{|p| p.name.downcase}
+    set_projects
   end
 
   def get_text_color(color)
@@ -87,10 +73,18 @@ class ProjectsController < ApplicationController
 
     return [_r.hex, _g.hex, _b.hex]
   end
-  
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:name, :description, :color, :text_color)
+    end
+
+    def set_projects
+      @projects = Project.all.sort_by{|p| p.name.downcase}
+    end
+
+    def set_project
+      @project = Project.find(params[:id])
     end
 end

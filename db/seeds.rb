@@ -43,18 +43,18 @@ Envlevel.create!(:name => "SIT", :description => "System Testing")
 Envlevel.create!(:name => "PROD-SUPPORT", :description => "Production Support")
 
 Env.delete_all
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "DEV1", :envlevel => Envlevel.find_by_name("DEV"), :description => "Main Dev Env")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "DEV2", :envlevel => Envlevel.find_by_name("DEV"), :description => "CI")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "DEV3", :envlevel => Envlevel.find_by_name("DEV"), :description => "DEV Env")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "DEV4", :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod Support")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "MOD",  :envlevel => Envlevel.find_by_name("UAT"), :description => "Pre Prod")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "UAT", :envlevel => Envlevel.find_by_name("UAT"), :description => "User Testing")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "TST02",  :envlevel => Envlevel.find_by_name("SIT"), :description => "System Testing")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "E2E",  :envlevel => Envlevel.find_by_name("UAT"), :description => "End to End")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "Baseline",  :envlevel => Envlevel.find_by_name("UAT"), :description => "Production Baseline")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "Model 1",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "Model 2",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy")
-Env.create!(:last_refresh_date => Date.today - (rand(90)), :name => "Model 3",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy")
+Env.create!(:name => "DEV1", :envlevel => Envlevel.find_by_name("DEV"), :description => "Main Dev Env", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "DEV2", :envlevel => Envlevel.find_by_name("DEV"), :description => "CI", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "DEV3", :envlevel => Envlevel.find_by_name("DEV"), :description => "DEV Env")
+Env.create!(:name => "DEV4", :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod Support", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "MOD",  :envlevel => Envlevel.find_by_name("UAT"), :description => "Pre Prod", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "UAT", :envlevel => Envlevel.find_by_name("UAT"), :description => "User Testing", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "TST02",  :envlevel => Envlevel.find_by_name("SIT"), :description => "System Testing", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "E2E",  :envlevel => Envlevel.find_by_name("UAT"), :description => "End to End", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "Baseline",  :envlevel => Envlevel.find_by_name("UAT"), :description => "Production Baseline", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "Model 1",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "Model 2",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "Model 3",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
 
 Envproperty.delete_all
 Env.all.each do |env|
@@ -140,17 +140,6 @@ end
 
 statuses = ["In Progress", "New", "Complete"]
 
-RefreshRequest.delete_all
-(1..10).each do |i|
-	RefreshRequest.create!([
-		:env => Env.find(rand(Env.maximum(:id))+1),
-		:app => App.find(rand(App.maximum(:id))+1),
-		:refresh_date => Date.today + rand(30),
-		:notes => Forgery(:lorem_ipsum).words(rand(50)),
-		:status => statuses[rand(statuses.count)]
-	])
-end
-
 System.delete_all
 
 Env.all.each do |e|
@@ -158,6 +147,25 @@ Env.all.each do |e|
 		s = System.new
 		s.env = e
 		s.app = App.find(i)
+		if(i.even?)
+			s.refresh_date = Date.today - (rand(90))
+		else
+			s.refresh_date = nil
+		end
+		
 		s.save!
 	end
+end
+
+RefreshRequest.delete_all
+
+(1..10).each do |i|
+	s = System.find(i)
+	RefreshRequest.create!([
+		:env => s.env,
+		:app => s.app,
+		:refresh_date => Date.today - rand(90),
+		:notes => Forgery(:lorem_ipsum).words(rand(50)+1),
+		:status => statuses[rand(statuses.count)]
+	])
 end

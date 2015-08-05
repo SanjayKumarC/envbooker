@@ -1,0 +1,24 @@
+<%- model_class = Project -%>
+<div class="col-md-12">
+  <div class="page-header">
+    <%= link_to "", new_system_path, remote: true, class: "btn btn-primary fa fa-lg fa-plus button-text" %>
+  </div>
+  <table class="table table-bordered table-condensed table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Environment</th>
+        <th>App</th>
+        <th>Last Refresh Date</th>
+        <% if can? :update, @envbookings and can? :delete, @envbookings %>
+          <th></th><th></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="system-index">
+      <%= render 'index' %>
+    </tbody>
+  </table>
+
+</div>
+
+<div id="system-modal" class="modal" role="dialog"></div>

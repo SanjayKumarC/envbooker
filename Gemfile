@@ -23,6 +23,7 @@ gem "font-awesome-rails"
 gem "forgery"
 
 group :development, :test do
+  gem "fasterer"
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'

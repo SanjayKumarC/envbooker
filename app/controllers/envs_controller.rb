@@ -9,12 +9,12 @@ class EnvsController < ApplicationController
   end
 
   def index
-    get_sorted_apps
+    get_sorted_envs
   end
 
   def show
     @env = Env.find(params[:id])
-    @envproperties = Envproperty.where(env_id:@env.id).sort{|x,y| x.key <=> y.key}
+    @envproperties = Envproperty.where(env_id:@env.id).sort_by { |x| [x.key] }
   end
 
   # GET /envs/new
@@ -36,7 +36,7 @@ class EnvsController < ApplicationController
   def create
     @env = Env.new(env_params)
     @env.save
-    get_sorted_apps
+    get_sorted_envs
   end
 
   def update
@@ -77,7 +77,7 @@ class EnvsController < ApplicationController
       end
     end
 
-    get_sorted_apps
+    get_sorted_envs
   end
 
   def delete
@@ -87,15 +87,15 @@ class EnvsController < ApplicationController
   def destroy
     @env = Env.find(params[:id])
     @env.destroy
-    get_sorted_apps
+    get_sorted_envs
   end
 
   private
-    def get_sorted_apps
+    def get_sorted_envs
       @envs = Env.all.sort_by{|env| env.name.downcase}
     end
 
     def env_params
-      params.require(:env).permit(:name, :envlevel_id, :description, :last_refresh_date, :notes)
+      params.require(:env).permit(:name, :envlevel_id, :description, :notes)
     end
 end

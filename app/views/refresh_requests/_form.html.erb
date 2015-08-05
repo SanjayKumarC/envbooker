@@ -33,18 +33,16 @@
     <!-- Environmnt -->
     <div class="control-group">
       <%= f.label :env_id, :class => 'control-label' %>
-      <%= f.select(:env_id, @env_map, {include_blank: true}, { :class => 'form-control input-sm' }) %>
+      <%= f.select(:env_id, @envs.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm', :id => 'envs_select' }) %>
       <%= error_span(@refresh_request[:env_id]) %>
     </div>
 
     <!-- App -->
     <div class="control-group">
       <%= f.label :app_id, :class => 'control-label' %>
-      <%= f.select(:app_id, @app_map, {include_blank: false}, { :class => 'form-control input-sm'}) %>
+      <%= f.select(:app_id, @apps.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm', :id => 'apps_select' }) %>
       <%= error_span(@refresh_request[:app_id]) %>
     </div>
-
-    <%= params.inspect %>
 
     <% unless params[:action] == 'new' %>
       <!-- Status -->
@@ -58,7 +56,7 @@
     <!-- Notes -->
     <div class="control-group">
       <%= f.label :notes, :class => 'control-label' %>
-      <%= f.text_area :notes, :value => @refresh_request.notes, :class => 'form-control input-sm datepicker', :rows => 5 %>
+      <%= f.text_area :notes, :value => @refresh_request.notes, :class => 'form-control input-sm', :rows => 5 %>
       <%= error_span(@refresh_request[:refresh_date]) %>
     </div>
 

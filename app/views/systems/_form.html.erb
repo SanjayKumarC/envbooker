@@ -1,0 +1,62 @@
+<%= form_for @system, remote: true, :html => { :class => "form-horizontal system", style: "display:inline;" } do |f| %>
+
+  <div class="modal-body">
+    <% if @system.errors.any? %>
+      <div id="error_expl" class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= pluralize(@system.errors.count, "error") %> prohibited this project from being saved:</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+          <% @system.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.datepicker').datepicker({
+          todayBtn: "linked",
+          clearBtn: true,
+          language: "en-GB",
+          calendarWeeks: true,
+          autoclose: true,
+          todayHighlight: true,
+          format: 'dd-mm-yyyy'
+        });
+      });
+    </script>
+
+    <!-- Environmnt -->
+    <div class="control-group">
+      <%= f.label :env_id, :class => 'control-label' %>
+      <%= f.select(:env_id, @envs.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
+      <%= error_span(@system[:env_id]) %>
+    </div>
+
+    <!-- App -->
+    <div class="control-group">
+      <%= f.label :app_id, :class => 'control-label' %>
+      <%= f.select(:app_id, @apps.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
+      <%= error_span(@system[:app_id]) %>
+    </div>
+
+    <% @value = (@system.refresh_date != nil) ? @system.refresh_date.strftime('%d-%m-%Y') : nil %>
+
+    <div class="control-group">
+      <%= f.label :refresh_date, :class => 'control-label' %>
+      <%= f.text_field :refresh_date, :value => @value, :class => 'form-control input-sm datepicker' %>
+      <%= error_span(@system[:refresh_date]) %>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+  </div>
+
+<% end %>

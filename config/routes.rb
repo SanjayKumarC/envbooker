@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :systems do 
+    get 'delete'
+  end
+
   resources :user_preferences
 
   get 'dashboard', to: 'dashboard#index'
@@ -25,7 +29,8 @@ Rails.application.routes.draw do
     get 'delete'
   end
 
-  get 'update_apps', to: 'envbookings#update_apps'
+  get 'envbookings_update_apps', to: 'envbookings#update_apps'
+  get 'refresh_requests_update_apps', to: 'refresh_requests#update_apps'
 
   resources :projects do
     get 'delete'

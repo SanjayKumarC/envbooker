@@ -38,16 +38,16 @@ class HomeController < ApplicationController
 			@envbookings = Envbooking.all
 		end
 
-		@envs = Env.find(@envbookings.pluck(:env_id)).sort {|x,y| x.name <=> y.name}
-		@apps = App.find(@envbookings.pluck(:app_id)).sort {|x,y| x.name <=> y.name}
-		@projects = Project.find(@envbookings.pluck(:project_id)).sort {|x,y| x.name <=> y.name}
+		@envs = Env.find(@envbookings.pluck(:env_id)).sort_by {|x| [x.name] }
+		@apps = App.find(@envbookings.pluck(:app_id)).sort_by {|x| [x.name] }
+		@projects = Project.find(@envbookings.pluck(:project_id)).sort_by {|x| [x.name] }
 
 	  @sorted_bookings = @envbookings.sort_by{|booking| Env.find_by_id(booking[:env_id]).name.downcase}
 	  @rowheight = 41
 	  @divheight = (@envbookings.count+2) * @rowheight
 
-    first = Envbooking.all.sort {|x,y| x.start_date <=> y.start_date}.first
-    last = Envbooking.all.sort {|x,y| x.end_date <=> y.end_date}.last
+    first = Envbooking.all.sort_by {|x| [x.start_date]}.first
+    last = Envbooking.all.sort_by {|x| [x.end_date]}.last
 
     begin
       @min_date = first.start_date.to_time.iso8601.to_date
@@ -82,6 +82,7 @@ class HomeController < ApplicationController
 	def saveconfig
 		@appconfig = Appconfig.find(1)
 		@appconfig.template = params[:appconfig][:template]
+		@appconfig.sidebar = params[:appconfig][:sidebar]
 		@appconfig.update_attributes(appconfig_params)
 	end
 	private

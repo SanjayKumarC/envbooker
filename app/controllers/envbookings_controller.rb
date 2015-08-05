@@ -110,10 +110,11 @@ class EnvbookingsController < ApplicationController
 
   private
     def helper_config_maps
-      @users = User.all.sort{|x,y| x.name.downcase <=> y.name.downcase}
-      @projects = Project.all.sort{|x,y| x.name.downcase <=> y.name.downcase}
-      @envs = Env.all.sort{|x,y| x.name.downcase <=> y.name.downcase}
-      @apps = Env.find(@envs.first.id).apps
+      @users = User.all.sort_by {|x| [x.name.downcase]}
+      @projects = Project.all.sort_by {|x| [x.name.downcase]}
+
+      @envs = Env.find(System.pluck(:env_id)).sort_by {|x| [x.name.downcase]}
+      @apps = Env.find(@envs.first.id).apps.sort_by {|x| x.name.downcase}
     end
 
     def set_envbooking
@@ -121,7 +122,7 @@ class EnvbookingsController < ApplicationController
     end
 
     def get_sorted_bookings
-      @envbookings = Envbooking.all.sort {|x,y| x.start_date <=> y.start_date}
+      @envbookings = Envbooking.all.sort_by {|x| [x.start_date] }
     end
 
     def envbooking_params

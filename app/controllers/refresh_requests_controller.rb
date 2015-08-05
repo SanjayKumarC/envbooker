@@ -1,23 +1,25 @@
 class RefreshRequestsController < ApplicationController
   skip_before_action :authenticate_user!
 
-  before_action :set_refresh_request, only: [:show, :edit, :update, :destroy]
-  before_action :set_env_maps, only: [:edit, :update, :create, :new]
-  before_action :set_statues, only: [:edit, :update, :create, :new]
-  before_action :set_refresh_requests, only: [:index]
-
   def index
+    set_refresh_requests
   end
 
   def show
+    set_refresh_request
   end
 
   def new
+    set_statuses
+    set_env_maps
     @refresh_request = RefreshRequest.new
     @refresh_request.refresh_date = Date.today()
   end
 
   def edit
+    set_refresh_request
+    set_env_maps
+    set_statuses
   end
 
   def delete
@@ -32,9 +34,11 @@ class RefreshRequestsController < ApplicationController
 
   def update_request
     @refresh_request = RefreshRequest.find(params[:refresh_request_id])
-    env = Env.find(@refresh_request.env_id)
-    env.last_refresh_date = Date.today()
-    env.save
+    s = System.find_by env_id:@refresh_request.env_id, app_id:@refresh_request.app_id
+    s.refresh_date = Date.today()
+
+    s.save
+
     @refresh_request.status = 'Complete'
     @refresh_request.save
     set_refresh_requests
@@ -48,12 +52,22 @@ class RefreshRequestsController < ApplicationController
   end
 
   def update
+    set_refresh_request
     @refresh_request.update(refresh_request_params)
+    set_refresh_requests
   end
 
   def destroy
+    set_refresh_request
     @refresh_request.destroy
     set_refresh_requests
+  end
+
+  def update_apps
+    @apps = Env.find(params[:env_id]).apps
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
@@ -63,15 +77,17 @@ class RefreshRequestsController < ApplicationController
     end
 
     def set_refresh_requests
-      @refresh_requests = RefreshRequest.where.not(status: 'Complete').sort{|x,y| x.env.name <=> y.env.name}
+      @refresh_requests = RefreshRequest.where.not(status: 'Complete').sort_by {|x| [x.env.name] }
+      set_env_maps
+      set_statuses
     end
 
     def set_env_maps
-      @env_map = Env.all.map{|e|[e.name, e.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
-      @app_map = App.all.map{|a|[a.name, a.id]}.sort!{|x,y| x[0].downcase <=> y[0].downcase}
+      @envs = Env.find(System.pluck(:env_id)).sort_by { |x| [x.name.downcase] }
+      @apps = Env.find(@envs.first.id).apps.sort_by { |x| [x.name.downcase] }
     end
 
-    def set_statues
+    def set_statuses
       @statuses = ["New", "Complete","In Progress"]
     end
 

@@ -1,6 +1,6 @@
 $ ->
   $(document).on 'change', '#envs_select', (evt) ->
-    $.ajax 'envbookings_update_apps',
+    $.ajax 'refresh_requests_update_apps',
       tyoe: 'GET'
       dataType: 'script'
       data: {

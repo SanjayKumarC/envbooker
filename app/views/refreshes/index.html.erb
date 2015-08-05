@@ -1,29 +1,35 @@
 <table class="table table-bordered table-hover table-striped table-condensed">
   <thead>
     <th>Environment</th>
+    <th>App</th>
     <th>Last Refresh Date</th>
-    <th>Ago?</th>
     <th>Notes</th>
     <th>Properties</th>
   </thead>
   <tbody>
-    <% @envs.each do |env| %>
+    <% @systems.each do |sys| %>
       <tr>
-        <td><%= env.name %></td>
-        <td><%= env.last_refresh_date.strftime("%A, %d %B %Y") %></td>
-        <% days_ago = (Date.today - env.last_refresh_date).to_i %>
-        <% case days_ago %>
-        <% when 0 %>
-        <%   days_ago_message = "Today" %>
-        <% when 1 %>
-        <%   days_ago_message = "Yesterday" %>
-        <% else %>
-        <%   days_ago_message = time_ago_in_words(env.last_refresh_date) + " ago" %>
+        <td><%= sys.env.name %></td>
+        <td><%= sys.app.name %></td>
+        <% unless(sys.refresh_date == nil) %>
+          <% days_ago = (Date.today - sys.refresh_date).to_i %>
+          <% case days_ago %>
+          <% when 0 %>
+          <%   days_ago_message = "Today" %>
+          <% when 1 %>
+          <%   days_ago_message = "Yesterday" %>
+          <% else %>
+          <%   days_ago_message = time_ago_in_words(sys.refresh_date) + " ago" %>
+          <% end %>
         <% end %>
-        <td><%= days_ago_message %> </td>
-        <td><%= env.notes %></td>
+        <% unless(sys.refresh_date == nil) %>
+          <td><%= sys.refresh_date.strftime('%A, %d %B %Y') %> (<small><%= days_ago_message %></small>)</td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= sys.env.notes %></td>
 
-        <% props = Envproperty.where(env_id:env.id) %>
+        <% props = Envproperty.where(env_id:sys.env.id) %>
 
         <td colspan="3">
           <% props.each do |p| %>

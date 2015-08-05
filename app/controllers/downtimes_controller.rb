@@ -46,7 +46,7 @@ class DowntimesController < ApplicationController
     end
 
     def set_downtimes
-      @downtimes = Downtime.all.sort { |x,y| Env.find(x.env_id).name <=> Env.find(y.env_id).name }
+      @downtimes = Downtime.all.sort_by { |x| [x.env.name] }
       @summed_downtime = Downtime.group(:env_id).sum(:hours)
       total_hours = Appconfig.find(1).total_hours * 1.0
       @availability = {}
