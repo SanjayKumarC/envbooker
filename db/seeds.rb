@@ -56,16 +56,6 @@ Env.create!(:name => "Model 1",  :envlevel => Envlevel.find_by_name("PROD-SUPPOR
 Env.create!(:name => "Model 2",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
 Env.create!(:name => "Model 3",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
 
-Envproperty.delete_all
-Env.all.each do |env|
-	ep = Envproperty.new
-	ep.env_id = env.id
-	ep.key = "State"
-	ep.value = "Open"
-	ep.save!
-end
-
-
 project_colors = ["\#00c159","\#4ac7db","\#fff425","\#f3a735","\#bc1d3a","\#002ab3","\#3383cd","\#d6a9d4","\#ff55ff","\#454545"]
 
 Project.delete_all
@@ -152,7 +142,7 @@ Env.all.each do |e|
 		else
 			s.refresh_date = nil
 		end
-		
+
 		s.save!
 	end
 end
@@ -168,4 +158,13 @@ RefreshRequest.delete_all
 		:notes => Forgery(:lorem_ipsum).words(rand(50)+1),
 		:status => statuses[rand(statuses.count)]
 	])
+end
+
+SystemProperty.delete_all
+System.all.each do |system|
+	sp = SystemProperty.new
+	sp.system = system
+	sp.key = "State"
+	sp.value = "Open"
+	sp.save!
 end

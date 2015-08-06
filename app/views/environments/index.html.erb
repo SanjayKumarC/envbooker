@@ -2,29 +2,35 @@
   <div id="content">
     <ul class="nav nav-tabs" data-tabs="tabs" id="tabs">
       <% first = 1 %>
-      <% @envs.each do |e| %>
+      <% last_sys = "" %>
+      <% @systems.each do |sys| %>
+
+        <% if (sys.env.name == last_sys) %>
+          <% next %>
+        <% else %>
+          <% last_sys = sys.env.name %>
+        <% end %>
+
         <% if first==1 %>
           <% first = 0 %>
           <li class="active">
-            <a data-toggle="tab" href="#<%= e.name.delete(' ') %>"><%= e.name %></a>
+            <a data-toggle="tab" href="#<%= sys.env.name.delete(' ') %>"><%= Env.find(sys.env_id).name %></a>
           </li>
         <% else %>
           <li>
-            <a data-toggle="tab" href="#<%= e.name.delete(' ') %>"><%= e.name %></a>
+            <a data-toggle="tab" href="#<%= sys.env.name.delete(' ') %>"><%= Env.find(sys.env_id).name %></a>
           </li>
         <% end %>
-
       <% end %>
     </ul>
     <div class="tab-content" id="my-tab-content">
       <% first = 1 %>
-      <% @envs.each do |e| %>
-        <% @properties = Envproperty.where(env_id: e.id) %>
+      <% @systems.each do |sys| %>
         <% if first == 1 %>
           <% first = 0 %>
-          <div class="tab-pane active" id="<%= e.name.delete(' ') %>">
+          <div class="tab-pane active" id="<%= sys.env.name.delete(' ') %>">
         <% else %>
-          <div class="tab-pane" id="<%= e.name.delete(' ') %>">
+          <div class="tab-pane" id="<%= sys.env.name.delete(' ') %>">
         <% end %>
 
           <table class="table table-bordered table-condensed table-striped table-hover">
@@ -33,10 +39,10 @@
               <th>Value</th>
             </thead>
             <tbody>
-              <% @properties.each do |p| %>
+              <% sys.system_properties.each do |sp| %>
                 <tr>
-                  <td><%= p.key %></td>
-                  <td><%= p.value %></td>
+                  <td><%= sp.key %></td>
+                  <td><%= sp.value %></td>
                 </tr>
               <% end %>
             </tbody>

@@ -20,11 +20,14 @@ class SystemsController < ApplicationController
   def edit
     set_system
     set_select_vars
+    @system.system_properties.build
+
   end
 
   def new
     @system = System.new
     set_select_vars
+    @system.system_properties.build
   end
 
   def create
@@ -51,7 +54,7 @@ class SystemsController < ApplicationController
 
   private
     def system_params
-      params.require(:system).permit(:env_id, :app_id, :refresh_date)
+      params.require(:system).permit(:env_id, :app_id, :refresh_date, system_properties_attributes: [:id, :key, :value, :_destroy])
     end
 
     def set_select_vars

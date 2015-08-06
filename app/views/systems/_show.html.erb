@@ -23,7 +23,22 @@
             <td><%= @system.refresh_date %></td>
           </tr>
         </tbody>
-      </table>
+     </table>
+     <hr/>
+     <table class="table table-hover table-bordered table-striped table-condensed">
+       <thead>
+         <th>Property</th>
+         <th>Value</th>
+       </thead>
+       <tbody>
+         <% @system.system_properties.each do |sp| %>
+          <tr>
+           <td><%= sp.key %> </td>
+           <td><%= sp.value %> </td>
+          </tr>
+        <% end %>
+       </tbody>
+     </table>
     </div>
 
     <div class="modal-footer">

@@ -8,6 +8,11 @@
       <td></td>
     <% end %>
     <td>
+      <% system.system_properties.all.each do |sp| %>
+        <%= sp.key %> - <%= sp.value %> <br/>
+      <% end %>
+    </td>
+    <td>
       <% if can? :update, system %>
         <%= link_to edit_system_path(system), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
           <span class="fa fa-fw fa-edit"></span>

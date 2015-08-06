@@ -7,9 +7,22 @@
     <th>Properties</th>
   </thead>
   <tbody>
+    <% old_name = "" %>
     <% @systems.each do |sys| %>
+
+      <% if sys.env.name == old_name %>
+        <% first_td = "<td></td>" %>
+      <% else %>
+        <% first_td = "<td>#{sys.env.name}</td>" %>
+        <% unless old_name.blank? %>
+          <tr>
+            <td colspan="5"></td>
+          </tr>
+        <% end %>
+        <% old_name = sys.env.name %>
+      <% end %>
+
       <tr>
-        <td><%= sys.env.name %></td>
         <td><%= sys.app.name %></td>
         <% unless(sys.refresh_date == nil) %>
           <% days_ago = (Date.today - sys.refresh_date).to_i %>
@@ -29,11 +42,9 @@
         <% end %>
         <td><%= sys.env.notes %></td>
 
-        <% props = Envproperty.where(env_id:sys.env.id) %>
-
         <td colspan="3">
-          <% props.each do |p| %>
-            <%= p.key %> - <%= p.value %><br/>
+          <% sys.system_properties.each do |sp| %>
+            <%= sp.key %> - <%= sp.value %><br/>
           <% end %>
         </td>
 

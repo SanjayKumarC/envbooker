@@ -11,46 +11,17 @@
         </thead>
         <tbody>
           <tr>
-            <td>
-              Environment Name
-            </td>
-            <td>
-              <%= @env.name %>
-            </td>
+            <td>Environment Name</td>
+            <td><%= @env.name %></td>
           </tr>
           <tr>
-            <td>
-              Environment Description
-            </td>
-            <td>
-              <%= @env.description %>
-            </td>
+            <td>Environment Description</td>
+            <td><%= @env.description %></td>
           </tr>
           <tr>
-            <td>
-              Environment Level
-            </td>
-            <td>
-              <%= Envlevel.find_by_id(@env.envlevel_id).name %>
-            </td>
+            <td>Environment Level</td>
+            <td><%= Envlevel.find_by_id(@env.envlevel_id).name %></td>
           </tr>
-        </tbody>
-      </table>
-
-      <hr/>
-
-      <table class="table table-striped table-bordered table-hover table-condensed">
-        <thead>
-          <th>Property</th>
-          <th>Value</th>
-        </thead>
-        <tbody>
-          <% @envproperties.each do |ep| %>
-            <tr>
-              <td><%= ep.key %></td>
-              <td><%= ep.value %></td>
-            </tr>
-          <% end %>
         </tbody>
       </table>
     </div>

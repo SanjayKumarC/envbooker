@@ -9,12 +9,11 @@ class EnvsController < ApplicationController
   end
 
   def index
-    get_sorted_envs
+    get_envs
   end
 
   def show
-    @env = Env.find(params[:id])
-    @envproperties = Envproperty.where(env_id:@env.id).sort_by { |x| [x.key] }
+    get_env
   end
 
   # GET /envs/new
@@ -24,60 +23,19 @@ class EnvsController < ApplicationController
 
   # GET /envs/1/edit
   def edit
-    @env = Env.find(params[:id])
-    @ep = Envproperty.where(env_id:@env.id)
-
-    @envproperties = ""
-    @ep.each do |p|
-      @envproperties += "#{p.key}|#{p.value}\n"
-    end
+    get_env
   end
 
   def create
     @env = Env.new(env_params)
     @env.save
-    get_sorted_envs
+    get_envs
   end
 
   def update
-    @env = Env.find(params[:id])
+    get_env
     @env.update_attributes(env_params)
-
-    my_params = params[:env]
-    envproperties = my_params[:envproperties]
-    rows = envproperties.split(/\r?\n/)
-
-    new_keys = []
-    rows.each do |row|
-      key, value = row.split(/\|/)
-      new_keys.push(key)
-    end
-
-    old_keys = Envproperty.where(env_id: @env.id).pluck(:key)
-    missing_keys = old_keys - new_keys
-
-    if(missing_keys)
-      missing_keys.each do |d|
-        Envproperty.where(env_id:@env.id, key: d).delete_all
-      end
-    end
-
-    rows.each do |row|
-      key, value = row.split(/\|/)
-      begin
-        ep = Envproperty.find_by env_id:@env.id, key:key
-        ep.value = value
-        ep.save
-      rescue
-        ep = Envproperty.new
-        ep.env_id = @env.id
-        ep.key = key
-        ep.value = value
-        ep.save
-      end
-    end
-
-    get_sorted_envs
+    get_envs
   end
 
   def delete
@@ -85,14 +43,18 @@ class EnvsController < ApplicationController
   end
 
   def destroy
-    @env = Env.find(params[:id])
+    get_env
     @env.destroy
-    get_sorted_envs
+    get_envs
   end
 
   private
-    def get_sorted_envs
+    def get_envs
       @envs = Env.all.sort_by{|env| env.name.downcase}
+    end
+
+    def get_env
+      @env = Env.find(params[:id])
     end
 
     def env_params

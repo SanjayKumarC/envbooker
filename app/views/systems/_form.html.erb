@@ -52,6 +52,27 @@
       <%= error_span(@system[:refresh_date]) %>
     </div>
 
+    <% if @system.system_properties.any? %>
+      <div class="control-group">
+        <table class="table">
+          <thead>
+            <td><label class="control-label">Property</label></td>
+            <td><label class="control-label">Value</label></td>
+            <td><label class="control-label">Delete?</label></td>
+          </thead>
+          <tbody>
+            <%= f.fields_for :system_properties do |sys_property| %>
+              <tr>
+                <td><%= sys_property.text_field :key, :class => 'form-control' %></td>
+                <td><%= sys_property.text_field :value, :class => 'form-control' %></td>
+                <td><%= sys_property.check_box :_destroy %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+
   </div>
 
   <div class="modal-footer">

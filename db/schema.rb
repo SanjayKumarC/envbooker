@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806091158) do
+ActiveRecord::Schema.define(version: 20150806095844) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -72,14 +72,6 @@ ActiveRecord::Schema.define(version: 20150806091158) do
     t.string   "description"
   end
 
-  create_table "envproperties", force: :cascade do |t|
-    t.integer "env_id"
-    t.string  "key"
-    t.string  "value"
-  end
-
-  add_index "envproperties", ["env_id", "key"], name: "index_envproperties_on_env_id_and_key", unique: true
-
   create_table "envs", force: :cascade do |t|
     t.string   "name"
     t.integer  "envlevel_id"
@@ -122,6 +114,16 @@ ActiveRecord::Schema.define(version: 20150806091158) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "system_properties", force: :cascade do |t|
+    t.integer  "system_id"
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "system_properties", ["system_id"], name: "index_system_properties_on_system_id"
 
   create_table "systems", force: :cascade do |t|
     t.integer  "env_id"
