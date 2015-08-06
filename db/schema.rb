@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804194542) do
+ActiveRecord::Schema.define(version: 20150806091158) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150804194542) do
     t.integer  "total_hours"
     t.boolean  "show_extra_color_box", default: false
     t.boolean  "sidebar",              default: false
+    t.boolean  "show_legend",          default: false
   end
 
   add_index "appconfigs", ["singleton_guard"], name: "index_appconfigs_on_singleton_guard", unique: true
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(version: 20150804194542) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.boolean  "sidebar",              default: false
+    t.boolean  "show_legend",          default: false
   end
 
   add_index "user_preferences", ["user_id"], name: "index_user_preferences_on_user_id"

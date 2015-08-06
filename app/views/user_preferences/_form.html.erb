@@ -36,6 +36,12 @@
     <%= error_span(@user_preference[:sidebar]) %>
   </div>
 
+  <div class="control-group">
+    <%= f.check_box :show_legend, :class => 'checkbox-inline' %>
+    <%= f.label :show_legend, :class => 'control-label' %>
+    <%= error_span(@user_preference[:show_legend]) %>
+  </div>
+
   <br/>
   <br/>
   <div class="actions">

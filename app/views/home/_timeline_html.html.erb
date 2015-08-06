@@ -4,15 +4,41 @@
   </div>
 
   <div class="panel-body">
-    <div class="row">
-      <div class="col-lg-11">
-        <div id="visualization"></div>
+    <% if @config_var.show_legend %>
+      <div class="row">
+        <div class="col-lg-11">
+          <div id="visualization"></div>
+        </div>
+        <div class="col-lg-1">
+          <table class="table table-bordered table-hover table-striped table-condensed">
+            <thead>
+              <% if @config_var.color_by_project %>
+                <th>Projects</th>
+              <% else %>
+                <th>Apps</th>
+              <% end %>
+            </thead>
+            <tbody>
+              <% if @config_var.color_by_project %>
+                <% @projects.each do |project| %>
+                  <tr>
+                    <td><div class="color-box" style="background-color: <%= project.color %>;"></div> <%= project.name %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <% @apps.each do |app| %>
+                  <tr>
+                    <td><div class="color-box" style="background-color: <%= app.color %>;"></div> <%= app.name %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="col-lg-1">
-        Legend.
-      </div>
-
-    </div>
+    <% else %>
+      <div id="visualization"></div>
+    <% end %>
   </div>
 
   <div class="panel-footer">

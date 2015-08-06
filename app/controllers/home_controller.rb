@@ -87,6 +87,6 @@ class HomeController < ApplicationController
 	end
 	private
 		def appconfig_params
-			params.require(:appconfig).permit(:template, :color_by_project, :show_extra_color_box, :total_hours)
+			params.require(:appconfig).permit(:template, :color_by_project, :show_extra_color_box, :total_hours, :sidebar, :show_legend)
 		end
 end
