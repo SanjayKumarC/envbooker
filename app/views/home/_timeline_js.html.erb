@@ -54,7 +54,6 @@ Remaining: <%= days_left %> days";
         <% if @config_var.color_by_project %>
           style: '<%= compute_style(booking.project) %>'
         <% else %>
-          //style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>',
           style: '<%= compute_style(booking.app) %>'
         <% end %>
       });
