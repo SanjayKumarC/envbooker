@@ -21,6 +21,7 @@ gem 'responders'
 gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem "forgery"
+gem 'browser'
 
 group :development, :test do
   gem "fasterer"

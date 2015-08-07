@@ -52,9 +52,17 @@ Remaining: <%= days_left %> days";
           <% end %>
         <% end %>
         <% if @config_var.color_by_project %>
-          style: '<%= compute_style(booking.project) %>'
+          <% if browser.ie? %>
+            style: 'background-color: <%= booking.project.color %>; color: <%= booking.project.text_color %>'
+          <% else %>
+            style: '<%= compute_style(booking.project) %>'
+          <% end %>
         <% else %>
-          style: '<%= compute_style(booking.app) %>'
+          <% if browser.ie? %>
+            style: 'background-color: <%= booking.project.color %>; color: <%= booking.project.text_color %>'
+          <% else %>
+            style: '<%= compute_style(booking.app) %>'
+          <% end %>
         <% end %>
       });
     <% end %>
