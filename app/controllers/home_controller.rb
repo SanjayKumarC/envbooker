@@ -85,8 +85,48 @@ class HomeController < ApplicationController
 		@appconfig.sidebar = params[:appconfig][:sidebar]
 		@appconfig.update_attributes(appconfig_params)
 	end
+
+	helper_method :compute_style
+
+	def shader (percent, color, text_color)
+		if(text_color.upcase == '#000000')
+			percent *= -1
+		end
+
+	  dec = color.slice(1..color.length).to_i(16)
+	  amt = (2.55*percent).round
+
+	  r = (dec >> 16) + amt
+	  g = (dec >> 8 & 0x00FF) + amt
+	  b = (dec & 0X0000FF) + amt
+
+	  hex = 0x1000000 +
+	  ((r<255 ? (r<1 ? 0 : r ) : 255) * 0x10000) +
+	  ((g<255 ? (g<1 ? 0 : g ) : 255) * 0x100) +
+	  ((b<255 ? (b<1 ? 0 : b ) : 255))
+
+		ret_val = "#" + hex.to_s(16).slice(1..6).to_s
+
+		return ret_val
+
+	end
+
+	def compute_style(obj)
+
+	  c = obj.color
+	  tc = obj.text_color
+
+		logger.debug "text color: #{tc.class}"
+
+	  sec = shader(@config_var.shade_percentage, c, tc)
+
+	  #color, color, 2nd, 2nd, color, color, 2nd, 2nd
+	  str = sprintf("color: %7s; background: -webkit-repeating-linear-gradient(45deg, %7s, %7s 10px, %7s 10px, %7s 20px); background: repeating-linear-gradient(45deg, %7s, %7s 10px, %7s 10px, %7s 20px);", tc,c,c,sec,sec,c,c,sec,sec)
+	  return str
+	end
+
 	private
 		def appconfig_params
-			params.require(:appconfig).permit(:template, :color_by_project, :show_extra_color_box, :total_hours, :sidebar, :show_legend)
+			params.require(:appconfig).permit(:template, :color_by_project, :show_extra_color_box, :total_hours, :sidebar, :show_legend, :shade_percentage)
 		end
 end

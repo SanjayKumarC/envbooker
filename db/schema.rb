@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806095844) do
+ActiveRecord::Schema.define(version: 20150807133546) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150806095844) do
     t.boolean  "show_extra_color_box", default: false
     t.boolean  "sidebar",              default: false
     t.boolean  "show_legend",          default: false
+    t.integer  "shade_percentage",     default: 10
   end
 
   add_index "appconfigs", ["singleton_guard"], name: "index_appconfigs_on_singleton_guard", unique: true
@@ -34,6 +35,14 @@ ActiveRecord::Schema.define(version: 20150806095844) do
     t.string   "color"
     t.string   "description"
     t.string   "text_color"
+  end
+
+  create_table "booking_requests", force: :cascade do |t|
+    t.string   "notes"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "project"
   end
 
   create_table "downtimes", force: :cascade do |t|
@@ -145,6 +154,7 @@ ActiveRecord::Schema.define(version: 20150806095844) do
     t.datetime "updated_at",                           null: false
     t.boolean  "sidebar",              default: false
     t.boolean  "show_legend",          default: false
+    t.integer  "shade_percentage",     default: 10
   end
 
   add_index "user_preferences", ["user_id"], name: "index_user_preferences_on_user_id"

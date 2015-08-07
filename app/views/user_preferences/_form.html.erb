@@ -19,6 +19,12 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :shade_percentage, :class => 'control-label' %><small> (0 for no shading, )</small>
+    <%= f.number_field :shade_percentage, :class => 'form-control' %>
+    <%= error_span(@user_preference[:shade_percentage]) %>
+  </div>
+
+  <div class="control-group">
     <%= f.check_box :color_by_project, :class => 'checkbox-inline' %>
     <%= f.label :color_by_project, :class => 'control-label' %>
     <%= error_span(@user_preference[:color_by_project]) %>

@@ -1,0 +1,26 @@
+
+<div class="col-md-12">
+  <div class="page-header">
+    <%= link_to "", new_booking_request_path, remote: true, class: "btn btn-primary fa fa-lg fa-plus button-text" %>
+  </div>
+  <table class="table table-bordered table-condensed table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Request Number</th>
+        <th>Request Status</th>
+        <th>Project</th>
+        <% if can? :update, @booking_requests and can? :delete, @booking_requests %>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Update</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="booking_request-index">
+      <%= render 'index' %>
+    </tbody>
+  </table>
+
+</div>
+
+<div id="booking_request-modal" class="modal" role="dialog"></div>

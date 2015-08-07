@@ -1,0 +1,72 @@
+<%= form_for @booking_request, remote: true, :html => { :class => "form-horizontal booking_request", style: "display:inline;" } do |f| %>
+
+  <script>
+    <% projects = Project.pluck(:name).uniq.sort %>
+    $(function() {
+      var availableTags = [
+        <% projects.each do |p| %>
+          <% if p == projects.last %>
+            "<%= p %>"
+          <% else %>
+            "<%= p %>",
+          <% end %>
+        <% end %>
+      ];
+      $( "#booking_request_project" ).autocomplete({
+        source: availableTags,
+        minLength:0
+      }).bind('focus', function(){ $(this).autocomplete("search"); } );
+    });
+  </script>
+
+  <div class="modal-body">
+    <% if @booking_request.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@booking_request.errors.count, "error") %> prohibited this booking_request from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @booking_request.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label "What do you need?", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :notes, :class => 'form-control', :autofocus => true, :rows => 10 %>
+      </div>
+      <%= error_span(@booking_request[:notes]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :project, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :project, :class => 'form-control', :id => 'booking_request_project' %>
+      </div>
+      <%= error_span(@booking_request[:project]) %>
+    </div>
+
+    <% if params[:action] == "edit" %>
+      <div class="control-group">
+        <%= f.label :status, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select(:status, @statuses, {}, { :class => 'form-control input-sm' }) %>
+        </div>
+        <%= error_span(@booking_request[:status]) %>
+      </div>
+    <% end %>
+
+
+  </div>
+
+  <div class="modal-footer">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+  </div>
+
+<% end %>

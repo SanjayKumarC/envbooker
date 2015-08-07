@@ -18,6 +18,10 @@
 
     var items = new vis.DataSet();
 
+    function compute_style (base_color, text_color) {
+
+    };
+
     <% @envbookings.each do |booking| %>
       <% days_left = (booking.end_date - Date.today).to_i %>
 
@@ -43,7 +47,8 @@ Remaining: <%= days_left %> days";
         <% if @config_var.color_by_project %>
           style: 'background-color: <%= Project.find_by_id(booking.project_id).color %>; color: <%= Project.find_by_id(booking.project_id).text_color %>',
         <% else %>
-          style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>',
+          //style: 'background-color: <%= App.find_by_id(booking.app_id).color %>; color: <%= App.find_by_id(booking.app_id).text_color %>',
+          style: '<%= compute_style(booking.app) %>',
         <% end %>
         <% if @config_var.show_extra_color_box %>
           <% if @config_var.color_by_project %>

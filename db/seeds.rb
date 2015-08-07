@@ -30,6 +30,7 @@ a.singleton_guard=0
 
 a.template = "{{name}} {{{br}}} {{app}} {{{br}}} {{project}} {{{br}}} {{user}} {{{br}}} {{{extra_color_box}}}"
 a.total_hours = 160
+a.
 a.save!
 
 User.destroy_all
@@ -168,3 +169,8 @@ System.all.each do |system|
 	sp.value = "Open"
 	sp.save!
 end
+
+Status.delete_all
+Status.create!([name: "New"])
+Status.create!([name: "In Progress"])
+Status.create!([name: "Completed"])

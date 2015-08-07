@@ -16,6 +16,6 @@ class UserPreferencesController < ApplicationController
 
   private
     def user_preference_params
-      params.require(:user_preference).permit(:user_id, :template, :color_by_project, :show_extra_color_box, :sidebar, :show_legend)
+      params.require(:user_preference).permit(:user_id, :template, :color_by_project, :show_extra_color_box, :sidebar, :show_legend, :shade_percentage)
     end
 end

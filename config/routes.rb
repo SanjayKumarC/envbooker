@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  resources :systems do 
+
+  devise_for :users, :controllers => { registrations: 'registrations' }
+
+  resources :booking_requests do
+    get 'delete'
+    get 'complete'
+    post 'complete', :to => 'booking_requests#update_request'
+  end
+
+  resources :systems do
     get 'delete'
   end
 
@@ -16,10 +25,6 @@ Rails.application.routes.draw do
   resources :downtimes do
     get 'delete'
   end
-
-  devise_for :users, :controllers => { registrations: 'registrations' }
-
-  get 'index/index'
 
   resources :apps do
     get 'delete'
@@ -53,6 +58,8 @@ Rails.application.routes.draw do
   post '/' => 'home#index'
 
   get 'newenvbooking', to: 'envbookings#new'
+  get 'new_refresh_request', to: 'refresh_requests#new'
+  get 'new_booking_request', to: 'booking_requests#new'
 
   # You can have the root of your site routed with "root"
   get 'appconfig', to: 'home#appconfig'

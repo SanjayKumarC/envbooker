@@ -1,0 +1,32 @@
+<% @booking_requests.each do |booking_request| %>
+  <tr>
+    <td><%= link_to booking_request.id, booking_request, :remote => true %></td>
+    <td><%= booking_request.status %></td>
+    <td><%= booking_request.project %></td>
+
+    <% if can? :update, booking_request %>
+      <td>
+        <%= link_to edit_booking_request_path(booking_request), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
+          <span class="fa fa-fw fa-edit"></span>
+        <% end %>
+      </td>
+    <% end %>
+
+    <% if can? :delete, booking_request %>
+      <td>
+        <%= link_to booking_request_delete_path(booking_request), remote: true, title: "Delete", class: "", :data => {:toggle=>"tooltip"} do %>
+          <span class="fa fa-fw fa-trash"></span>
+        <% end %>
+      </td>
+    <% end %>
+
+    <% if can? :update, booking_request %>
+      <td>
+        <%= link_to booking_request_complete_path(booking_request), title: "Update", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
+          <span class="fa fa-fw fa-arrow-circle-right"></span>
+        <% end %>
+      </td>
+    <% end %>
+
+  </tr>
+<% end %>

@@ -1,0 +1,24 @@
+<script>
+  $(document).ready(function(){
+    $('#booking_request-modal').on('shown.bs.modal', function () {
+      $('#modal-yes').focus();
+    });
+  });
+</script>
+
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><%= "Complete Request" %></h3>
+    </div>
+    <div class="modal-body">
+      <p>
+        Are you sure? <br/>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <%= link_to "Yes", booking_request_complete_path(@booking_request), method: :post, remote: true, :autofocus => true, class: "btn btn-danger", id: "modal-yes"%>
+      <%= link_to "No", "#", class: "btn btn-primary", data: { dismiss: "modal" } %>
+    </div>
+  </div>
+</div>

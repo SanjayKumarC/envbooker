@@ -1,5 +1,5 @@
-<% if @system.errors.any? %>
-  <% @system.errors.full_messages.each do |message| %>
+<% if @booking_request.errors.any? %>
+  <% @booking_request.errors.full_messages.each do |message| %>
     <% flash[:alert] = message %>
     $(".alert-danger").show(500);
     <% flash.discard %>
@@ -11,5 +11,5 @@
   <% flash.discard %>
 <% end %>
 
-$("#system-modal").modal("hide");
-$(".system-index").html("<%= escape_javascript(render 'index') %>");
+$("#booking_request-modal").modal("hide");
+$(".booking_request-index").html("<%= escape_javascript(render 'index') %>");

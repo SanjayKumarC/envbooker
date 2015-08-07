@@ -35,6 +35,17 @@
           </li>
         </ul>
       </li>
+
+      <% if !current_user.try(:admin?) %>
+        <li>
+          <a href="/new_refresh_request" data-remote="true"><i class="fa fa-fw fa-refresh"></i> Book a Refresh</a>
+        </li>
+
+        <li>
+          <a href="/new_booking_request" data-remote="true"><i class="fa fa-fw fa-calendar"></i> Book an Environment</a>
+        </li>
+      <% end %>
+
       <% if current_user.try(:admin?) %>
         <li>
           <a href="/newenvbooking" data-remote="true"><i class="fa fa-fw fa-calendar"></i> New Booking</a>
