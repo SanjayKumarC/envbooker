@@ -168,8 +168,3 @@ System.all.each do |system|
 	sp.value = "Open"
 	sp.save!
 end
-
-Status.delete_all
-Status.create!([name: "New"])
-Status.create!([name: "In Progress"])
-Status.create!([name: "Completed"])
