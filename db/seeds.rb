@@ -30,7 +30,6 @@ a.singleton_guard=0
 
 a.template = "{{name}} {{{br}}} {{app}} {{{br}}} {{project}} {{{br}}} {{user}} {{{br}}} {{{extra_color_box}}}"
 a.total_hours = 160
-a.
 a.save!
 
 User.destroy_all
