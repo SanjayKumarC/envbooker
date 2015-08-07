@@ -126,7 +126,7 @@ background: %7s; \
 background: -webkit-repeating-linear-gradient(45deg, %7s, %7s 10px, %7s 10px, %7s 20px); \
 background: -ms-repeating-linear-gradient(45deg, %7s, %7s 10px, %7s 10px, %7s 20px); \
 background: repeating-linear-gradient(45deg, %7s, %7s 10px, %7s 10px, %7s 20px); \
-filter: progid:DXImageTransform.Microsoft.gradient(-45deg, %7s, %7s 10px, %7s 10px, %7s 20px)", tc,c,c,c,sec,sec,c,c,sec,sec,c,c,sec,sec,c,c,sec,sec)
+filter: progid:DXImageTransform.Microsoft.gradient(-45deg, %7s, %7s 10px, %7s 10px, %7s 20px);", tc,c,c,c,sec,sec,c,c,sec,sec,c,c,sec,sec,c,c,sec,sec)
 	  return str
 	end
 
