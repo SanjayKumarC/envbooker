@@ -42,9 +42,12 @@ class BookingRequestsController < ApplicationController
   def create
     @booking_request = BookingRequest.new(booking_request_params)
     @booking_request.status = 'New'
-    @booking_request.save
-    check_project
-    set_booking_requests
+    if @booking_request.save
+      check_project
+      set_booking_requests
+    else
+      redirect_to root_url
+    end
   end
 
   def delete
@@ -81,6 +84,6 @@ class BookingRequestsController < ApplicationController
     end
 
     def booking_request_params
-      params.require(:booking_request).permit(:notes, :status, :project)
+      params.require(:booking_request).permit(:notes, :status, :project, :user, :start_date, :end_date)
     end
 end

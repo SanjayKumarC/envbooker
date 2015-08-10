@@ -37,6 +37,11 @@ group :development, :test do
   gem 'thin'
 end
 
+group :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
+end
+
 group :production do
   gem 'capistrano', '~> 3.1.0'
   gem 'capistrano-bundler', '~> 1.1.2'

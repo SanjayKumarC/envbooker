@@ -39,7 +39,7 @@ div.vis-item-content {
 }
 
 .vis-group:nth-child(even) {
-  background-color: #e0e0e0;
+  background-color: #f5f5f5;
 }
 
 .vis-label:nth-child(odd) {
@@ -47,5 +47,5 @@ div.vis-item-content {
 }
 
 .vis-label:nth-child(even) {
-  background-color: #e0e0e0;
+  background-color: #f5f5f5;
 }

@@ -8,7 +8,6 @@ class ActiveSupport::TestCase
   # Use seeds.rb instead
 
   require "#{Rails.root}/db/seeds.rb"
-  
 
   # Add more helper methods to be used by all tests here...
 end

@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  env_id: 
-  app_id: 
+  id: 1
+  env_id: 1
+  app_id: 1
 
 two:
-  env_id: 
-  app_id: 
+  id: 2
+  env_id: 2
+  app_id: 2

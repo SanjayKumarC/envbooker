@@ -168,3 +168,15 @@ System.all.each do |system|
 	sp.value = "Open"
 	sp.save!
 end
+
+BookingRequest.delete_all
+(1..10).each do |i|
+	BookingRequest.create!([
+		:notes => Forgery(:lorem_ipsum).words(rand(50)+1),
+		:project => Project.find(rand(Project.count) + 1).name,
+		:user => 'John Doe',
+		:status => statuses[rand(statuses.count)],
+		:start_date => Date.today() - rand(30),
+		:end_date => Date.today() + rand(90)
+	])
+end
