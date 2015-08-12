@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   get 'envbookings_update_apps', to: 'envbookings#update_apps'
   get 'refresh_requests_update_apps', to: 'refresh_requests#update_apps'
 
+  get 'refresh_requests_hide_completed', to: "refresh_requests#hide_completed"
+  get 'booking_requests_hide_completed', to: "booking_requests#hide_completed"
+
   resources :projects do
     get 'delete'
   end

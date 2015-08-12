@@ -5,6 +5,11 @@ class RefreshRequestsController < ApplicationController
     set_refresh_requests
   end
 
+  def hide_completed
+    checkbox = params[:checkbox_value]
+    (checkbox == "true") ? set_refresh_requests_not_complete : set_refresh_requests
+  end
+
   def show
     set_refresh_request
   end
@@ -77,7 +82,13 @@ class RefreshRequestsController < ApplicationController
     end
 
     def set_refresh_requests
-      @refresh_requests = RefreshRequest.where.not(status: 'Complete').sort_by {|x| [x.env.name] }
+      @refresh_requests = RefreshRequest.all.sort_by {|x| [x.env.name] }
+      set_env_maps
+      set_statuses
+    end
+
+    def set_refresh_requests_not_complete
+      @refresh_requests = RefreshRequest.where.not(status_id: Status.find_by(status_type: 'complete_status').id).sort_by {|x| [x.env.name] }
       set_env_maps
       set_statuses
     end

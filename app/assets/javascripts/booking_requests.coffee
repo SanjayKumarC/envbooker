@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).ready ->
+  $('#booking_requests_hide_completed').click ->
+    $.ajax
+      url: 'booking_requests_hide_completed'
+      data: checkbox_value: $('#booking_requests_hide_completed').is(':checked')
+      dataType: 'script'
+    return
+  return

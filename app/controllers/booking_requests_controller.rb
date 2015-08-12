@@ -6,6 +6,11 @@ class BookingRequestsController < ApplicationController
     set_booking_requests
   end
 
+  def hide_completed
+    checkbox = params[:checkbox_value]
+    (checkbox == "true") ? set_booking_requests_not_complete : set_booking_requests
+  end
+
   def edit
     set_booking_request
     set_statuses
@@ -66,7 +71,11 @@ class BookingRequestsController < ApplicationController
     end
 
     def set_booking_requests
-      @booking_requests = BookingRequest.where.not(status: 'Complete')
+      @booking_requests = BookingRequest.all.sort
+    end
+
+    def set_booking_requests_not_complete
+      @booking_requests = BookingRequest.where.not(status_id: Status.find_by(status_type: 'complete_status')).sort
     end
 
     def set_statuses
