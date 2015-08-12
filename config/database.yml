@@ -9,6 +9,14 @@ default: &default
   pool: 5
   timeout: 5000
 
+
+# development:
+  # adapter: postgresql
+  # encoding: unicode
+  # database: development_envbooker
+  # pool: 5
+  # user: rails
+  # password: admin
 development:
   <<: *default
   database: db/development.sqlite3

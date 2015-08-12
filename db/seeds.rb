@@ -128,7 +128,11 @@ reasons = ['Batch not complete', 'Out for refresh', 'Access Problems', 'Someone 
 	)
 end
 
-statuses = ["In Progress", "New", "Complete"]
+Status.delete_all
+Status.create!(:name => 'In Progress', :status_type => 'in_progress_status')
+Status.create!(:name => 'New', :status_type => 'new_status')
+Status.create!(:name => 'Scheduled', :status_type => 'scheduled_status')
+Status.create!(:name => 'Complete', :status_type => 'complete_status')
 
 System.delete_all
 
@@ -148,7 +152,6 @@ Env.all.each do |e|
 end
 
 RefreshRequest.delete_all
-
 (1..10).each do |i|
 	s = System.find(i)
 	RefreshRequest.create!([
@@ -156,7 +159,8 @@ RefreshRequest.delete_all
 		:app => s.app,
 		:refresh_date => Date.today - rand(90),
 		:notes => Forgery(:lorem_ipsum).words(rand(50)+1),
-		:status => statuses[rand(statuses.count)]
+		:status => Status.find(rand(Status.count)+1),
+		:mks_id => (rand(900000) + 100000).to_s
 	])
 end
 
@@ -175,7 +179,7 @@ BookingRequest.delete_all
 		:notes => Forgery(:lorem_ipsum).words(rand(50)+1),
 		:project => Project.find(rand(Project.count) + 1).name,
 		:user => 'John Doe',
-		:status => statuses[rand(statuses.count)],
+		:status => Status.find(rand(Status.count)+1),
 		:start_date => Date.today() - rand(30),
 		:end_date => Date.today() + rand(90)
 	])

@@ -3,8 +3,9 @@
     <td><%= link_to refresh_request.env.name, refresh_request, :remote => true %></td>
     <td><%= refresh_request.app.name %></td>
     <td><%= refresh_request.refresh_date %></td>
-    <td><%= refresh_request.status %></td>
+    <td><%= refresh_request.status.name %></td>
     <td><%= refresh_request.notes %></td>
+    <td><%= refresh_request.mks_id %></td>
 
     <% if can? :update, refresh_request %>
       <td>

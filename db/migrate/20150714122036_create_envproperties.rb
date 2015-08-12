@@ -5,7 +5,7 @@ class CreateEnvproperties < ActiveRecord::Migration
       t.string :key
       t.string :value
     end
-    add_foreign_key :envproperties, :env_ids
+    add_foreign_key :envproperties, :envs
     add_index :envproperties, [:env_id, :key], unique: true
   end
 end

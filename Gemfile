@@ -26,6 +26,8 @@ gem "font-awesome-rails"
 gem "forgery"
 gem 'browser'
 
+#gem 'pg'
+
 group :development, :test do
   gem "fasterer"
   gem 'byebug'

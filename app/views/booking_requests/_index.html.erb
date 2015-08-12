@@ -1,7 +1,7 @@
 <% @booking_requests.each do |booking_request| %>
   <tr>
     <td><%= link_to booking_request.id, booking_request, :remote => true %></td>
-    <td><%= booking_request.status %></td>
+    <td><%= booking_request.status.name %></td>
     <td><%= booking_request.project %></td>
     <td><%= booking_request.user %></td>
     <td><%= booking_request.start_date %></td>

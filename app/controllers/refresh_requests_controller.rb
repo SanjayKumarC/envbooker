@@ -88,11 +88,11 @@ class RefreshRequestsController < ApplicationController
     end
 
     def set_statuses
-      @statuses = ["New", "Complete","In Progress"]
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def refresh_request_params
-      params.require(:refresh_request).permit(:env_id, :app_id, :refresh_date, :notes, :status)
+      params.require(:refresh_request).permit(:env_id, :app_id, :refresh_date, :notes, :status_id, :mks_id)
     end
 end

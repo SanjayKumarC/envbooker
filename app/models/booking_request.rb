@@ -1,4 +1,7 @@
 class BookingRequest < ActiveRecord::Base
+
+  belongs_to :status
+
   validates :notes, :presence => true
   validates :project, :presence => true
   validates :user, :presence => true
@@ -13,5 +16,4 @@ class BookingRequest < ActiveRecord::Base
       errors.add(:end_date, "End Date must be greater than start date.")
     end
   end
-
 end

@@ -91,9 +91,9 @@
 
     <% if params[:action] == "edit" %>
       <div class="control-group">
-        <%= f.label :status, :class => 'control-label' %>
+        <%= f.label :status_id, :class => 'control-label' %>
         <div class="controls">
-          <%= f.select(:status, @statuses, {}, { :class => 'form-control input-sm' }) %>
+          <%= f.select(:status_id, @statuses.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
         </div>
         <%= error_span(@booking_request[:status]) %>
       </div>

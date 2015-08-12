@@ -21,7 +21,7 @@ class BookingRequestsController < ApplicationController
 
   def update_request
     @booking_request = BookingRequest.find(params[:booking_request_id])
-    @booking_request.status = 'Complete'
+    @booking_request.status = Status.find_by(status_type:'complete_status')
     @booking_request.save
     set_booking_requests
   end
@@ -70,7 +70,7 @@ class BookingRequestsController < ApplicationController
     end
 
     def set_statuses
-      @statuses = ['New', 'In Progress', 'Complete']
+      @statuses = Status.all
     end
 
     def check_project
@@ -84,6 +84,6 @@ class BookingRequestsController < ApplicationController
     end
 
     def booking_request_params
-      params.require(:booking_request).permit(:notes, :status, :project, :user, :start_date, :end_date)
+      params.require(:booking_request).permit(:notes, :status_id, :project, :user, :start_date, :end_date)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810085705) do
+ActiveRecord::Schema.define(version: 20150812105122) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -39,14 +39,16 @@ ActiveRecord::Schema.define(version: 20150810085705) do
 
   create_table "booking_requests", force: :cascade do |t|
     t.string   "notes"
-    t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "project"
     t.string   "user"
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "status_id"
   end
+
+  add_index "booking_requests", ["status_id"], name: "index_booking_requests_on_status_id"
 
   create_table "downtimes", force: :cascade do |t|
     t.integer  "env_id"
@@ -111,11 +113,13 @@ ActiveRecord::Schema.define(version: 20150810085705) do
     t.string   "notes"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.string   "status"
+    t.string   "mks_id"
+    t.integer  "status_id"
   end
 
   add_index "refresh_requests", ["app_id"], name: "index_refresh_requests_on_app_id"
   add_index "refresh_requests", ["env_id"], name: "index_refresh_requests_on_env_id"
+  add_index "refresh_requests", ["status_id"], name: "index_refresh_requests_on_status_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
@@ -126,6 +130,13 @@ ActiveRecord::Schema.define(version: 20150810085705) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "statuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "status_type"
+  end
 
   create_table "system_properties", force: :cascade do |t|
     t.integer  "system_id"
