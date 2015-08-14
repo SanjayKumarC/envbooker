@@ -1,0 +1,13 @@
+<% @statuses.each do |status| %>
+  <tr>
+    <td><%= link_to status.name, status, :remote => true %></td>
+    <td><%= status.status_type %></td>
+    <td>
+      <% if can? :update, p %>
+        <%= link_to edit_status_path(status), title: "Edit", :data => {:toggle=>"tooltip"}, remote: true, class: "" do %>
+          <span class="fa fa-fw fa-edit"></span>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
