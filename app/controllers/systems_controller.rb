@@ -54,7 +54,7 @@ class SystemsController < ApplicationController
 
   private
     def system_params
-      params.require(:system).permit(:env_id, :app_id, :refresh_date, system_properties_attributes: [:id, :key, :value, :_destroy])
+      params.require(:system).permit(:env_id, :app_id, :refresh_date, :refreshed_daily, system_properties_attributes: [:id, :key, :value, :_destroy])
     end
 
     def set_select_vars
