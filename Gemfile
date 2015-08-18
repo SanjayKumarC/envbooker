@@ -13,7 +13,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "twitter-bootstrap-rails"
 #gem "less-rails"
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
-gem 'wdm', '>= 0.0.3', platforms: [:mswin]
 
 gem "therubyracer", :platform => 'ruby'
 gem 'bootstrap_form'
@@ -25,6 +24,7 @@ gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem "forgery"
 gem 'browser'
+gem 'seed_dump'
 
 #gem 'pg'
 

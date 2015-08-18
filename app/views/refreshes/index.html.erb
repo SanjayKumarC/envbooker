@@ -1,4 +1,4 @@
-<table class="table table-bordered table-hover table-striped table-condensed">
+<table class="table table-bordered table-hover table-striped table-condensed sortable">
   <thead>
     <th>Environment</th>
     <th>App</th>
@@ -7,22 +7,9 @@
     <th>Properties</th>
   </thead>
   <tbody>
-    <% old_name = "" %>
     <% @systems.each do |sys| %>
-
-      <% if sys.env.name == old_name %>
-        <% first_td = "<td></td>" %>
-      <% else %>
-        <% first_td = "<td>#{sys.env.name}</td>" %>
-        <% unless old_name.blank? %>
-          <tr>
-            <td colspan="5"></td>
-          </tr>
-        <% end %>
-        <% old_name = sys.env.name %>
-      <% end %>
-
       <tr>
+        <td><%= sys.env.name %> </td>
         <td><%= sys.app.name %></td>
         <% unless(sys.refresh_date == nil) %>
           <% days_ago = (Date.today - sys.refresh_date).to_i %>
@@ -35,10 +22,14 @@
           <%   days_ago_message = time_ago_in_words(sys.refresh_date) + " ago" %>
           <% end %>
         <% end %>
-        <% unless(sys.refresh_date == nil) %>
-          <td><%= sys.refresh_date.strftime('%A, %d %B %Y') %> (<small><%= days_ago_message %></small>)</td>
+        <% if sys.refreshed_daily %>
+          <td style="background-color: #2f4f4f; color: white;">Refreshed Daily</td>
         <% else %>
-          <td></td>
+          <% unless(sys.refresh_date == nil) %>
+            <td><%= sys.refresh_date.strftime('%A, %d %B %Y') %> (<small><%= days_ago_message %></small>)</td>
+          <% else %>
+            <td></td>
+          <% end %>
         <% end %>
         <td><%= sys.env.notes %></td>
 

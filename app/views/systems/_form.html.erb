@@ -52,6 +52,12 @@
       <%= error_span(@system[:refresh_date]) %>
     </div>
 
+    <div class="control-group">
+      <%= f.check_box :refreshed_daily, :class => 'checkbox-inline' %>
+      <%= f.label :refreshed_daily, :class => 'control-label' %>
+      <%= error_span(@system[:refreshed_daily]) %>
+    </div>
+
     <% if @system.system_properties.any? %>
       <div class="control-group">
         <table class="table">

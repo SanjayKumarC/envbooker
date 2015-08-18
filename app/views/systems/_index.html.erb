@@ -2,10 +2,14 @@
   <tr>
     <td><%= link_to system.env.name, system, :remote => true %></td>
     <td><%= system.app.name %></td>
-    <% unless (system.refresh_date ==nil) %>
-      <td><%= system.refresh_date.strftime('%A, %d %B %Y') %></td>
+    <% if system.refreshed_daily %>
+      <td style="background-color: #2f4f4f; color: white;">Refreshed Daily</td>
     <% else %>
-      <td></td>
+      <% unless (system.refresh_date ==nil) %>
+        <td><%= system.refresh_date.strftime('%A, %d %B %Y') %></td>
+      <% else %>
+        <td></td>
+      <% end %>
     <% end %>
     <td>
       <% system.system_properties.all.each do |sp| %>

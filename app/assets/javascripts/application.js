@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
-//= require bootstrap/bootstrap-datepicker
+//= require bootstrap/bootstrap-datepicker.min
 //= require bootstrap/locales/bootstrap-datepicker.en-GB.min
 //= require spectrum
 //= require turbolinks
