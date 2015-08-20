@@ -24,7 +24,7 @@ Appconfig.create!([
 ])
 
 User.create!([
-  {email: "johngriffiths@aberdeen-asset.com", password: 'admin455', password_confirmation: 'admin455$!', admin: true, name: "John Griffiths"},
+  {email: "johngriffiths@aberdeen-asset.com", password: 'admin455$!', password_confirmation: 'admin455$!', admin: true, name: "John Griffiths"},
   {email: "warrensutherland@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Warren Sutherland"},
   {email: "arularuldas@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Arul Aruldas"},
   {email: "stephenbrown@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stephen Brown"},
