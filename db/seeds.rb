@@ -24,26 +24,26 @@ Appconfig.create!([
 ])
 
 User.create!([
-  {email: "admin@admin.com", password: 'admin455', password_confirmation: 'admin455', admin: true, name: "John Griffiths"},
-  {email: "warrensutherland@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Warren Sutherland"},
-  {email: "arularuldas@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Arul Aruldas"},
-  {email: "stephenbrown@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stephen Brown"},
-  {email: "patilkenchangouda@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Patil Kenchangouda"},
-  {email: "danielbrowne@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Daniel Browne"},
-  {email: "tristanpurvis@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Tristan Purvis"},
-  {email: "noweedmubarak@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Noweed Mubarak"},
-  {email: "richardallen@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Richard Allen"},
-  {email: "davidwitherington@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "David Witherington"},
-  {email: "stuartblackwell@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stuart Blackwell"},
-  {email: "raminkorouei@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Ramin Korouei"},
-  {email: "bryancoyne@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Bryan Coyne"},
-  {email: "MarkRitchie@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Mark Ritchie"},
-  {email: "SimonThompson@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Simon Thompson"},
-  {email: "KrisFernando@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Kris Fernando"},
-  {email: "ChrisMurphy@admin.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Chris Murphy"},
-  {email: "MickCharleton@admin.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Mick Charleton"},
-  {email: "StewartLawrie@admin.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Stewart Lawrie"},
-  {email: "MichaelJowitt@admin.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Michael Jowitt"}
+  {email: "johngriffiths@aberdeen-asset.com", password: 'admin455', password_confirmation: 'admin455$!', admin: true, name: "John Griffiths"},
+  {email: "warrensutherland@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Warren Sutherland"},
+  {email: "arularuldas@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Arul Aruldas"},
+  {email: "stephenbrown@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stephen Brown"},
+  {email: "patilkenchangouda@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Patil Kenchangouda"},
+  {email: "danielbrowne@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Daniel Browne"},
+  {email: "tristanpurvis@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Tristan Purvis"},
+  {email: "noweedmubarak@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Noweed Mubarak"},
+  {email: "richardallen@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Richard Allen"},
+  {email: "davidwitherington@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "David Witherington"},
+  {email: "stuartblackwell@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stuart Blackwell"},
+  {email: "raminkorouei@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Ramin Korouei"},
+  {email: "bryancoyne@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Bryan Coyne"},
+  {email: "MarkRitchie@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Mark Ritchie"},
+  {email: "SimonThompson@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Simon Thompson"},
+  {email: "KrisFernando@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Kris Fernando"},
+  {email: "ChrisMurphy@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Chris Murphy"},
+  {email: "MickCharleton@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Mick Charleton"},
+  {email: "StewartLawrie@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Stewart Lawrie"},
+  {email: "MichaelJowitt@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Michael Jowitt"}
 ])
 
 App.create!([
