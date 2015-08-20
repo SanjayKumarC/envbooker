@@ -36,28 +36,28 @@
     <!-- Environmnt -->
     <div class="control-group">
       <%= f.label :env_id, :class => 'control-label' %>
-      <%= f.select(:env_id, @envs.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm', :id => 'envs_select' }) %>
+      <%= f.select(:env_id, @envs.collect{|x| [x.name, x.id]}, { include_blank: true }, { :class => 'form-control input-sm', :id => 'envs_select' }) %>
       <%= error_span(@envbooking[:env_id]) %>
     </div>
 
     <!-- App -->
     <div class="control-group">
       <%= f.label :app_id, :class => 'control-label' %>
-      <%= f.select(:app_id, @apps.collect{|x| [x.name, x.id]}, {}, { :id => "apps_select", :class => 'form-control input-sm', multiple: true, :size => App.count }) %>
+      <%= f.select(:app_id, @apps.collect{|x| [x.name, x.id]}, { include_blank: true }, { :id => "apps_select", :class => 'form-control input-sm', multiple: true, :size => App.count }) %>
       <%= error_span(@envbooking[:app_id]) %>
     </div>
 
     <!-- Project -->
     <div class="control-group">
       <%= f.label :project_id, :class => 'control-label' %>
-      <%= f.select(:project_id, @projects.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
+      <%= f.select(:project_id, @projects.collect{|x| [x.name, x.id]}, { include_blank: true }, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:project_id]) %>
     </div>
 
     <!-- User -->
     <div class="control-group">
       <%= f.label :user_id, :class => 'control-label' %>
-      <%= f.select(:user_id, @users.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
+      <%= f.select(:user_id, @users.collect{|x| [x.name, x.id]}, { include_blank: true }, { :class => 'form-control input-sm' }) %>
       <%= error_span(@envbooking[:user_id]) %>
     </div>
 

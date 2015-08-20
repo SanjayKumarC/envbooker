@@ -9,12 +9,12 @@ Project.delete_all
 System.delete_all
 Envbooking.delete_all
 
-Status.create!([
-  {name: "In Progress", status_type: "in_progress_status"},
-  {name: "New", status_type: "new_status"},
-  {name: "Scheduled", status_type: "scheduled_status"},
-  {name: "Complete", status_type: "complete_status"}
-])
+Status.delete_all
+Status.create!(:name => 'In Progress', :status_type => 'in_progress_status')
+Status.create!(:name => 'New', :status_type => 'new_status')
+Status.create!(:name => 'Scheduled', :status_type => 'scheduled_status')
+Status.create!(:name => 'Complete', :status_type => 'complete_status')
+
 
 sql = 'update sqlite_sequence set seq = 0'
 ActiveRecord::Base.connection.execute(sql)
@@ -45,11 +45,10 @@ User.create!([
   {email: "StewartLawrie@admin.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Stewart Lawrie"},
   {email: "MichaelJowitt@admin.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Michael Jowitt"}
 ])
-
 App.create!([
   {name: "CADIS(Edinburgh)", color: "#2ef0c5", description: "MarkIT EDM", text_color: "#FFFFFF"},
   {name: "CADIS(London)", color: "#4a86fb", description: "MarkIT EDM", text_color: "#000000"},
-  {name: "Charles River", color: "#2ff43d", description: "Charles River Investment Management System", text_color: "#000000"},
+  {name: "Charles River", color: "#111111", description: "Charles River Investment Management System", text_color: "#FFFFFF"},
   {name: "CeDaR", color: "#f670e6", description: "CeDaR", text_color: "#000000"},
   {name: "Portree", color: "#d6d6d4", description: "Portree", text_color: "#000000"},
   {name: "Phoenix", color: "#0083cd", description: "Phoenix", text_color: "#FFFFFF"},
@@ -59,12 +58,8 @@ App.create!([
   {name: "NUTS", color: "#ffc425", description: "Unitised Trading", text_color: "#000000"},
   {name: "thinkFolio", color: "#4aa7db", description: "thinkFolio", text_color: "#000000"},
   {name: "PRAMS", color: "#00b159", description: "PRAMS", text_color: "#FFFFFF"},
-  {name: "CML", color: "#a13b91", description: "CML", text_color: "#FFFFFF"},
-  {name: "Cash and FX (old)", color: "#24f6ec", description: "Current Cash and FX App", text_color: "#000000"},
-  {name: "Cash and FX (new)", color: "#a01fea", description: "Replacement Cash and FX App", text_color: "#000000"},
-  {name: "Account Master", color: "#e8bff7", description: "Account Master", text_color: "#000000"}
+  {name: "CML", color: "#a13b91", description: "CML", text_color: "#FFFFFF"}
 ])
-
 Envlevel.create!([
   {name: "DEV", description: "Development Environment"},
   {name: "UAT", description: "User Testing"},
@@ -87,7 +82,6 @@ Env.create!([
   {name: "Model 2", envlevel_id: 4, description: "Prod CR Copy", notes: nil},
   {name: "Model 3", envlevel_id: 4, description: "Prod CR Copy", notes: nil}
 ])
-
 Project.create!([
   {name: "Panther", description: "Panther", color: "#454545", text_color: "#FFFFFF"},
   {name: "QUANTS", description: "QUANTS migration", color: "#ff55ff", text_color: "#000000"},
@@ -95,15 +89,8 @@ Project.create!([
   {name: "Production Support", description: "Production Support", color: "#3383cd", text_color: "#000000"},
   {name: "BAU", description: "BAU", color: "#002ab3", text_color: "#FFFFFF"},
   {name: "Global Point Attribution", description: "Global Point Attribution", color: "#bc1d3a", text_color: "#FFFFFF"},
-  {name: "NUTS decommissioning", description: "NUTS decommissioning", color: "#f3a735", text_color: "#000000"},
-  {name: "Account Master Enhancements", description: "Account Master Enhancements", color: "#cc3838", text_color: "#000000"},
-  {name: "MSN", description: "Major Shareholding Notification", color: "#17dd8e", text_color: "#FFFFFF"},
-  {name: "Fund Prices", description: "Fund Prices", color: "#18d0b0", text_color: "#FFFFFF"},
-  {name: "Batch Remediation", description: "Batch Performance Enhancements", color: "#e6e827", text_color: "#000000"},
-  {name: "New Cash and FX App", description: "New Cash and FX App", color: "#431690", text_color: "#FFFFFF"},
-  {name: "CI", description: "Continuous Integration", color: "#f4b726", text_color: "#000000"}
+  {name: "NUTS decommissioning", description: "NUTS decommissioning", color: "#f3a735", text_color: "#000000"}
 ])
-
 System.create!([
   {env_id: 1, app_id: 1, refresh_date: "2015-07-08", refreshed_daily: false},
   {env_id: 1, app_id: 7, refresh_date: "2015-04-07", refreshed_daily: false},
@@ -135,41 +122,11 @@ System.create!([
   {env_id: 10, app_id: 2, refresh_date: "2015-08-14", refreshed_daily: false},
   {env_id: 10, app_id: 3, refresh_date: "2015-08-14", refreshed_daily: false},
   {env_id: 6, app_id: 3, refresh_date: nil, refreshed_daily: true},
+  {env_id: 6, app_id: 2, refresh_date: nil, refreshed_daily: false},
   {env_id: 7, app_id: 3, refresh_date: "2015-04-17", refreshed_daily: false},
-  {env_id: 9, app_id: 14, refresh_date: nil, refreshed_daily: false},
-  {env_id: 8, app_id: 15, refresh_date: nil, refreshed_daily: false},
-  {env_id: 8, app_id: 8, refresh_date: nil, refreshed_daily: false},
-  {env_id: 7, app_id: 2, refresh_date: nil, refreshed_daily: false},
-  {env_id: 7, app_id: 16, refresh_date: nil, refreshed_daily: false}
+  {env_id: 7, app_id: 2, refresh_date: nil, refreshed_daily: false}
 ])
-
 Envbooking.create!([
-  {env_id: 8, project_id: 12, user_id: 14, start_date: "2015-03-01", end_date: "2015-09-30", app_id: 15, notes: nil},
-  {env_id: 8, project_id: 7, user_id: 3, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 8, project_id: 7, user_id: 3, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 3, notes: nil},
-  {env_id: 8, project_id: 7, user_id: 3, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 8, notes: nil},
-  {env_id: 9, project_id: 5, user_id: 16, start_date: "2015-01-01", end_date: "2015-12-31", app_id: 3, notes: nil},
-  {env_id: 9, project_id: 5, user_id: 16, start_date: "2015-01-01", end_date: "2015-12-31", app_id: 2, notes: nil},
-  {env_id: 9, project_id: 6, user_id: 17, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 9, project_id: 3, user_id: 7, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 3, notes: nil},
-  {env_id: 9, project_id: 3, user_id: 7, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 9, project_id: 11, user_id: 18, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 9, project_id: 10, user_id: 19, start_date: "2015-08-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 9, project_id: 5, user_id: 9, start_date: "2015-08-19", end_date: "2015-08-31", app_id: 14, notes: nil},
-  {env_id: 9, project_id: 5, user_id: 8, start_date: "2015-08-19", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 10, project_id: 9, user_id: 6, start_date: "2015-07-01", end_date: "2015-12-31", app_id: 2, notes: nil},
-  {env_id: 10, project_id: 9, user_id: 6, start_date: "2015-07-01", end_date: "2015-12-31", app_id: 3, notes: nil},
-  {env_id: 7, project_id: 2, user_id: 2, start_date: "2015-04-01", end_date: "2015-09-30", app_id: 3, notes: nil},
-  {env_id: 7, project_id: 2, user_id: 2, start_date: "2015-04-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 9, project_id: 1, user_id: 15, start_date: "2015-07-01", end_date: "2015-09-30", app_id: 3, notes: nil},
-  {env_id: 9, project_id: 1, user_id: 15, start_date: "2015-07-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 7, project_id: 3, user_id: 2, start_date: "2015-03-01", end_date: "2015-09-30", app_id: 3, notes: nil},
-  {env_id: 7, project_id: 3, user_id: 2, start_date: "2015-03-01", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 7, project_id: 1, user_id: 18, start_date: "2015-08-19", end_date: "2015-09-30", app_id: 3, notes: nil},
-  {env_id: 7, project_id: 8, user_id: 8, start_date: "2015-08-19", end_date: "2015-09-30", app_id: 2, notes: nil},
-  {env_id: 7, project_id: 8, user_id: 8, start_date: "2015-08-19", end_date: "2015-09-30", app_id: 16, notes: nil},
-  {env_id: 2, project_id: 13, user_id: 20, start_date: "2015-01-01", end_date: "2015-12-31", app_id: 1, notes: nil},
-  {env_id: 2, project_id: 13, user_id: 20, start_date: "2015-01-01", end_date: "2015-12-31", app_id: 4, notes: nil},
-  {env_id: 2, project_id: 13, user_id: 20, start_date: "2015-01-01", end_date: "2015-12-31", app_id: 6, notes: nil},
-  {env_id: 2, project_id: 13, user_id: 20, start_date: "2015-01-01", end_date: "2015-12-31", app_id: 5, notes: nil}
+  {env_id: 1, project_id: 5, user_id: 1, start_date: "2015-08-01", end_date: "2015-08-31", app_id: 1, notes: nil},
+  {env_id: 1, project_id: 5, user_id: 3, start_date: "2015-08-18", end_date: "2015-08-31", app_id: 5, notes: nil}
 ])

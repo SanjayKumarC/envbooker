@@ -38,6 +38,8 @@ class HomeController < ApplicationController
 			@envbookings = Envbooking.all
 		end
 
+		@envbookings.sort_by { |x| x.env.name }
+
 		@envs = Env.find(@envbookings.pluck(:env_id)).sort_by {|x| [x.name] }
 		@apps = App.find(@envbookings.pluck(:app_id)).sort_by {|x| [x.name] }
 		@projects = Project.find(@envbookings.pluck(:project_id)).sort_by {|x| [x.name] }

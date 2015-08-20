@@ -13,7 +13,11 @@
     var groups = new vis.DataSet();
 
     <% @envs.each do |env| %>
-      groups.add({id:<%= env.id %>, content:'<b><%= env.name %></b>'});
+      groups.add({
+        id:<%= env.id %>,
+        content:'<b><%= env.name %></b>',
+        env_name: '<%= env.name %>'
+      });
     <% end %>
 
     var items = new vis.DataSet();
@@ -25,8 +29,9 @@
     <% @envbookings.each do |booking| %>
       <% days_left = (booking.end_date - Date.today).to_i %>
 
-      var title = "App : <%= App.find_by_id(booking.app_id).name %>, \n\
-Project : <%= Project.find_by_id(booking.project_id).name %>, \n\
+      var title = "User : <%= booking.user.name %>, \n\
+App : <%= booking.app.name %>, \n\
+Project : <%= booking.project.name %>, \n\
 Start : <%= booking.start_date.strftime('%d/%m/%Y') %>, \n\
 End : <%= booking.end_date.strftime('%d/%m/%Y') %> \n\
 Remaining: <%= days_left %> days";
@@ -36,10 +41,10 @@ Remaining: <%= days_left %> days";
         type: 'range',
         start: '<%= booking.start_date.to_time.iso8601 %>',
         end: '<%= booking.end_date.to_time.iso8601 %>',
-        user: '<%= User.find_by_id(booking.user_id).email %>',
-        name: '<%= User.find_by_id(booking.user_id).name %>',
-        project: '<%= Project.find_by_id(booking.project_id).name %>',
-        app: '<%= App.find_by_id(booking.app_id).name %>',
+        user: '<%= booking.user.email %>',
+        name: '<%= booking.user.name %>',
+        project: '<%= booking.project.name %>',
+        app: '<%= booking.app.name %>',
         group: <%= booking.env_id %>,
         subgroup: <%= booking.project_id %>,
         br: '<br/>',
@@ -53,13 +58,13 @@ Remaining: <%= days_left %> days";
         <% end %>
         <% if @config_var.color_by_project %>
           <% if browser.ie? %>
-            style: 'background-color: <%= booking.project.color %>; color: <%= booking.project.text_color %>'
+            style: 'color: <%= booking.project.text_color %>; background-color: <%= booking.project.color %>;'
           <% else %>
             style: '<%= compute_style(booking.project) %>'
           <% end %>
         <% else %>
           <% if browser.ie? %>
-            style: 'background-color: <%= booking.project.color %>; color: <%= booking.project.text_color %>'
+            style: 'color: <%= booking.app.text_color %>; background-color: <%= booking.app.color %>;'
           <% else %>
             style: '<%= compute_style(booking.app) %>'
           <% end %>
@@ -74,6 +79,7 @@ Remaining: <%= days_left %> days";
       max: '<%= @max_date %>',
       template: template,
       orientation: 'both',
+      groupOrder: 'env_name',
     <% if current_user.try(:admin?) %>
       editable: {
         add: false,
