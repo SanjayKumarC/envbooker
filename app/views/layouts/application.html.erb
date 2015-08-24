@@ -33,6 +33,10 @@
       <!-- Navigation -->
       <%= render :partial => 'home/navbar' %>
 
+      <% if Rails.env =='development' %>
+        <h1 style="background-color: white; color: black;">DEVELOPMENT</h1>
+      <% end %>
+
       <div id="page-wrapper">
         <div class="container-fluid">
           <div class="row">

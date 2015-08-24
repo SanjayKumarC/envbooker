@@ -44,16 +44,17 @@ class RefreshRequestsController < ApplicationController
 
     s.save
 
-    @refresh_request.status = 'Complete'
+    @refresh_request.status = Status.find_by status_type:'complete_status'
     @refresh_request.save
     set_refresh_requests
   end
 
   def create
     @refresh_request = RefreshRequest.new(refresh_request_params)
-    @refresh_request.status = 'New'
+    @refresh_request.status = Status.find_by status_type:"new_status"
     @refresh_request.save
     set_refresh_requests
+    RefreshRequestNotifier.send_notification_to_admin(@refresh_request).deliver_later
   end
 
   def update

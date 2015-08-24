@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818151446) do
+ActiveRecord::Schema.define(version: 20150820154433) do
 
   create_table "appconfigs", force: :cascade do |t|
     t.integer  "singleton_guard"
@@ -115,11 +115,13 @@ ActiveRecord::Schema.define(version: 20150818151446) do
     t.datetime "updated_at",   null: false
     t.string   "mks_id"
     t.integer  "status_id"
+    t.integer  "user_id"
   end
 
   add_index "refresh_requests", ["app_id"], name: "index_refresh_requests_on_app_id"
   add_index "refresh_requests", ["env_id"], name: "index_refresh_requests_on_env_id"
   add_index "refresh_requests", ["status_id"], name: "index_refresh_requests_on_status_id"
+  add_index "refresh_requests", ["user_id"], name: "index_refresh_requests_on_user_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
