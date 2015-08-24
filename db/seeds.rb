@@ -8,6 +8,7 @@ Envlevel.delete_all
 Project.delete_all
 System.delete_all
 Envbooking.delete_all
+Status.delete_all
 
 Status.create!([
   {name: "In Progress", status_type: "in_progress_status"},
@@ -24,26 +25,29 @@ Appconfig.create!([
 ])
 
 User.create!([
-  {email: "johngriffiths@aberdeen-asset.com", password: 'admin455$!', password_confirmation: 'admin455$!', admin: true, name: "John Griffiths"},
-  {email: "warrensutherland@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Warren Sutherland"},
-  {email: "arularuldas@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Arul Aruldas"},
-  {email: "stephenbrown@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stephen Brown"},
-  {email: "patilkenchangouda@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Patil Kenchangouda"},
-  {email: "danielbrowne@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Daniel Browne"},
-  {email: "tristanpurvis@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Tristan Purvis"},
-  {email: "noweedmubarak@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Noweed Mubarak"},
-  {email: "richardallen@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Richard Allen"},
-  {email: "davidwitherington@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "David Witherington"},
-  {email: "stuartblackwell@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stuart Blackwell"},
-  {email: "raminkorouei@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Ramin Korouei"},
-  {email: "bryancoyne@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Bryan Coyne"},
-  {email: "MarkRitchie@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Mark Ritchie"},
-  {email: "SimonThompson@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Simon Thompson"},
-  {email: "KrisFernando@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Kris Fernando"},
-  {email: "ChrisMurphy@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Chris Murphy"},
-  {email: "MickCharleton@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Mick Charleton"},
-  {email: "StewartLawrie@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Stewart Lawrie"},
-  {email: "MichaelJowitt@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Michael Jowitt"}
+  {email: "john.griffiths@aberdeen-asset.com", password: 'admin455$!', password_confirmation: 'admin455$!', admin: true, name: "John Griffiths"},
+  {email: "warren.sutherland@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Warren Sutherland"},
+  {email: "arul.aruldas@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Arul Aruldas"},
+  {email: "stephen.brown@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stephen Brown"},
+  {email: "patil.kenchangouda@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Patil Kenchangouda"},
+  {email: "daniel.browne@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Daniel Browne"},
+  {email: "tristan.purvis@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Tristan Purvis"},
+  {email: "noweed.mubarak@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Noweed Mubarak"},
+  {email: "richard.allen@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Richard Allen"},
+  {email: "david.witherington@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "David Witherington"},
+  {email: "stuart.blackwell@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Stuart Blackwell"},
+  {email: "ramin.korouei@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Ramin Korouei"},
+  {email: "bryan.coyne@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Bryan Coyne"},
+  {email: "Mark.Ritchie@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Mark Ritchie"},
+  {email: "Simon.Thompson@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Simon Thompson"},
+  {email: "Kris.Fernando@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Kris Fernando"},
+  {email: "Chri.sMurphy@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Chris Murphy"},
+  {email: "Mick.Charleton@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Mick Charleton"},
+  {email: "Stewart.Lawrie@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Stewart Lawrie"},
+  {email: "Michael.Jowitt@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Michael Jowitt"},
+  {email: "Stuart.Caven@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Stuart Caven"},
+  {email: "Simon.Thompson-admin@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: true, name: "Simon Thompson Admin"},
+  {email: "Stuart.Caven-admin@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: true, name: "Stuart Caven Admin"},
 ])
 
 App.create!([
