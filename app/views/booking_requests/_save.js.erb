@@ -1,6 +1,7 @@
 <% if @booking_request.errors.any? %>
   <% @booking_request.errors.full_messages.each do |message| %>
     <% flash[:alert] = message %>
+    $(".alert-danger").html("<%= escape_javascript flash[:alert]%> ");
     $(".alert-danger").show(500);
     <% flash.discard %>
   <% end %>

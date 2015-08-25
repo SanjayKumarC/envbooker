@@ -42,17 +42,17 @@ class BookingRequestsController < ApplicationController
 
   def new
     @booking_request = BookingRequest.new
+    @booking_request.status = Status.find_by status_type:"new_status"
   end
 
   def create
     @booking_request = BookingRequest.new(booking_request_params)
-    @booking_request.status = 'New'
-    if @booking_request.save
+    @booking_request.status = Status.find_by status_type:"new_status"
+    result = @booking_request.save
+    if result
       check_project
-      set_booking_requests
-    else
-      redirect_to root_url
     end
+    set_booking_requests
   end
 
   def delete
