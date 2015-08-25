@@ -3,6 +3,7 @@ class Downtime < ActiveRecord::Base
 
   validates :hours, :numericality => true, :presence => true
   validates :reason, :presence => true
+  validates :env, :presence => true
 
   scope :lastmonth, lambda {
     where("date between ? and ?", Date.today-30, Date.today)
