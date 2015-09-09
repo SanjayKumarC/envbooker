@@ -44,7 +44,7 @@ User.create!([
   {email: "Chri.sMurphy@aberdeen-asset.com", password: 'user1234', password_confirmation: 'user1234', admin: false, name: "Chris Murphy"},
   {email: "Mick.Charleton@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Mick Charleton"},
   {email: "Stewart.Lawrie@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Stewart Lawrie"},
-  {email: "Michael.Jowitt@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Michael Jowitt"}
+  {email: "Michael.Jowitt@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Michael Jowitt"},
   {email: "Donald.Macrae@aberdeen-asset.com", :password => 'user1234', :password_confirmation => 'user1234', admin: false, name: "Donald Macrae"}
 ])
 
