@@ -1,7 +1,5 @@
 class EnvbookingsController < ApplicationController
   before_action :check_admin
-  before_action :set_envbooking, only: [:show, :edit, :update, :destroy]
-
 
   #AJAX Methods
   def update_booking
@@ -47,6 +45,7 @@ class EnvbookingsController < ApplicationController
   end
 
   def show
+    set_envbooking
   end
 
   # GET /envbookings/new
@@ -57,6 +56,7 @@ class EnvbookingsController < ApplicationController
 
   # GET /envbookings/1/edit
   def edit
+    set_envbooking
     helper_config_maps
   end
 
@@ -70,24 +70,13 @@ class EnvbookingsController < ApplicationController
   end
 
   def create
-    app_ids = envbooking_params[:app_id]
-    app_ids.reject! {|id| id.empty?}
-
-    app_ids.each do |id|
-      b = Envbooking.new
-      b.env_id = envbooking_params[:env_id]
-      b.project_id = envbooking_params[:project_id]
-      b.user_id = envbooking_params[:user_id]
-      b.start_date = envbooking_params[:start_date]
-      b.end_date = envbooking_params[:end_date]
-      b.app_id = id
-      b.save
-    end
-
+    @envbooking = Envbooking.new(envbooking_params)
+    @envbooking.save
     get_sorted_bookings
   end
 
   def update
+    set_envbooking
     @envbooking.update_attributes(envbooking_params)
     get_sorted_bookings
   end
@@ -104,6 +93,7 @@ class EnvbookingsController < ApplicationController
   end
 
   def destroy
+    set_envbooking
     @envbooking.destroy
     get_sorted_bookings
   end
@@ -126,6 +116,6 @@ class EnvbookingsController < ApplicationController
     end
 
     def envbooking_params
-      params.require(:envbooking).permit(:env_id, :project_id, :start_date, :end_date, :user_id, :app_id => [])
+      params.require(:envbooking).permit(:env_id, :project_id, :start_date, :end_date, :notes, :user_id, :app_id)
     end
 end
