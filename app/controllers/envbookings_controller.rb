@@ -112,7 +112,7 @@ class EnvbookingsController < ApplicationController
     end
 
     def get_sorted_bookings
-      @envbookings = Envbooking.all.sort_by {|x| [x.start_date] }
+      @envbookings = Envbooking.all.sort_by {|x| [x.env.name, x.start_date] }
     end
 
     def envbooking_params
