@@ -6,6 +6,10 @@
 #
 config/database.yml
 
+#big shit
+/tools/*
+/vendor/cache
+
 # Ignore bundler config.
 /.bundle
 
