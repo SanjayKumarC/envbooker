@@ -1,16 +1,16 @@
 <% if @booking_request.errors.any? %>
-  <% @booking_request.errors.full_messages.each do |message| %>
-    <% flash[:alert] = message %>
-    $(".alert-danger").html("<%= escape_javascript flash[:alert]%> ");
-    $(".alert-danger").show(500);
-    <% flash.discard %>
+  <% if params[:action] == 'create' %>
+    $("#booking_request-modal").html("<%= escape_javascript(render 'new') %>")
+    $("#booking_request-modal").modal("show")
+  <% else %>
+    $("#booking_request-modal").html("<%= escape_javascript(render 'edit') %>")
+    $("#booking_request-modal").modal("show")
   <% end %>
 <% else %>
   <% flash[:success] = "Success" %>
   $(".alert-success").html("<%= escape_javascript flash[:success]%> ");
   $(".alert-success").show(500);
   <% flash.discard %>
+  $("#booking_request-modal").modal("hide");
+  $(".booking_request-index").html("<%= escape_javascript(render 'index') %>");
 <% end %>
-
-$("#booking_request-modal").modal("hide");
-$(".booking_request-index").html("<%= escape_javascript(render 'index') %>");

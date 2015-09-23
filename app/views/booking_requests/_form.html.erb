@@ -35,7 +35,6 @@
   <% @booking_request.start_date ||= Date.today() %>
   <% @booking_request.end_date ||= Date.today() %>
 
-
   <div class="modal-body">
     <% if @booking_request.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -57,7 +56,6 @@
       <div class="controls">
         <%= f.text_area :notes, :class => 'form-control', :autofocus => true, :rows => 10 %>
       </div>
-      <%= error_span(@booking_request[:notes]) %>
     </div>
 
     <div class="control-group">
@@ -65,7 +63,6 @@
       <div class="controls">
         <%= f.text_field :project, :class => 'form-control', :id => 'booking_request_project' %>
       </div>
-      <%= error_span(@booking_request[:project]) %>
     </div>
 
     <div class="control-group">
@@ -73,20 +70,17 @@
       <div class="controls">
         <%= f.text_field :user, :class => 'form-control' %>
       </div>
-      <%= error_span(@booking_request[:user]) %>
     </div>
 
     <div class="control-group">
       <%= f.label :start_date, :class => 'control-label' %>
       <%= f.text_field :start_date, :value => @booking_request.start_date.strftime('%d-%m-%Y'), :class => 'form-control input-sm datepicker' %>
-      <%= error_span(@booking_request[:start_date]) %>
     </div>
 
     <!-- End Date -->
     <div class="control-group">
       <%= f.label :end_date, :class => 'control-label' %>
       <%= f.text_field :end_date, :value => @booking_request.end_date.strftime('%d-%m-%Y'), :class => 'form-control input-sm datepicker' %>
-      <%= error_span(@booking_request[:end_date]) %>
     </div>
 
     <% if params[:action] == "edit" %>
@@ -95,7 +89,6 @@
         <div class="controls">
           <%= f.select(:status_id, @statuses.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
         </div>
-        <%= error_span(@booking_request[:status]) %>
       </div>
     <% end %>
 
