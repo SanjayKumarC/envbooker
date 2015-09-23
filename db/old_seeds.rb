@@ -43,18 +43,10 @@ Envlevel.create!(:name => "SIT", :description => "System Testing")
 Envlevel.create!(:name => "PROD-SUPPORT", :description => "Production Support")
 
 Env.delete_all
-Env.create!(:name => "DEV1", :envlevel => Envlevel.find_by_name("DEV"), :description => "Main Dev Env", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "DEV2", :envlevel => Envlevel.find_by_name("DEV"), :description => "CI", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "DEV3", :envlevel => Envlevel.find_by_name("DEV"), :description => "DEV Env")
-Env.create!(:name => "DEV4", :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod Support", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "MOD",  :envlevel => Envlevel.find_by_name("UAT"), :description => "Pre Prod", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "UAT", :envlevel => Envlevel.find_by_name("UAT"), :description => "User Testing", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "TST02",  :envlevel => Envlevel.find_by_name("SIT"), :description => "System Testing", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "E2E",  :envlevel => Envlevel.find_by_name("UAT"), :description => "End to End", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "Baseline",  :envlevel => Envlevel.find_by_name("UAT"), :description => "Production Baseline", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "Model 1",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "Model 2",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
-Env.create!(:name => "Model 3",  :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod CR Copy", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "ENV1", :envlevel => Envlevel.find_by_name("DEV"), :description => "Main Dev Env", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "ENV2", :envlevel => Envlevel.find_by_name("SIT"), :description => "CI", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
+Env.create!(:name => "ENV3", :envlevel => Envlevel.find_by_name("UAT"), :description => "DEV Env")
+Env.create!(:name => "ENV4", :envlevel => Envlevel.find_by_name("PROD-SUPPORT"), :description => "Prod Support", :notes => Forgery(:lorem_ipsum).words(rand(10)+1))
 
 project_colors = ["\#00c159","\#4ac7db","\#fff425","\#f3a735","\#bc1d3a","\#002ab3","\#3383cd","\#d6a9d4","\#ff55ff","\#454545"]
 
