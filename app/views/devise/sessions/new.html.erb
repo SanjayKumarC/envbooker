@@ -8,7 +8,7 @@
       <div class="controls">
         <%= f.email_field :email, autofocus: true, :tabindex => 1, :class => 'form-control' %>
       </div>
-      <%= error_span(@user[:email]) %>
+      <%= f.error_span(@user[:email]) %>
     </div>
 
     <div class="control-group">
@@ -16,7 +16,7 @@
       <div class="controls">
         <%= f.password_field :password, autocomplete: "off", :tabindex => 2, :class => 'form-control' %>
       </div>
-      <%= error_span(@user[:password]) %>
+      <%= f.error_span(@user[:password] || "") %>
     </div>
     <br/>
 

@@ -1,4 +1,4 @@
-class CreateSystems < ActiveRecord::Migration
+class CreateSystems < ActiveRecord::Migration[5.1]
   def change
     create_table :systems do |t|
       t.references :env, index: true, foreign_key: true

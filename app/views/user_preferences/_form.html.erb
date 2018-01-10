@@ -15,37 +15,31 @@
   <div class="control-group">
     <%= f.label :template, :class => 'control-label' %>
     <%= f.text_area :template, :class => 'form-control', :rows => 6 %>
-    <%= error_span(@user_preference[:template]) %>
   </div>
 
   <div class="control-group">
     <%= f.label :shade_percentage, :class => 'control-label' %><small> (0 for no shading, )</small>
     <%= f.number_field :shade_percentage, :class => 'form-control' %>
-    <%= error_span(@user_preference[:shade_percentage]) %>
   </div>
 
   <div class="control-group">
     <%= f.check_box :color_by_project, :class => 'checkbox-inline' %>
     <%= f.label :color_by_project, :class => 'control-label' %>
-    <%= error_span(@user_preference[:color_by_project]) %>
   </div>
 
   <div class="control-group">
     <%= f.check_box :show_extra_color_box, :class => 'checkbox-inline' %>
     <%= f.label :show_extra_color_box, :class => 'control-label' %>
-    <%= error_span(@user_preference[:show_extra_color_box]) %>
   </div>
 
   <div class="control-group">
     <%= f.check_box :sidebar, :class => 'checkbox-inline' %>
     <%= f.label :sidebar, :class => 'control-label' %>
-    <%= error_span(@user_preference[:sidebar]) %>
   </div>
 
   <div class="control-group">
     <%= f.check_box :show_legend, :class => 'checkbox-inline' %>
     <%= f.label :show_legend, :class => 'control-label' %>
-    <%= error_span(@user_preference[:show_legend]) %>
   </div>
 
   <br/>

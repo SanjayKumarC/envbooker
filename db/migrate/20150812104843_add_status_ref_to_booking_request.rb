@@ -1,4 +1,4 @@
-class AddStatusRefToBookingRequest < ActiveRecord::Migration
+class AddStatusRefToBookingRequest < ActiveRecord::Migration[5.1]
   def up
     remove_column :booking_requests, :status
     add_reference :booking_requests, :status, index: true, foreign_key: true

@@ -1,4 +1,4 @@
-class CreateDowntimes < ActiveRecord::Migration
+class CreateDowntimes < ActiveRecord::Migration[5.1]
   def change
     create_table :downtimes do |t|
       t.references :env, index: true

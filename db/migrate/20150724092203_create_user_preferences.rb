@@ -1,4 +1,4 @@
-class CreateUserPreferences < ActiveRecord::Migration
+class CreateUserPreferences < ActiveRecord::Migration[5.1]
   def change
     create_table :user_preferences do |t|
       t.references :user, index: true, foreign_key: true

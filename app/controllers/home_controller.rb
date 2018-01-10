@@ -3,7 +3,7 @@ require 'json'
 class HomeController < ApplicationController
 	respond_to :html, :js
 
-	before_filter :set_appconfig
+	before_action :set_appconfig
 	skip_before_action :authenticate_user!
 
   def index

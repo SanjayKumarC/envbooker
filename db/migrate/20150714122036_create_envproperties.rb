@@ -1,4 +1,4 @@
-class CreateEnvproperties < ActiveRecord::Migration
+class CreateEnvproperties < ActiveRecord::Migration[5.1]
   def change
     create_table :envproperties do |t|
       t.references :env

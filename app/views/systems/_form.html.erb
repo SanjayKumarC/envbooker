@@ -34,14 +34,12 @@
     <div class="control-group">
       <%= f.label :env_id, :class => 'control-label' %>
       <%= f.select(:env_id, @envs.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
-      <%= error_span(@system[:env_id]) %>
     </div>
 
     <!-- App -->
     <div class="control-group">
       <%= f.label :app_id, :class => 'control-label' %>
       <%= f.select(:app_id, @apps.collect{|x| [x.name, x.id]}, {}, { :class => 'form-control input-sm' }) %>
-      <%= error_span(@system[:app_id]) %>
     </div>
 
     <% @value = (@system.refresh_date != nil) ? @system.refresh_date.strftime('%d-%m-%Y') : nil %>
@@ -49,13 +47,11 @@
     <div class="control-group">
       <%= f.label :refresh_date, :class => 'control-label' %>
       <%= f.text_field :refresh_date, :value => @value, :class => 'form-control input-sm datepicker' %>
-      <%= error_span(@system[:refresh_date]) %>
     </div>
 
     <div class="control-group">
       <%= f.check_box :refreshed_daily, :class => 'checkbox-inline' %>
       <%= f.label :refreshed_daily, :class => 'control-label' %>
-      <%= error_span(@system[:refreshed_daily]) %>
     </div>
 
     <% if @system.system_properties.any? %>

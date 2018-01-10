@@ -1,4 +1,4 @@
-class CreateAppconfigs < ActiveRecord::Migration
+class CreateAppconfigs < ActiveRecord::Migration[5.1]
   def change
     create_table :appconfigs do |t|
       t.integer :singleton_guard

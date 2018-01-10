@@ -1,4 +1,4 @@
-class AddIndexToEnbookings < ActiveRecord::Migration
+class AddIndexToEnbookings < ActiveRecord::Migration[5.1]
   def up
     add_index(:envbookings, [:env_id, :project_id, :start_date, :end_date], unique: true, name: "index_envbookings_env_project_start_date_end_date")
   end

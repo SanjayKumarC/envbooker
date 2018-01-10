@@ -1,6 +1,8 @@
 <script type="text/javascript">
   $(function() {
-    $('#show_hide_filtering').click(function() {
+    $('#show_hide_filtering').click(function(event) {
+      event.preventDefault();
+      
       $('#filter_form').toggle();
       if($('#filter_form').is(':hidden')) {
         $('#show_hide_filtering').html('<a href="#"><i class="fa fa-fw fa-plus-square"></i> Filtering</a>');

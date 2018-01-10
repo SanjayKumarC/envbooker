@@ -1,4 +1,4 @@
-class AddUserToRefreshRequest < ActiveRecord::Migration
+class AddUserToRefreshRequest < ActiveRecord::Migration[5.1]
   def change
     add_reference :refresh_requests, :user, index: true, foreign_key: true
   end

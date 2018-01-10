@@ -1,4 +1,4 @@
-class CreateEnvlevels < ActiveRecord::Migration
+class CreateEnvlevels < ActiveRecord::Migration[5.1]
   def change
     create_table :envlevels do |t|
       t.string :name

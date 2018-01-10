@@ -1,4 +1,4 @@
-class CreateEnvbookings < ActiveRecord::Migration
+class CreateEnvbookings < ActiveRecord::Migration[5.1]
   def change
     create_table :envbookings do |t|
       t.references :env, index: true

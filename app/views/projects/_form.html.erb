@@ -31,7 +31,6 @@
       <div class="controls">
         <%= f.text_field :name, :class => 'form-control', :autofocus => true %>
       </div>
-      <%= error_span(@project[:name]) %>
     </div>
 
     <div class="control-group">
@@ -39,7 +38,6 @@
       <div class="controls">
         <%= f.text_field :description, :class => 'form-control' %>
       </div>
-      <%= error_span(@project[:description]) %>
     </div>
 
     <div class="control-group">
@@ -48,7 +46,6 @@
         <%= f.text_field :color, :class => 'form-control basic-color-picker' %>
         <small id="color-callback"><%= @project.color %></small>
       </div>
-      <%= error_span(@project[:name]) %>
     </div>
 
   </div>

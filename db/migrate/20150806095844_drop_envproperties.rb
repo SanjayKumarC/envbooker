@@ -1,4 +1,4 @@
-class DropEnvproperties < ActiveRecord::Migration
+class DropEnvproperties < ActiveRecord::Migration[5.1]
 
   def up
     drop_table :envproperties

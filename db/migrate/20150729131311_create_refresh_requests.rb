@@ -1,4 +1,4 @@
-class CreateRefreshRequests < ActiveRecord::Migration
+class CreateRefreshRequests < ActiveRecord::Migration[5.1]
   def change
     create_table :refresh_requests do |t|
       t.references :env, index: true, foreign_key: true
