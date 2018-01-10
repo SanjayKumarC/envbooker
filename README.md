@@ -1,5 +1,7 @@
 # README #
 
+Has been upgraded for Rails 5. YMMV. Had to remove error_spans this seems to be deprecated.
+
 Tool for managing multiple concurrent resources. Uses timeline instead of calendar.
 
 Clone the repository
