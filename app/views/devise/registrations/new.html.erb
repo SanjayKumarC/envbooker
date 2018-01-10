@@ -7,7 +7,6 @@
     <div class="controls">
       <%= f.email_field :email, :class => 'form-control', autofocus: true %>
     </div>
-    <%= f.error_span(@user[:email]) %>
   </div>
 
   <div class="control-group">
@@ -16,7 +15,6 @@
     <div class="controls">
       <%= f.text_field :name, :class => 'form-control'  %>
     </div>
-    <%= f.error_span(@user[:name]) %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -32,7 +30,6 @@
     <div class="controls">
       <%= f.password_field :password, autocomplete: "off", :class => 'form-control'%>
     </div>
-    <%= f.error_span(@user[:password]) %>
   </div>
 
   <div class="control-group">
@@ -41,7 +38,6 @@
     <div class="controls">
       <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control'%>
     </div>
-    <%= f.error_span(@user[:password_confirmation]) %>
   </div>
 
   <div class="actions">
